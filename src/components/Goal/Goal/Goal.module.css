@@ -1,0 +1,13 @@
+.container {
+  flex: 4;
+  white-space: pre-line;
+  border-right: 2px solid rgb(225, 224, 224);
+  padding-left: 50px;
+  padding-right: 50px;
+  height: 100vh;
+}
+
+.title {
+  font-size: 2rem;
+  color: white;
+}

@@ -1,0 +1,12 @@
+html {
+  height: 100vh;
+}
+
+.App {
+  height: 100vh;
+}
+.box {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}

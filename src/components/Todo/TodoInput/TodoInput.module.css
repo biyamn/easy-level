@@ -1,0 +1,55 @@
+form {
+  display: flex;
+  flex-direction: row;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
+  font: inherit;
+  width: 120px;
+  height: 65px;
+  margin-left: 10px;
+  border: 1px solid transparent;
+  color: black;
+  background: #a8dcfa;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 1.3rem;
+}
+
+.button:focus {
+  outline: none;
+}
+
+.button:hover,
+.button:active {
+  background: #7eccf9;
+  border-color: transparent;
+  color: black;
+}
+
+.input {
+  width: 450px;
+  height: 60px;
+  border-color: transparent;
+  background-color: #232934;
+  border-radius: 6px;
+  font-size: 1.3rem;
+  color: white;
+}
+
+.input:focus, .input.invalid:focus {
+  border: 2px solid #63c6ff;
+  outline: none;
+  background-color: #1b1e25;
+}
+
+.input.invalid {
+  border: 2px solid red;
+  background-color: #373a43bc;
+}
