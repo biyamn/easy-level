@@ -11,9 +11,3 @@
   justify-content: space-between;
 }
 
-.delteIcon, .delteOkIcon, .delteNoIcon {
-  width: 40px;
-  height: 40px;
-  background-color: transparent;
-  border: none;
-}
