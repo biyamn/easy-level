@@ -25,3 +25,11 @@
 - **구현 결과**: 
 
 ![image (1)](https://user-images.githubusercontent.com/101965666/218552725-e01a86c3-1ccb-4dc4-91d7-01ed774f482d.gif)
+
+<br>
+
+#### 4. 삭제 기능을 개선하였습니다.
+- **구현 과정을 담은 포스팅**: <a href='https://velog.io/@hamham/%ED%88%AC%EB%91%90%EB%A6%AC%EC%8A%A4%ED%8A%B8-4%ED%83%84-%EC%82%AD%EC%A0%9C-%EA%B8%B0%EB%8A%A5-%EC%88%98%EC%A0%95%ED%95%98%EA%B8%B0'>[투두리스트 4탄] 삭제 기능 개선하기</a>
+- **구현 결과**: 
+
+![image](https://user-images.githubusercontent.com/101965666/219398579-606741b9-d249-4884-8302-5c8038326860.gif)
