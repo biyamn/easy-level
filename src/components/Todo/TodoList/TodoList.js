@@ -6,7 +6,9 @@ const TodoList = (props) => {
   
   return (
     <div className={styles.container}>
-      <TodoItem item={props.item} onDelete={onDelete}/>
+      {props.item.map((todo) => (
+        <TodoItem todo={todo} onDelete={onDelete}/>
+      ))}
     </div>
   );
 };
