@@ -7,7 +7,7 @@ const TodoList = (props) => {
   return (
     <div className={styles.container}>
       {props.item.map((todo) => (
-        <TodoItem todo={todo} onDelete={onDelete}/>
+        <TodoItem todo={todo} onDelete={onDelete} key={todo.id}/>
       ))}
     </div>
   );

@@ -22,7 +22,7 @@ const TodoItem = (props) => {
   }
   
   return (
-      <div className={styles.textAndDeteteBtn} key={props.todo.id}>
+      <div className={styles.textAndDeteteBtn}>
         <div className={styles.text}>{props.todo.text}</div>
         {isDeleteClicked ? 
           <div>
