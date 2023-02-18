@@ -3,12 +3,18 @@
   height: 50px;
   color: white;
   font-size: 1.5rem;
-  border-bottom: 2px solid white;
+  border: 1px solid 373a43bc;
+  border-radius: 7px;
+  background-color: #373a43bc;
   padding: 0px;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 .checkboxAndText {
@@ -21,4 +27,26 @@
   height: 40px;
   background-color: transparent;
   border: none;
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+label div {
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+  background-color: #1a202c;
+  border: 3px solid rgb(73, 220, 73);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+input[type="checkbox"]:checked + div {
+  background-color: rgb(73, 220, 73);
+}
+
+.text {
+  margin-left: 10px;
 }
