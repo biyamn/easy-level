@@ -23,7 +23,10 @@ const TodoItem = (props) => {
   
   return (
       <div className={styles.textAndDeteteBtn}>
-        <div className={styles.text}>{props.todo.text}</div>
+        <div className={styles.checkboxAndText}>
+          <input type="checkbox"></input>
+          <div className={styles.text}>{props.todo.text}</div>
+        </div>
         {isDeleteClicked ? 
           <div>
             <button className={styles.delteOkIcon} onClick={() => onDelete(props.todo.id)}><FontAwesomeIcon icon={faCheck} size="2x" color="white"/></button>

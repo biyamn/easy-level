@@ -11,6 +11,11 @@
   justify-content: space-between;
 }
 
+.checkboxAndText {
+  display: flex;
+  align-items: stretch;
+}
+
 .delteIcon, .delteOkIcon, .delteNoIcon {
   width: 40px;
   height: 40px;
