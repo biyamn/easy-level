@@ -34,7 +34,9 @@ input[type="checkbox"] {
 }
 
 label div {
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 35px;
   height: 35px;
   background-color: #1a202c;

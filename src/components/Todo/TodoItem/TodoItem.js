@@ -1,12 +1,12 @@
 import styles from "./TodoItem.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
 const TodoItem = (props) => {
   const [isDeleteClicked, setIsDeleteClicked] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
 
   const openDelete = () => {
     setIsDeleteClicked(true);
@@ -24,8 +24,10 @@ const TodoItem = (props) => {
     <div className={styles.textAndDeteteBtn}>
       <div className={styles.checkboxAndText}>
         <label>
-          <input type="checkbox" />
-          <div />
+          <input type="checkbox" onClick={() => setIsChecked(!isChecked)} />
+          <div>
+            {isChecked && <FontAwesomeIcon icon={faCheck} color="white" />}
+          </div>
         </label>
         <div className={styles.text}>{props.todo.text}</div>
       </div>
