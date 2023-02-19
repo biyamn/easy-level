@@ -45,10 +45,20 @@ label div {
   cursor: pointer;
 }
 
-input[type="checkbox"]:checked + div {
+input[type="checkbox"]:checked +div {
   background-color: rgb(73, 220, 73);
 }
 
 .text {
-  margin-left: 10px;
+  margin-left: 20px;
+}
+
+.checkIcon {
+  width: 0%;
+}
+
+input[type="checkbox"]:checked +div .checkIcon{
+  display: block;
+  transition: width 0.2s ease-in-out;
+  width: 100%;
 }
