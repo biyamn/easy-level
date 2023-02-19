@@ -11,7 +11,7 @@ const Goal = () => {
   }
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>이루고 싶은<br/>목표를 입력해주세요!</h1>
+      <h1 className={styles.title}>이루고 싶은<br/>목표를 입력해 주세요!</h1>
       <GoalInput onSaveGoal={onSaveGoal}/>
       <GoalTitle input={displayInputs}/>
     </div>

@@ -6,6 +6,7 @@ import { useState } from "react";
 
 const TodoItem = (props) => {
   const [isDeleteClicked, setIsDeleteClicked] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
 
   const openDelete = () => {
     setIsDeleteClicked(true);
@@ -23,12 +24,12 @@ const TodoItem = (props) => {
     <div className={styles.textAndDeteteBtn}>
       <div className={styles.checkboxAndText}>
         <label>
-          <input type="checkbox"/>
+          <input type="checkbox" onClick={() => setIsChecked(!isChecked)} />
           <div>
             <FontAwesomeIcon icon={faCheck} color="#1a202c" className={styles.checkIcon} />
           </div>
         </label>
-        <div className={styles.text}>{props.todo.text}</div>
+        <div className={isChecked? `${styles.text} ${styles.checked}` : `${styles.text}`}>{props.todo.text}</div>
       </div>
       {isDeleteClicked ? (
         <div>
