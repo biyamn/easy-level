@@ -58,7 +58,6 @@ input[type="checkbox"]:checked +div {
 }
 
 input[type="checkbox"]:checked +div .checkIcon{
-  display: block;
-  transition: width 0.2s ease-in-out;
+  transition: width 0.2s ease;
   width: 100%;
 }
