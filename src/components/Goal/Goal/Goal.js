@@ -7,8 +7,9 @@ const Goal = () => {
   const [displayInputs, setDisplayInputs] = useState([]);
 
   const onSaveGoal = (goal) => {
-    setDisplayInputs([...displayInputs, goal]);
+    setDisplayInputs(goal);
   }
+  console.log(displayInputs)
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>이루고 싶은<br/>목표를 입력해 주세요!</h1>
