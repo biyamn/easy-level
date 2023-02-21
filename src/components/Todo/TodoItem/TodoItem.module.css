@@ -17,12 +17,16 @@
   padding-bottom: 30px;
 }
 
+.editBtnAndDeleteBtn {
+  display: flex;
+}
+
 .checkboxAndText {
   display: flex;
   align-items: stretch;
 }
 
-.delteIcon, .delteOkIcon, .delteNoIcon {
+.delteIcon, .submitIcon, .cancelIcon, .editIcon {
   width: 40px;
   height: 40px;
   background-color: transparent;

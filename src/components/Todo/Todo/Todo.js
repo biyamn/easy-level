@@ -10,6 +10,18 @@ const Todo = () => {
     setDisplayInputs([...displayInputs, goal]);
   }
   
+  const onEdit = (id, updatedText) => {
+    setDisplayInputs(displayInputs.map(todo => {
+      if (todo.id === id) {
+        return {
+          ...todo,
+          text: updatedText
+        };
+      }
+      return todo;
+    }))
+  }
+
   const onDelete = (id) => {
     setDisplayInputs(displayInputs.filter((todo) => todo.id !== id));
   }
@@ -18,7 +30,7 @@ const Todo = () => {
     <div className={styles.container}>
       <h1 className={styles.title}>목표를 이루기 위해 <br/>해야 할 것들을 적어주세요!</h1>
       <TodoInput onSaveGoal={onSaveGoal} />
-      <TodoList item={displayInputs} onDelete={onDelete} />
+      <TodoList item={displayInputs} onDelete={onDelete} onEdit={onEdit} />
     </div>
   );
 };
