@@ -55,11 +55,17 @@ input[type="checkbox"]:checked +div {
 
 .text {
   margin-left: 20px;
-  
 }
 
 .text.checked {
   color: rgb(107, 107, 107);
+}
+
+.text input {
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  font-size: 1.5rem;
 }
 
 .checkIcon {

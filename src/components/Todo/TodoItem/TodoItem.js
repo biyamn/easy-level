@@ -8,8 +8,17 @@ const TodoItem = (props) => {
   const [isEditClicked, setIsEditClicked] = useState(false);
   const [isDeleteClicked, setIsDeleteClicked] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
-  const [isEdit, setIsEdit] = useState(false);
   const [updatedText, setUpdatedText] = useState('');
+
+  const submitEditedContent = () => {
+    if (updatedText === '') {
+      setIsEditClicked(false);
+      return;
+    }
+    props.submitEditedContent(updatedText, props.todo.id);
+    setUpdatedText('');
+    setIsEditClicked(false);
+  }
 
   const openEdit = () => {
     setIsEditClicked(true);
@@ -20,6 +29,7 @@ const TodoItem = (props) => {
   };
 
   const cancelEdit = () => {
+    setUpdatedText('');
     setIsEditClicked(false);
   }
 
@@ -41,13 +51,26 @@ const TodoItem = (props) => {
             <FontAwesomeIcon icon={faCheck} color="#1a202c" className={styles.checkIcon} />
           </div>
         </label>
-        <div className={isChecked? `${styles.text} ${styles.checked}` : `${styles.text}`}>{props.todo.text}</div>
+        {isEditClicked
+          ? (
+            <div className={isChecked? `${styles.text} ${styles.checked}` : `${styles.text}`}>
+              <input
+                value={updatedText}
+                onChange={(e) => setUpdatedText(e.target.value)}
+              />
+            </div>
+          ) : (
+          <div className={isChecked? `${styles.text} ${styles.checked}` : `${styles.text}`}>
+            {props.todo.text}
+          </div>)
+        }
+        
       </div>
       <div>
       <div className={styles.editBtnAndDeleteBtn}>
         {(isEditClicked && !isDeleteClicked) ? (
             <div>
-              <button className={styles.submitIcon}>
+              <button className={styles.submitIcon} onClick={submitEditedContent}>
                 <FontAwesomeIcon icon={faCheck} size="2x" color="white" />
               </button>
               <button className={styles.cancelIcon} onClick={cancelEdit}>
