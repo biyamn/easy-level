@@ -28,7 +28,7 @@
 }
 
 .input {
-  width: 250px;
+  width: 240px;
   height: 55px;
   border-color: transparent;
   background-color: #232934;
@@ -47,4 +47,19 @@
 .input.invalid {
   border: 2px solid red;
   background-color: #ff0a0a1e;
+}
+
+
+@media screen and (max-width: 768px) {
+  .input {
+    width: 240px;
+    height: 55px;
+    font-size: 1.2rem;
+  }
+
+  .button {
+    width: 80px;
+    height: 55px;
+    font-size: 1.2rem;
+  }
 }

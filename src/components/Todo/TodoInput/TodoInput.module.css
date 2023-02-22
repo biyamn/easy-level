@@ -57,13 +57,13 @@ form {
 
 @media screen and (max-width: 768px) {
   .input {
-    width: 250px;
+    width: 240px;
     height: 55px;
     font-size: 1.2rem;
   }
 
   .button {
-    width: 110px;
+    width: 80px;
     height: 55px;
     font-size: 1.2rem;
   }

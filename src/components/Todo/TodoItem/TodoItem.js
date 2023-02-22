@@ -46,7 +46,7 @@ const TodoItem = (props) => {
   };
 
   return (
-    <div className={styles.textAndDeteteBtn}>
+    <div className={styles.container}>
       <div className={styles.checkboxAndText}>
         <label>
           <input type="checkbox" onClick={() => setIsChecked(!isChecked)} />

@@ -1,4 +1,4 @@
-.textAndDeteteBtn {
+.container {
   width: 700px;
   height: 50px;
   color: white;
@@ -76,4 +76,12 @@ input[type="checkbox"]:checked +div {
 input[type="checkbox"]:checked +div .checkIcon{
   transition: width 0.2s ease;
   width: 100%;
+}
+
+
+@media screen and (max-width: 768px) {
+  .container {
+    width: 350px;
+    margin-bottom: 10px; 
+  }
 }

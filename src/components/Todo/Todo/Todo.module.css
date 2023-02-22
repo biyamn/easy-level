@@ -16,4 +16,8 @@
   .title {
     font-size: 2rem;
   }
+
+  .container {
+    border-left: none;
+  }
 }
