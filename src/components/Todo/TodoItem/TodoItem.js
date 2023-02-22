@@ -4,7 +4,6 @@ import { faTrashCan, faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { faCheck, faXmark} from "@fortawesome/free-solid-svg-icons";
 import { useState, useRef } from "react";
 
-
 const TodoItem = (props) => {
   const editedText = useRef(null);
 

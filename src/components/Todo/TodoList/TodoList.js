@@ -4,8 +4,6 @@ import styles from './TodoList.module.css';
 const TodoList = (props) => {
   const onDelete = (id) => props.onDelete(id);
 
-  const onEdit = (id) => props.onEdit(id);
-
   const submitEditedContent = (updatedText, id) => props.submitEditedContent(updatedText, id);
 
   return (
