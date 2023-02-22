@@ -1,7 +1,8 @@
 .container {
-  margin: 100px;
+  margin: 10px;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .title {
@@ -10,7 +11,7 @@
 }
 
 @media screen and (max-width: 768px) {
-  .container {
+  .title {
     width: 350px;
   }
 }
