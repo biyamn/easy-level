@@ -2,6 +2,7 @@
   flex: 6;
   white-space: pre-line;
   border-left: 2px solid rgb(225, 224, 224);
+  justify-content: center;
 }
 
 .title {
@@ -9,4 +10,10 @@
   justify-content: center;
   font-size: 2.3rem;
   color: white;
+}
+
+@media screen and (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+  }
 }

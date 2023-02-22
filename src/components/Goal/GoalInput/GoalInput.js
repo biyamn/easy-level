@@ -21,7 +21,7 @@ const GoalInput = (props) => {
     setEnteredGoal('');
   }
   return (
-    <div>
+    <div className={styles.container}>
       <form onSubmit={submitHandler}>
         <input 
           className={!isValid ? `${styles.input} ${styles.invalid}` : `${styles.input}`}

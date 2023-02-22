@@ -12,7 +12,7 @@ form {
 .button {
   font: inherit;
   width: 120px;
-  height: 65px;
+  height: 60px;
   margin-left: 10px;
   border: 1px solid transparent;
   color: black;
@@ -52,4 +52,19 @@ form {
 .input.invalid {
   border: 2px solid red;
   background-color: #ff0a0a1e;
+}
+
+
+@media screen and (max-width: 768px) {
+  .input {
+    width: 250px;
+    height: 55px;
+    font-size: 1.2rem;
+  }
+
+  .button {
+    width: 110px;
+    height: 55px;
+    font-size: 1.2rem;
+  }
 }
