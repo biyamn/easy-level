@@ -1,7 +1,7 @@
 .container {
   flex: 6;
   white-space: pre-line;
-  height: 100vh;
+  border-left: 2px solid rgb(225, 224, 224);
 }
 
 .title {

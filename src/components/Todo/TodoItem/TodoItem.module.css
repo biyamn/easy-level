@@ -62,8 +62,9 @@ input[type="checkbox"]:checked +div {
 }
 
 .text input {
-  background: transparent;
-  border: 1px solid white;
+  border: 0 none;
+  background-color: transparent;
+  height: 35px;
   color: white;
   font-size: 1.5rem;
 }
