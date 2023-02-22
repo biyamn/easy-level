@@ -1,5 +1,5 @@
 .container {
-  padding: 100px 0;
+  margin: 100px;
   display: flex;
   justify-content: center;
 }
@@ -11,6 +11,6 @@
 
 @media screen and (max-width: 768px) {
   .container {
-    padding: 20px 0;
+    width: 350px;
   }
 }
