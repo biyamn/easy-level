@@ -5,6 +5,10 @@
   justify-content: center;
 }
 
+.bar {
+  /* position: fixed; */
+}
+
 .title {
   display: flex;
   justify-content: center;

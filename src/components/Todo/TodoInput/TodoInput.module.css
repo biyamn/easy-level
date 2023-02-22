@@ -4,6 +4,7 @@ form {
 }
 
 .container {
+  padding-bottom: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -67,4 +68,9 @@ form {
     height: 55px;
     font-size: 1.2rem;
   }
+
+  .container {
+    padding-bottom: 20px;
+  }
+  
 }

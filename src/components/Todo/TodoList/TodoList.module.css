@@ -3,11 +3,5 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 50px;
 }
 
-@media screen and (max-width: 768px) {
-  .container {
-    padding-top: 20px;
-  }
-}
