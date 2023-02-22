@@ -51,5 +51,5 @@ form {
 
 .input.invalid {
   border: 2px solid red;
-  background-color: #373a43bc;
+  background-color: #ff0a0a1e;
 }
