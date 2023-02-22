@@ -2,9 +2,12 @@ import styles from "./TodoItem.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { faCheck, faXmark} from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useState, useRef } from "react";
+
 
 const TodoItem = (props) => {
+  const editedText = useRef(null);
+
   const [isEditClicked, setIsEditClicked] = useState(false);
   const [isDeleteClicked, setIsDeleteClicked] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
@@ -22,6 +25,7 @@ const TodoItem = (props) => {
 
   const openEdit = () => {
     setIsEditClicked(true);
+    editedText.current.focus();
   }
 
   const openDelete = () => {
@@ -57,6 +61,7 @@ const TodoItem = (props) => {
               <input
                 value={updatedText}
                 onChange={(e) => setUpdatedText(e.target.value)}
+                ref={editedText}
               />
             </div>
           ) : (
