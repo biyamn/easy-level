@@ -6,7 +6,7 @@
 
 
 .title {
-  font-size: 2rem;
+  font-size: 3rem;
   color: white;
   display: flex;
   justify-content: center;
@@ -15,5 +15,9 @@
 @media screen and (max-width: 768px) {
   .container {
     flex: 1;
+  }
+
+  .title {
+    font-size: 2.5rem;
   }
 }

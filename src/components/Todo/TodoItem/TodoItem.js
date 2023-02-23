@@ -61,7 +61,7 @@ const TodoItem = (props) => {
                 value={updatedText}
                 onChange={(e) => setUpdatedText(e.target.value)}
                 ref={editedText}
-                placeholder={`'${props.todo.text}' 수정하기`}
+                placeholder='Todo 수정하기'
               />
             </div>
           ) : (
@@ -72,7 +72,7 @@ const TodoItem = (props) => {
         
       </div>
       <div>
-      <div className={styles.editBtnAndDeleteBtn}>
+      <div>
         {(isEditClicked && !isDeleteClicked) ? (
             <div>
               <button className={styles.submitIcon} onClick={submitEditedContent}>
@@ -95,7 +95,7 @@ const TodoItem = (props) => {
               </button>
             </div>
           ) : (
-            <div>
+            <div className={styles.editBtnAndDeleteBtn}>
               <button className={styles.editIcon} onClick={openEdit}>
                 <FontAwesomeIcon icon={faPenToSquare} size="2x" color="white" />
               </button>

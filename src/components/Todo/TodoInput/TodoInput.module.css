@@ -54,4 +54,12 @@
   .container {
     margin: 0 20%;
   }
+
+  .input {
+    height: 45px;
+  }
+
+  .button { 
+    height: 45px;
+  }
 }

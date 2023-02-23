@@ -1,29 +1,31 @@
 .container {
-  width: 80%;
-  height: 50px;
+  width: 100%;
   color: white;
   font-size: 1.5rem;
-  border: 1px solid #373a43bc;
+  border: 1px solid #232934;
   border-radius: 7px;
-  background-color: #373a43bc;
-  padding: 0px;
+  background-color: #232934;
   margin-bottom: 25px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
-  padding-top: 30px;
-  padding-bottom: 30px;
+  padding: 2% 4%;
 }
 
 .editBtnAndDeleteBtn {
   display: flex;
+  flex-direction: row;
 }
 
 .checkboxAndText {
   display: flex;
-  align-items: stretch;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.checkboxAndText label {
+  margin-right: 10px;
 }
 
 .delteIcon, .submitIcon, .cancelIcon, .editIcon {
@@ -38,9 +40,7 @@ input[type="checkbox"] {
 }
 
 label div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  
   width: 35px;
   height: 35px;
   background-color: #1a202c;
@@ -54,7 +54,9 @@ input[type="checkbox"]:checked +div {
 }
 
 .text {
-  margin-left: 20px;
+  margin: 0;
+  /* word-break: keep-all; */
+  word-wrap: break-word;
 }
 
 .text.checked {
@@ -81,7 +83,7 @@ input[type="checkbox"]:checked +div .checkIcon{
 
 @media screen and (max-width: 768px) {
   .container {
-    width: 350px;
-    margin-bottom: 10px; 
+    margin-bottom: 10px;
+    font-size: 1.2rem;
   }
 }

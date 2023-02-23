@@ -8,10 +8,14 @@
 .title {
   font-size: 3rem;
   color: yellow;
+  overflow: wrap;
+  word-break: keep-all;
+  flex-basis: 350px;
+  text-align: center;
 }
 
 @media screen and (max-width: 768px) {
   .title {
-    width: 350px;
+    font-size: 2.5rem;
   }
 }
