@@ -72,40 +72,38 @@ const TodoItem = (props) => {
         
       </div>
       <div>
-      <div>
-        {(isEditClicked && !isDeleteClicked) ? (
-            <div>
-              <button className={styles.submitIcon} onClick={submitEditedContent}>
-                <FontAwesomeIcon icon={faCheck} size="2x" color="white" />
-              </button>
-              <button className={styles.cancelIcon} onClick={cancelEdit}>
-                <FontAwesomeIcon icon={faXmark} size="2x" color="white" />
-              </button>
-            </div>
-          ) : ((!isEditClicked && isDeleteClicked) ? (
-            <div>
-              <button
-                className={styles.submitIcon}
-                onClick={() => onDelete(props.todo.id)}
-              >
-                <FontAwesomeIcon icon={faCheck} size="2x" color="white" />
-              </button>
-              <button className={styles.cancelIcon} onClick={cancelDelete}>
-                <FontAwesomeIcon icon={faXmark} size="2x" color="white" />
-              </button>
-            </div>
-          ) : (
-            <div className={styles.editBtnAndDeleteBtn}>
-              <button className={styles.editIcon} onClick={openEdit}>
-                <FontAwesomeIcon icon={faPenToSquare} size="2x" color="white" />
-              </button>
-              <button className={styles.delteIcon} onClick={openDelete}>
-                <FontAwesomeIcon icon={faTrashCan} size="2x" color="white" />
-              </button>
-            </div>
-          ))}
+      {(isEditClicked && !isDeleteClicked) ? (
+        <div>
+          <button className={styles.submitIcon} onClick={submitEditedContent}>
+            <FontAwesomeIcon icon={faCheck} size="2x" color="white" />
+          </button>
+          <button className={styles.cancelIcon} onClick={cancelEdit}>
+            <FontAwesomeIcon icon={faXmark} size="2x" color="white" />
+          </button>
         </div>
-      </div>
+        ) : ((!isEditClicked && isDeleteClicked) ? (
+        <div>
+          <button
+            className={styles.submitIcon}
+            onClick={() => onDelete(props.todo.id)}
+          >
+            <FontAwesomeIcon icon={faCheck} size="2x" color="white" />
+          </button>
+          <button className={styles.cancelIcon} onClick={cancelDelete}>
+            <FontAwesomeIcon icon={faXmark} size="2x" color="white" />
+          </button>
+        </div>
+        ) : (
+        <div className={styles.editBtnAndDeleteBtn}>
+          <button className={styles.editIcon} onClick={openEdit}>
+            <FontAwesomeIcon icon={faPenToSquare} size="2x" color="white" />
+          </button>
+          <button className={styles.delteIcon} onClick={openDelete}>
+            <FontAwesomeIcon icon={faTrashCan} size="2x" color="white" />
+          </button>
+        </div>
+      ))}
+    </div>
     </div>
   );
 };

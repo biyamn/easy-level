@@ -55,8 +55,8 @@ input[type="checkbox"]:checked +div {
 
 .text {
   margin: 0;
-  /* word-break: keep-all; */
-  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: keep-all;
 }
 
 .text.checked {
