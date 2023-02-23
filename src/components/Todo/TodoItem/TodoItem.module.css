@@ -18,6 +18,11 @@
   flex-direction: row;
 }
 
+.submitBtnAndCancelBtn {
+  display: flex;
+  flex-direction: row;
+}
+
 .checkboxAndText {
   display: flex;
   justify-content: space-between;
@@ -45,7 +50,6 @@ input[type="checkbox"] {
 }
 
 label div {
-  
   width: 35px;
   height: 35px;
   background-color: #1a202c;
@@ -60,8 +64,7 @@ input[type="checkbox"]:checked +div {
 
 .text {
   margin: 0;
-  overflow-wrap: break-word;
-  word-break: keep-all;
+  word-wrap: break-word;
 }
 
 .text.checked {
@@ -91,5 +94,15 @@ input[type="checkbox"]:checked +div .checkIcon{
   .container {
     margin-bottom: 10px;
     font-size: 1.2rem;
+  }
+
+  .delteIcon, .submitIcon, .cancelIcon, .editIcon {
+    width: 30px;
+    height: 30px;
+  }
+
+  label div {
+    width: 30px;
+    height: 30px;
   }
 }

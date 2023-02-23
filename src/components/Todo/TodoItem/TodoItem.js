@@ -82,7 +82,7 @@ const TodoItem = (props) => {
           </button>
         </div>
         ) : ((!isEditClicked && isDeleteClicked) ? (
-        <div>
+        <div className={styles.submitBtnAndCancelBtn}>
           <button
             className={styles.submitIcon}
             onClick={() => onDelete(props.todo.id)}
