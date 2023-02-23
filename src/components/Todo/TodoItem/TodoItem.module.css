@@ -38,7 +38,7 @@
   align-items: center;
 }
 
-.delteIcon, .submitIcon, .cancelIcon, .editIcon {
+.deleteIcon, .submitIcon, .cancelIcon, .editIcon {
   width: 40px;
   height: 40px;
   background-color: transparent;
@@ -79,6 +79,10 @@ input[type="checkbox"]:checked +div {
   font-size: 1.5rem;
 }
 
+.editIcon {
+  margin-right: -5px;
+}
+
 .checkIcon {
   width: 0%;
 }
@@ -97,9 +101,13 @@ input[type="checkbox"]:checked +div .checkIcon{
     padding: 2% 4%;
   }
 
-  .delteIcon, .submitIcon, .cancelIcon, .editIcon {
+  .deleteIcon, .submitIcon, .cancelIcon, .editIcon {
     width: 20px;
     height: 20px;
+  }
+
+  .editIcon {
+    margin-right: 10px;
   }
 
   label div {

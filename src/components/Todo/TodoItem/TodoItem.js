@@ -98,7 +98,7 @@ const TodoItem = (props) => {
           <button className={styles.editIcon} onClick={openEdit}>
             <FontAwesomeIcon icon={faPenToSquare} size="2x" color="white" />
           </button>
-          <button className={styles.delteIcon} onClick={openDelete}>
+          <button className={styles.deleteIcon} onClick={openDelete}>
             <FontAwesomeIcon icon={faTrashCan} size="2x" color="white" />
           </button>
         </div>
