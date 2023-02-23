@@ -1,5 +1,5 @@
 .container {
-  flex: 6;
+  flex: 3;
   white-space: pre-line;
   border-left: 2px solid rgb(225, 224, 224);
   justify-content: center;
