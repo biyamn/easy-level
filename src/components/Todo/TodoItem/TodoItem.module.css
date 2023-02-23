@@ -28,6 +28,11 @@
   margin-right: 10px;
 }
 
+.checkboxAndText div {
+  display: flex;
+  align-items: center;
+}
+
 .delteIcon, .submitIcon, .cancelIcon, .editIcon {
   width: 40px;
   height: 40px;
@@ -76,8 +81,9 @@ input[type="checkbox"]:checked +div {
 }
 
 input[type="checkbox"]:checked +div .checkIcon{
-  transition: width 0.2s ease;
-  width: 100%;
+  transition: 0.2s ease;
+  width: 30.2px;
+  height: 24px;
 }
 
 
