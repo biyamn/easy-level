@@ -111,7 +111,11 @@ input[type="checkbox"]:checked +div .checkIcon{
   }
 
   label div {
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
+  }
+
+  .text input {
+    font-size: 1.2rem;
   }
 }
