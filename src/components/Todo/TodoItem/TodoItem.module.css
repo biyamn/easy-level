@@ -102,12 +102,12 @@ input[type="checkbox"]:checked +div .checkIcon{
   }
 
   .deleteIcon, .submitIcon, .cancelIcon, .editIcon {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
   }
 
   .editIcon {
-    margin-right: 10px;
+    margin-right: 2px;
   }
 
   label div {
