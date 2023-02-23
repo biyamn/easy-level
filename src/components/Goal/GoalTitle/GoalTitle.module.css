@@ -1,12 +1,12 @@
 .container {
-  margin: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 30px;
 }
 
 .title {
-  font-size: 2.3rem;
+  font-size: 3rem;
   color: yellow;
 }
 

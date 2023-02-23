@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import styles from './TodoInput.module.css'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 const TodoInput = (props) => {
   const [enteredGoal, setEnteredGoal] = useState('');
@@ -28,16 +30,14 @@ const TodoInput = (props) => {
   }
 
   return (
-    <div className={styles.container}>
-      <form onSubmit={submitHandler}>
-        <input className={!isValid ? `${styles.input} ${styles.invalid}` : `${styles.input}`}
-          type='text' 
-          value={enteredGoal} 
-          onChange={goalChangeHandler} 
-        />
-        <button className={styles.button} type='submit'>추가</button>
-      </form>
-    </div>
+    <form className={styles.container} onSubmit={submitHandler}>
+      <input className={!isValid ? `${styles.input} ${styles.invalid}` : `${styles.input}`}
+        type='text' 
+        value={enteredGoal} 
+        onChange={goalChangeHandler} 
+      />
+      <button className={styles.button} type='submit'><FontAwesomeIcon icon={faPlus} color="#1a202c"/></button>
+    </form>
   );
 };
 

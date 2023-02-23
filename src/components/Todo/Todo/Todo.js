@@ -29,7 +29,9 @@ const Todo = () => {
   return (
     <div className={styles.container}>
       <div className={styles.bar}>
-        <h1 className={styles.title}>목표를 이루기 위해 <br/>해야 할 것들을 적어주세요!</h1>
+        <div className={styles.titleContainer}>
+          <h1 className={styles.title}>ToDo</h1>
+        </div>
         <TodoInput onSaveGoal={onSaveGoal} />
       </div>
       <TodoList item={displayInputs} onDelete={onDelete} submitEditedContent={submitEditedContent} />

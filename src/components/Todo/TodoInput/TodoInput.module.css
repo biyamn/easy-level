@@ -1,18 +1,12 @@
-form {
-  display: flex;
-  flex-direction: row;
-}
-
 .container {
-  padding-bottom: 50px;
   display: flex;
+  margin: 0 15%;
   justify-content: center;
-  align-items: center;
 }
 
 .button {
   font: inherit;
-  width: 120px;
+  flex: 1;
   height: 60px;
   margin-left: 10px;
   border: 1px solid transparent;
@@ -35,7 +29,7 @@ form {
 }
 
 .input {
-  width: 450px;
+  flex: 3;
   height: 60px;
   border-color: transparent;
   background-color: #232934;
@@ -57,20 +51,7 @@ form {
 
 
 @media screen and (max-width: 768px) {
-  .input {
-    width: 240px;
-    height: 55px;
-    font-size: 1.2rem;
-  }
-
-  .button {
-    width: 80px;
-    height: 55px;
-    font-size: 1.2rem;
-  }
-
   .container {
-    padding-bottom: 20px;
+    margin: 0 20%;
   }
-  
 }

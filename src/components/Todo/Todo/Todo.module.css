@@ -9,9 +9,14 @@
   /* position: fixed; */
 }
 
-.title {
+.titleContainer {
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+.title {
+  text-align: center;
   font-size: 2.3rem;
   color: white;
 }
@@ -19,9 +24,12 @@
 @media screen and (max-width: 768px) {
   .title {
     font-size: 2rem;
+    width: 350px;
   }
 
   .container {
+    flex: 1;
+    border-top: 2px solid rgb(225, 224, 224);
     border-left: none;
   }
 }

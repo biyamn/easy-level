@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import styles from './GoalInput.module.css';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 const GoalInput = (props) => {
   const [enteredGoal, setEnteredGoal] = useState('');
@@ -21,17 +23,15 @@ const GoalInput = (props) => {
     setEnteredGoal('');
   }
   return (
-    <div className={styles.container}>
-      <form onSubmit={submitHandler}>
+      <form className={styles.container} onSubmit={submitHandler}>
         <input 
           className={!isValid ? `${styles.input} ${styles.invalid}` : `${styles.input}`}
           type='text' 
           value={enteredGoal} 
           onChange={goalChangeHandler} 
         />
-        <button className={styles.button} type='submit'>입력</button>
+        <button className={styles.button} type='submit'><FontAwesomeIcon icon={faPlus} color="#1a202c"/></button>
       </form>
-    </div>
   );
 };
 
