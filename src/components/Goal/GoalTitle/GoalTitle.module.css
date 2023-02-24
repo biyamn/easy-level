@@ -8,8 +8,7 @@
 .title {
   font-size: 3rem;
   color: yellow;
-  overflow: wrap;
-  word-break: keep-all;
+  word-break: break-all;
   flex-basis: 350px;
   text-align: center;
 }
@@ -17,5 +16,13 @@
 @media screen and (max-width: 768px) {
   .title {
     font-size: 2.5rem;
+    margin: 0 0;
+  }
+
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5% 0;
   }
 }
