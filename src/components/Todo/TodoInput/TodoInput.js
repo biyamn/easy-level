@@ -35,6 +35,7 @@ const TodoInput = (props) => {
         type='text' 
         value={enteredGoal} 
         onChange={goalChangeHandler} 
+        placeholder='Add Todo'
       />
       <button className={styles.button} type='submit'><FontAwesomeIcon icon={faPlus} color="#1a202c"/></button>
     </form>

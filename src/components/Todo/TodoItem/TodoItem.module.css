@@ -10,7 +10,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 2% 4%;
+  padding: 2% 3%;
 }
 
 .editBtnAndDeleteBtn {
@@ -64,7 +64,7 @@ input[type="checkbox"]:checked +div {
 
 .text {
   margin: 0;
-  word-wrap: break-word;
+  word-break: break-all;
 }
 
 .text.checked {
@@ -98,7 +98,7 @@ input[type="checkbox"]:checked +div .checkIcon{
   .container {
     margin-bottom: 10px;
     font-size: 1.2rem;
-    padding: 2% 4%;
+    padding: 2% 3%;
   }
 
   .deleteIcon, .submitIcon, .cancelIcon, .editIcon {

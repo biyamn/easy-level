@@ -61,7 +61,7 @@ const TodoItem = (props) => {
                 value={updatedText}
                 onChange={(e) => setUpdatedText(e.target.value)}
                 ref={editedText}
-                placeholder='Todo 수정하기'
+                placeholder='Edit Todo'
               />
             </div>
           ) : (

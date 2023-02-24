@@ -30,7 +30,7 @@ const Todo = () => {
     <div className={styles.container}>
       <div className={styles.bar}>
         <div className={styles.titleContainer}>
-          <h1 className={styles.title}>ToDo</h1>
+          <h1 className={styles.title}>Todo list</h1>
         </div>
         <TodoInput onSaveGoal={onSaveGoal} />
       </div>

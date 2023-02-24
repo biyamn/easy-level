@@ -29,6 +29,7 @@ const GoalInput = (props) => {
           type='text' 
           value={enteredGoal} 
           onChange={goalChangeHandler} 
+          placeholder='Add Goal'
         />
         <button className={styles.button} type='submit'><FontAwesomeIcon icon={faPlus} color="#1a202c"/></button>
       </form>

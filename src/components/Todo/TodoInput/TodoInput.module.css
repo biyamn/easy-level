@@ -7,14 +7,14 @@
 .button {
   font: inherit;
   flex: 1;
-  height: 55px;
+  height: 65px;
   margin-left: 10px;
   border: 1px solid transparent;
   color: black;
   background: #a8dcfa;
   cursor: pointer;
   border-radius: 6px;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
 }
 
 .button:focus {
@@ -30,11 +30,11 @@
 
 .input {
   flex: 3;
-  height: 55px;
+  height: 65px;
   border-color: transparent;
   background-color: #232934;
   border-radius: 6px;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   color: white;
 }
 
