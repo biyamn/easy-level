@@ -57,9 +57,15 @@
 
   .input {
     height: 45px;
+    font-size: 1.2rem;
+  }
+
+  .input::placeholder {
+    font-size: 1.2rem;
   }
 
   .button { 
     height: 45px;
+    font-size: 1.2rem;
   }
 }

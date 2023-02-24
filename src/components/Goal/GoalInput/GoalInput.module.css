@@ -63,4 +63,8 @@
   .button { 
     height: 45px;
   }
+
+  .input::placeholder {
+    font-size: 1.2rem;
+  }
 }
