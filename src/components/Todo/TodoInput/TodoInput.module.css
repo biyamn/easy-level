@@ -30,13 +30,13 @@
 
 .input {
   flex: 3;
+  min-width: 50%;
   height: 65px;
   border-color: transparent;
   background-color: #232934;
   border-radius: 6px;
   font-size: 1.5rem;
   color: white;
-  min-width: 0;
 }
 
 .input:focus, .input.invalid:focus {

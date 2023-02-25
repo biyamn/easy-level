@@ -4,6 +4,10 @@ body, html {
   background-color: #1a202c;
 }
 
+input {
+  min-width: 0;
+}
+
 *::-webkit-scrollbar {
   display: none;
 }
