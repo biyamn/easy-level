@@ -102,6 +102,11 @@ input[type="checkbox"]:checked +div .checkIcon{
 
   .deleteIcon, .submitIcon, .cancelIcon, .editIcon {
     height: 30px;
+    width: 30px;
+  }
+
+  .editIcon, .submitIcon {
+    margin-right: 5%;
   }
 
   input.text {
