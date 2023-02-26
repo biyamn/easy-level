@@ -61,7 +61,7 @@ input[type="checkbox"]:checked +div {
 }
 
 .text {
-  height: 35px;
+  min-height: 35px;
   margin: 0;
   word-break: break-all;
 }
