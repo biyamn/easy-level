@@ -13,14 +13,8 @@
   padding: 2% 3%;
 }
 
-.editBtnAndDeleteBtn {
+.actionBtns {
   display: flex;
-  flex-direction: row;
-}
-
-.submitBtnAndCancelBtn {
-  display: flex;
-  flex-direction: row;
 }
 
 .checkboxAndText {
@@ -33,9 +27,10 @@
   margin-right: 10px;
 }
 
-.checkboxAndText div {
+.checkboxAndText > div {
   display: flex;
   align-items: center;
+  width: fit-content;
 }
 
 .deleteIcon, .submitIcon, .cancelIcon, .editIcon {
@@ -52,6 +47,9 @@ input[type="checkbox"] {
 label div {
   width: 35px;
   height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #1a202c;
   border: 3px solid rgb(73, 220, 73);
   border-radius: 50%;
@@ -63,6 +61,7 @@ input[type="checkbox"]:checked +div {
 }
 
 .text {
+  height: 35px;
   margin: 0;
   word-break: break-all;
 }
@@ -71,12 +70,13 @@ input[type="checkbox"]:checked +div {
   color: rgb(107, 107, 107);
 }
 
-.text input {
+input.text {
   border: 0 none;
   background-color: transparent;
   height: 35px;
   color: white;
   font-size: 1.5rem;
+  width: 100%;
 }
 
 .editIcon {
@@ -93,7 +93,6 @@ input[type="checkbox"]:checked +div .checkIcon{
   height: 24px;
 }
 
-
 @media screen and (max-width: 768px) {
   .container {
     margin-bottom: 10px;
@@ -102,20 +101,10 @@ input[type="checkbox"]:checked +div .checkIcon{
   }
 
   .deleteIcon, .submitIcon, .cancelIcon, .editIcon {
-    width: 30px;
     height: 30px;
   }
 
-  .editIcon {
-    margin-right: 2px;
-  }
-
-  label div {
-    width: 35px;
-    height: 35px;
-  }
-
-  .text input {
+  input.text {
     font-size: 1.2rem;
   }
 
