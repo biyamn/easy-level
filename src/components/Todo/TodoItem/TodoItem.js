@@ -65,7 +65,7 @@ const TodoItem = (props) => {
             value={updatedText}
             onChange={(e) => setUpdatedText(e.target.value)}
             ref={editedText}
-            placeholder="Edit Todo"
+            placeholder={props.todo.text}
           />
         ) : (
           <div
