@@ -38,7 +38,9 @@
   height: 40px;
   background-color: transparent;
   border: none;
+  padding: 0;
 }
+
 
 
 input[type="checkbox"] {
@@ -103,7 +105,7 @@ input[type="checkbox"]:checked +div .checkIcon{
   }
 
   .editIcon, .submitIcon {
-    margin-right: 5%;
+    margin-right: 4px;
   }
 
   input.text {
