@@ -14,8 +14,9 @@ const GoalInput = (props) => {
   
   const submitHandler = (e) => {
     e.preventDefault();
-    if (enteredGoal === '') {
+    if (enteredGoal.trim() === '') {
       setIsValid(false);
+      setEnteredGoal('');
       return;
     }
     setIsValid(true);
