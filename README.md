@@ -1,16 +1,11 @@
 # 📌 설명
-목표를 정하고 목표를 이루기 위한 투두를 작성할 수 있는 투두리스트입니다. 추가, 삭제, 완료, 수정 기능이 있습니다.
-
+목표를 정하고 목표를 이루기 위한 투두를 작성할 수 있는 투두리스트입니다. 
 #### 데스크탑에서 작성할 때
-![1](https://user-images.githubusercontent.com/101965666/221790060-ed6b7682-f510-4f54-8104-df516f3ba456.PNG)
+![1](https://user-images.githubusercontent.com/101965666/221892947-4d9a9650-658b-4042-b092-d77f1a95b0f6.PNG)
 #### 모바일에서 작성할 때
-![캡처](https://user-images.githubusercontent.com/101965666/221790380-18ff71c2-5ddd-4428-99d1-6cbcd84ff735.PNG)
-#### 수정 버튼을 눌렀을 때
-![2](https://user-images.githubusercontent.com/101965666/221790066-0aff8f66-78f2-4d45-b86e-d6365bd0f8d3.PNG)
-#### 삭제 버튼을 눌렀을 때
-![3](https://user-images.githubusercontent.com/101965666/221790068-00a440c3-33ba-4a6d-86d8-3091dd6e812a.PNG)
+![2](https://user-images.githubusercontent.com/101965666/221892957-f964a7a2-5c73-4a08-8377-8da83cf26872.PNG)
 #### 빈 문자열 혹은 공백으로 이루어진 문자열을 입력했을 때
-![5](https://user-images.githubusercontent.com/101965666/221790076-ab71f1a7-93cf-4f2c-8dec-731b926b9f83.PNG)
+![3](https://user-images.githubusercontent.com/101965666/221892960-f7ad247a-eeb5-482d-9b0e-6757cc84a0f7.PNG)
 
 <br>
 
