@@ -8,7 +8,7 @@
 .title {
   font-size: 3rem;
   color: yellow;
-  word-break: break-all;
+  word-break: keep-all;
   flex-basis: 350px;
   text-align: center;
 }
