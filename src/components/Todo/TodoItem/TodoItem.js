@@ -1,4 +1,4 @@
-import styles from "./TodoItem.module.css";
+import styles from "./TodoItem.tmp.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
