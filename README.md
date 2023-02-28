@@ -3,7 +3,8 @@
 #### 데스크탑에서 작성할 때
 ![1](https://user-images.githubusercontent.com/101965666/221892947-4d9a9650-658b-4042-b092-d77f1a95b0f6.PNG)
 #### 모바일에서 작성할 때
-![2](https://user-images.githubusercontent.com/101965666/221892957-f964a7a2-5c73-4a08-8377-8da83cf26872.PNG)
+<img src='https://user-images.githubusercontent.com/101965666/221892957-f964a7a2-5c73-4a08-8377-8da83cf26872.PNG' width='50%'>
+
 #### 빈 문자열 혹은 공백으로 이루어진 문자열을 입력했을 때
 ![3](https://user-images.githubusercontent.com/101965666/221892960-f7ad247a-eeb5-482d-9b0e-6757cc84a0f7.PNG)
 
@@ -64,7 +65,8 @@ https://todo.hamzik.dev
 <br>
 
 ### 7. 반응형 레이아웃을 추가하고 배포하였습니다.
-- **구현 과정을 담은 포스팅**: <a href=''>[투두리스트 7탄] 반응형 레이아웃 만들기+ 배포하기</a>
+- **구현 과정을 담은 포스팅**: <a href=''>[투두리스트 7탄] 반응형 레이아웃 만들기 + 배포하기</a>
 - **구현 결과**: 
+  ![Animation](https://user-images.githubusercontent.com/101965666/221894563-18641f73-3247-46e1-a3d3-c9f02f76c04c.gif)
 
   
