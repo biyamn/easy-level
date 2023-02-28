@@ -68,7 +68,6 @@ input[type="checkbox"]:checked +div {
   margin: 0;
   word-break: keep-all;
   padding: 0;
-  text-overflow: ellipsis;
   overflow-wrap: anywhere;
 }
 
