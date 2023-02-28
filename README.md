@@ -67,6 +67,7 @@ https://todo.hamzik.dev
 ### 7. 반응형 레이아웃을 추가하고 배포하였습니다.
 - **구현 과정을 담은 포스팅**: <a href=''>[투두리스트 7탄] 반응형 레이아웃 만들기 + 배포하기</a>
 - **구현 결과**: 
-  ![Animation](https://user-images.githubusercontent.com/101965666/221894563-18641f73-3247-46e1-a3d3-c9f02f76c04c.gif)
+  ![Animation](https://user-images.githubusercontent.com/101965666/221926989-c7a6fa47-e891-45e6-94e9-29036c638798.gif)
+
 
   
