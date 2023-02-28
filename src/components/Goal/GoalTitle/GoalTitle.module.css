@@ -3,14 +3,16 @@
   justify-content: center;
   align-items: center;
   padding: 30px;
+  width: 100%;
 }
 
 .title {
   font-size: 3rem;
   color: yellow;
   word-break: keep-all;
-  flex-basis: 350px;
   text-align: center;
+  text-overflow: ellipsis;
+  overflow-wrap: anywhere;
 }
 
 @media screen and (max-width: 768px) {
