@@ -7,11 +7,13 @@
 ## 💡 주요 페이지 및 기능
 추가, 완료, 수정, 삭제 기능이 있으며 반응형 레이아웃을 적용하였습니다.
 ### 데스크탑에서 작성할 때
-![1](https://user-images.githubusercontent.com/101965666/221892947-4d9a9650-658b-4042-b092-d77f1a95b0f6.PNG)
+<img src="[/img/myImg.png](https://user-images.githubusercontent.com/101965666/221892947-4d9a9650-658b-4042-b092-d77f1a95b0f6.PNG)" width="70%">
+
 ### 모바일에서 작성할 때
-<img src='https://user-images.githubusercontent.com/101965666/221892957-f964a7a2-5c73-4a08-8377-8da83cf26872.PNG' width='40%'>
+<img src="[/img/myImg.png](https://user-images.githubusercontent.com/101965666/221892957-f964a7a2-5c73-4a08-8377-8da83cf26872.PNG)" width="70%">
+
 ### 빈 문자열 혹은 공백으로 이루어진 문자열을 입력했을 때
-![3](https://user-images.githubusercontent.com/101965666/221892960-f7ad247a-eeb5-482d-9b0e-6757cc84a0f7.PNG)
+<img src="[/img/myImg.png](https://user-images.githubusercontent.com/101965666/221892960-f7ad247a-eeb5-482d-9b0e-6757cc84a0f7.PNG)" width="70%">
 
 <br>
 
