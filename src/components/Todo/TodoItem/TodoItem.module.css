@@ -33,15 +33,16 @@
   width: fit-content;
 }
 
-.deleteIcon, .submitIcon, .cancelIcon, .editIcon {
+.deleteIcon,
+.submitIcon,
+.cancelIcon,
+.editIcon {
   width: 40px;
   height: 40px;
   background-color: transparent;
   border: none;
   padding: 0;
 }
-
-
 
 input[type="checkbox"] {
   display: none;
@@ -59,7 +60,7 @@ label div {
   cursor: pointer;
 }
 
-input[type="checkbox"]:checked +div {
+input[type="checkbox"]:checked + div {
   background-color: rgb(73, 220, 73);
 }
 
@@ -88,7 +89,7 @@ input.text {
   width: 0%;
 }
 
-input[type="checkbox"]:checked +div .checkIcon{
+input[type="checkbox"]:checked + div .checkIcon {
   transition: 0.2s ease;
   width: 30.2px;
   height: 24px;
@@ -97,16 +98,20 @@ input[type="checkbox"]:checked +div .checkIcon{
 @media screen and (max-width: 768px) {
   .container {
     margin-bottom: 10px;
-    font-size: 1.2rem;
+    font-size: 1rem;
     padding: 2% 3%;
   }
 
-  .deleteIcon, .submitIcon, .cancelIcon, .editIcon {
+  .deleteIcon,
+  .submitIcon,
+  .cancelIcon,
+  .editIcon {
     height: 30px;
     width: 30px;
   }
 
-  .editIcon, .submitIcon {
+  .editIcon,
+  .submitIcon {
     margin-right: 4px;
   }
 

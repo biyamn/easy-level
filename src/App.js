@@ -1,6 +1,6 @@
-import styles from'./App.module.css';
-import Todo from './components/Todo/Todo/Todo';
-import Goal from './components/Goal/Goal/Goal';
+import styles from "./App.module.css";
+import Todo from "./components/Todo/Todo/Todo";
+import Goal from "./components/Goal/Goal/Goal";
 
 const App = () => {
   return (
@@ -11,6 +11,6 @@ const App = () => {
       </div>
     </div>
   );
-}
+};
 
 export default App;

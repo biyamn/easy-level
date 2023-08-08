@@ -39,7 +39,8 @@
   color: white;
 }
 
-.input:focus, .input.invalid:focus {
+.input:focus,
+.input.invalid:focus {
   border: 2px solid #63c6ff;
   outline: none;
   background-color: #1b1e25;
@@ -49,7 +50,6 @@
   border: 2px solid red;
   background-color: #ff0a0a1e;
 }
-
 
 @media screen and (max-width: 768px) {
   .container {
@@ -65,7 +65,7 @@
     font-size: 1.2rem;
   }
 
-  .button { 
+  .button {
     height: 45px;
     font-size: 1.2rem;
   }
