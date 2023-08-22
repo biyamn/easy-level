@@ -3,7 +3,7 @@
 <div align="center">
   <img src='https://user-images.githubusercontent.com/101965666/221892947-4d9a9650-658b-4042-b092-d77f1a95b0f6.PNG' width="60%"/>
 
-**배포 링크**: https://todo.hamzik.dev
+**배포 링크**: https://todolist.biyamn.dev
 
 </div>
 
