@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import styles from "./Goal.module.css";
 import GoalInput from "../GoalInput/GoalInput";
@@ -9,7 +10,6 @@ const Goal = () => {
   const onSaveGoal = (goal) => {
     setDisplayInputs(goal);
   };
-  console.log(displayInputs);
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Goal</h1>

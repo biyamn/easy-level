@@ -1,3 +1,4 @@
+import React from "react";
 import styles from "./GoalTitle.module.css";
 
 const GoalTitle = (props) => {
