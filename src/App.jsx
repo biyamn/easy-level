@@ -1,3 +1,4 @@
+import React from "react";
 import styles from "./App.module.css";
 import Todo from "./components/Todo/Todo/Todo";
 import Goal from "./components/Goal/Goal/Goal";

@@ -1,9 +1,10 @@
+import React from "react";
 import { useState } from "react";
-import styles from "./TodoInput.module.css";
+import styles from "./GoalInput.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
-const TodoInput = (props) => {
+const GoalInput = (props) => {
   const [enteredGoal, setEnteredGoal] = useState("");
   const [isValid, setIsValid] = useState(true);
 
@@ -20,16 +21,9 @@ const TodoInput = (props) => {
       return;
     }
     setIsValid(true);
-
-    const enteredGoalArray = {
-      id: Math.random(),
-      text: enteredGoal,
-    };
-
-    props.onSaveGoal(enteredGoalArray);
+    props.onSaveGoal(enteredGoal);
     setEnteredGoal("");
   };
-
   return (
     <form className={styles.container} onSubmit={submitHandler}>
       <input
@@ -39,7 +33,7 @@ const TodoInput = (props) => {
         type="text"
         value={enteredGoal}
         onChange={goalChangeHandler}
-        placeholder="Add Todo"
+        placeholder="Set Goal"
       />
       <button className={styles.button} type="submit">
         <FontAwesomeIcon icon={faPlus} color="#1a202c" />
@@ -48,4 +42,4 @@ const TodoInput = (props) => {
   );
 };
 
-export default TodoInput;
+export default GoalInput;
