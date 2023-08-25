@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./App.module.css";
 import Todo from "./components/Todo/Todo/Todo";
 import Goal from "./components/Goal/Goal/Goal";
 import { key } from "../key";
-import { getFirestore } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  setDoc,
+  doc,
+  deleteDoc,
+  getDocs,
+} from "firebase/firestore";
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
@@ -22,11 +30,29 @@ const analytics = getAnalytics(app);
 const db = getFirestore(app);
 
 const App = () => {
+  const [displayInputs, setDisplayInputs] = useState([]);
+  useEffect(() => {
+    getDocs(collection(db, "todoItem")).then((querySnapshot) => {
+      const firestoreTodoItemList = [];
+      querySnapshot.forEach((doc) => {
+        firestoreTodoItemList.push({
+          id: doc.id,
+          text: doc.data().text,
+        });
+      });
+      setDisplayInputs(firestoreTodoItemList);
+    });
+  }, []);
+
   return (
     <div className={styles.App}>
       <div className={styles.box}>
         <Goal />
-        <Todo db={db} />
+        <Todo
+          db={db}
+          displayInputs={displayInputs}
+          setDisplayInputs={setDisplayInputs}
+        />
       </div>
     </div>
   );

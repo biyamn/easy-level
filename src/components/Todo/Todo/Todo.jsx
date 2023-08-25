@@ -5,9 +5,7 @@ import TodoList from "../TodoList/TodoList";
 import styles from "./Todo.module.css";
 import { collection, addDoc, doc, deleteDoc } from "firebase/firestore";
 
-const Todo = ({ db }) => {
-  const [displayInputs, setDisplayInputs] = useState([]);
-
+const Todo = ({ db, displayInputs, setDisplayInputs }) => {
   const submitEditedContent = (updatedText, id) => {
     setDisplayInputs(
       displayInputs.map((todo) => {
