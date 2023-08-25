@@ -3,8 +3,9 @@ import { useState } from "react";
 import TodoInput from "../TodoInput/TodoInput";
 import TodoList from "../TodoList/TodoList";
 import styles from "./Todo.module.css";
+import { getFirestore, collection, addDoc } from "firebase/firestore";
 
-const Todo = () => {
+const Todo = ({ db }) => {
   const [displayInputs, setDisplayInputs] = useState([]);
 
   const submitEditedContent = (updatedText, id) => {
@@ -21,8 +22,18 @@ const Todo = () => {
     );
   };
 
-  const onSaveGoal = (goal) => {
-    setDisplayInputs([...displayInputs, goal]);
+  const onSaveGoal = async (goal) => {
+    const docRef = await addDoc(collection(db, "todoItem"), {
+      text: goal.text,
+    });
+
+    setDisplayInputs([
+      ...displayInputs,
+      {
+        id: docRef.id,
+        text: goal.text,
+      },
+    ]);
   };
 
   const onDelete = (id) => {

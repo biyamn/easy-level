@@ -3,6 +3,7 @@ import styles from "./App.module.css";
 import Todo from "./components/Todo/Todo/Todo";
 import Goal from "./components/Goal/Goal/Goal";
 import { key } from "../key";
+import { getFirestore, collection, addDoc } from "firebase/firestore";
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
@@ -18,13 +19,14 @@ console.log("firebaseConfig", firebaseConfig);
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+const db = getFirestore(app);
 
 const App = () => {
   return (
     <div className={styles.App}>
       <div className={styles.box}>
         <Goal />
-        <Todo />
+        <Todo db={db} />
       </div>
     </div>
   );
