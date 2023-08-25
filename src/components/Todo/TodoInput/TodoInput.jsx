@@ -5,30 +5,30 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 const TodoInput = (props) => {
-  const [enteredGoal, setEnteredGoal] = useState("");
+  const [enteredTodo, setEnteredTodo] = useState("");
   const [isValid, setIsValid] = useState(true);
 
   const goalChangeHandler = (e) => {
-    setEnteredGoal(e.target.value);
+    setEnteredTodo(e.target.value);
     setIsValid(true);
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (enteredGoal.trim() === "") {
+    if (enteredTodo.trim() === "") {
       setIsValid(false);
-      setEnteredGoal("");
+      setEnteredTodo("");
       return;
     }
     setIsValid(true);
 
-    const enteredGoalArray = {
+    const enteredTodoArray = {
       id: Math.random(),
-      text: enteredGoal,
+      text: enteredTodo,
     };
 
-    props.onSaveGoal(enteredGoalArray);
-    setEnteredGoal("");
+    props.onSaveTodo(enteredTodoArray);
+    setEnteredTodo("");
   };
 
   return (
@@ -38,7 +38,7 @@ const TodoInput = (props) => {
           !isValid ? `${styles.input} ${styles.invalid}` : `${styles.input}`
         }
         type="text"
-        value={enteredGoal}
+        value={enteredTodo}
         onChange={goalChangeHandler}
         placeholder="Add Todo"
       />

@@ -22,16 +22,16 @@ const Todo = ({ db }) => {
     );
   };
 
-  const onSaveGoal = async (goal) => {
+  const onSaveTodo = async (todo) => {
     const docRef = await addDoc(collection(db, "todoItem"), {
-      text: goal.text,
+      text: todo.text,
     });
 
     setDisplayInputs([
       ...displayInputs,
       {
         id: docRef.id,
-        text: goal.text,
+        text: todo.text,
       },
     ]);
   };
@@ -46,7 +46,7 @@ const Todo = ({ db }) => {
         <div className={styles.titleContainer}>
           <h1 className={styles.title}>Todo list</h1>
         </div>
-        <TodoInput onSaveGoal={onSaveGoal} />
+        <TodoInput onSaveTodo={onSaveTodo} />
       </div>
       <TodoList
         item={displayInputs}
