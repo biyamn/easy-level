@@ -3,7 +3,7 @@ import { useState } from "react";
 import TodoInput from "../TodoInput/TodoInput";
 import TodoList from "../TodoList/TodoList";
 import styles from "./Todo.module.css";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, doc, deleteDoc } from "firebase/firestore";
 
 const Todo = ({ db }) => {
   const [displayInputs, setDisplayInputs] = useState([]);
@@ -36,7 +36,10 @@ const Todo = ({ db }) => {
     ]);
   };
 
-  const onDelete = (id) => {
+  const onDelete = async (id) => {
+    const todoItemRef = doc(db, "todoItem", id);
+    await deleteDoc(todoItemRef);
+
     setDisplayInputs(displayInputs.filter((todo) => todo.id !== id));
   };
 

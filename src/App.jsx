@@ -3,7 +3,7 @@ import styles from "./App.module.css";
 import Todo from "./components/Todo/Todo/Todo";
 import Goal from "./components/Goal/Goal/Goal";
 import { key } from "../key";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
