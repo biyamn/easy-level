@@ -38,6 +38,7 @@ const App = () => {
         firestoreTodoItemList.push({
           id: doc.id,
           text: doc.data().text,
+          isFinished: doc.data().isFinished,
         });
       });
       setDisplayInputs(firestoreTodoItemList);

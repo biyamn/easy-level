@@ -67,6 +67,7 @@ const Todo = ({ db, displayInputs, setDisplayInputs }) => {
         item={displayInputs}
         onDelete={onDelete}
         submitEditedContent={submitEditedContent}
+        db={db}
       />
     </div>
   );

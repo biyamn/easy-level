@@ -4,6 +4,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useState, useRef } from "react";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  setDoc,
+  doc,
+} from "firebase/firestore";
 
 const TodoItem = (props) => {
   const editedText = useRef(null);
@@ -12,7 +19,7 @@ const TodoItem = (props) => {
   const [isDeleteClicked, setIsDeleteClicked] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [updatedText, setUpdatedText] = useState("");
-
+  console.log("isChecked", isChecked);
   const submitEditedContent = () => {
     if (updatedText === "") {
       setIsEditClicked(false);
@@ -45,11 +52,25 @@ const TodoItem = (props) => {
     props.onDelete(id);
   };
 
+  const onCheck = async (id) => {
+    console.log("checked id: ", id);
+    const todoItemRef = doc(props.db, "todoItem", id);
+    await setDoc(todoItemRef, {
+      text: props.todo.text,
+      isFinished: !isChecked,
+    });
+    setIsChecked(!isChecked);
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.checkboxAndText}>
         <label>
-          <input type="checkbox" onClick={() => setIsChecked(!isChecked)} />
+          <input
+            type="checkbox"
+            onChange={() => onCheck(props.todo.id)}
+            checked={props.todo.isFinished}
+          />
           <div>
             <FontAwesomeIcon
               icon={faCheck}

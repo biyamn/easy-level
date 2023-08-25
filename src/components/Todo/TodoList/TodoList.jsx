@@ -16,6 +16,7 @@ const TodoList = (props) => {
           onDelete={onDelete}
           key={todo.id}
           submitEditedContent={submitEditedContent}
+          db={props.db}
         />
       ))}
     </div>
