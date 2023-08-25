@@ -3,13 +3,27 @@ import { useState } from "react";
 import TodoInput from "../TodoInput/TodoInput";
 import TodoList from "../TodoList/TodoList";
 import styles from "./Todo.module.css";
-import { collection, addDoc, doc, deleteDoc } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  doc,
+  deleteDoc,
+  updateDoc,
+} from "firebase/firestore";
 
 const Todo = ({ db, displayInputs, setDisplayInputs }) => {
-  const submitEditedContent = (updatedText, id) => {
+  const editTodo = async (updatedText, id) => {
+    const todoItemRef = doc(db, "todoItem", id);
+    await updateDoc(todoItemRef, {
+      text: updatedText,
+    });
+  };
+
+  const submitEditedContent = async (updatedText, id) => {
     setDisplayInputs(
       displayInputs.map((todo) => {
         if (todo.id === id) {
+          editTodo(updatedText, id);
           return {
             ...todo,
             text: updatedText,
@@ -21,14 +35,14 @@ const Todo = ({ db, displayInputs, setDisplayInputs }) => {
   };
 
   const onSaveTodo = async (todo) => {
-    const docRef = await addDoc(collection(db, "todoItem"), {
+    const todoItemRef = await addDoc(collection(db, "todoItem"), {
       text: todo.text,
     });
 
     setDisplayInputs([
       ...displayInputs,
       {
-        id: docRef.id,
+        id: todoItemRef.id,
         text: todo.text,
       },
     ]);
