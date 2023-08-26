@@ -22,12 +22,7 @@ const TodoInput = (props) => {
     }
     setIsValid(true);
 
-    const enteredTodoArray = {
-      id: Math.random(),
-      text: enteredTodo,
-    };
-
-    props.onSaveTodo(enteredTodoArray);
+    props.onSaveTodo(enteredTodo);
     setEnteredTodo("");
   };
 

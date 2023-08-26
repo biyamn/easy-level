@@ -17,6 +17,9 @@ const TodoList = (props) => {
           key={todo.id}
           submitEditedContent={submitEditedContent}
           db={props.db}
+          syncTodoItemWithFirestore={props.syncTodoItemWithFirestore}
+          onCheck={props.onCheck}
+          displayInputs={props.displayInputs}
         />
       ))}
     </div>

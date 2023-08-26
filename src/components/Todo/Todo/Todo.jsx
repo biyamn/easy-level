@@ -1,8 +1,8 @@
 import React from "react";
-import { useState } from "react";
 import TodoInput from "../TodoInput/TodoInput";
 import TodoList from "../TodoList/TodoList";
 import styles from "./Todo.module.css";
+
 import {
   collection,
   addDoc,
@@ -11,48 +11,37 @@ import {
   updateDoc,
 } from "firebase/firestore";
 
-const Todo = ({ db, displayInputs, setDisplayInputs }) => {
-  const editTodo = async (updatedText, id) => {
+const Todo = ({ db, displayInputs, syncTodoItemWithFirestore }) => {
+  const submitEditedContent = async (updatedText, id) => {
     const todoItemRef = doc(db, "todoItem", id);
     await updateDoc(todoItemRef, {
       text: updatedText,
     });
+    syncTodoItemWithFirestore();
   };
 
-  const submitEditedContent = async (updatedText, id) => {
-    setDisplayInputs(
-      displayInputs.map((todo) => {
-        if (todo.id === id) {
-          editTodo(updatedText, id);
-          return {
-            ...todo,
-            text: updatedText,
-          };
-        }
-        return todo;
-      })
-    );
-  };
-
-  const onSaveTodo = async (todo) => {
-    const todoItemRef = await addDoc(collection(db, "todoItem"), {
-      text: todo.text,
+  const onSaveTodo = async (enteredTodo) => {
+    await addDoc(collection(db, "todoItem"), {
+      text: enteredTodo,
+      isFinished: false,
     });
 
-    setDisplayInputs([
-      ...displayInputs,
-      {
-        id: todoItemRef.id,
-        text: todo.text,
-      },
-    ]);
+    syncTodoItemWithFirestore();
   };
 
   const onDelete = async (id) => {
     const todoItemRef = doc(db, "todoItem", id);
     await deleteDoc(todoItemRef);
+    syncTodoItemWithFirestore();
+  };
 
-    setDisplayInputs(displayInputs.filter((todo) => todo.id !== id));
+  const onCheck = async (id) => {
+    const todoItemRef = doc(db, "todoItem", id);
+
+    await updateDoc(todoItemRef, {
+      isFinished: !displayInputs.find((todo) => todo.id === id).isFinished,
+    });
+    syncTodoItemWithFirestore();
   };
 
   return (
@@ -68,6 +57,9 @@ const Todo = ({ db, displayInputs, setDisplayInputs }) => {
         onDelete={onDelete}
         submitEditedContent={submitEditedContent}
         db={db}
+        syncTodoItemWithFirestore={syncTodoItemWithFirestore}
+        onCheck={onCheck}
+        displayInputs={displayInputs}
       />
     </div>
   );

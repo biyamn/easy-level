@@ -2,14 +2,32 @@ import React, { useState, useEffect } from "react";
 import styles from "./App.module.css";
 import Todo from "./components/Todo/Todo/Todo";
 import Goal from "./components/Goal/Goal/Goal";
-import { syncTodoItemWithFirestore } from "./server/syncTodoItemWithFirestore";
-import { db } from "./server/syncTodoItemWithFirestore";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { initializeApp } from "firebase/app";
+import { key } from "../key";
 
 const App = () => {
+  const firebaseConfig = key;
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const syncTodoItemWithFirestore = () => {
+    getDocs(collection(db, "todoItem")).then((querySnapshot) => {
+      const firestoreTodoItemList = [];
+      querySnapshot.forEach((doc) => {
+        firestoreTodoItemList.push({
+          id: doc.id,
+          text: doc.data().text,
+          isFinished: doc.data().isFinished,
+        });
+      });
+      setDisplayInputs(firestoreTodoItemList);
+    });
+  };
+
   const [displayInputs, setDisplayInputs] = useState([]);
 
   useEffect(() => {
-    syncTodoItemWithFirestore(setDisplayInputs);
+    syncTodoItemWithFirestore();
   }, []);
 
   return (
@@ -20,6 +38,7 @@ const App = () => {
           db={db}
           displayInputs={displayInputs}
           setDisplayInputs={setDisplayInputs}
+          syncTodoItemWithFirestore={syncTodoItemWithFirestore}
         />
       </div>
     </div>
