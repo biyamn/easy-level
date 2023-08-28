@@ -4,24 +4,24 @@ import styles from "./TodoList.module.css";
 
 const TodoItems = ({
   displayInputs,
-  onCheckTodo,
-  onDeleteTodo,
-  onEditTodo,
+  onTodoCheck,
+  onTodoDelete,
+  onTodoEdit,
 }) => {
-  const handleTodoDelete = (id) => onDeleteTodo(id);
+  const handleTodoDelete = (id) => onTodoDelete(id);
 
-  const handleTodoEdit = (updatedText, id) => onEditTodo(updatedText, id);
+  const handleTodoEdit = (updatedText, id) => onTodoEdit(updatedText, id);
 
-  const handleTodoCheck = (id) => onCheckTodo(id);
+  const handleTodoCheck = (id) => onTodoCheck(id);
   return (
     <div className={styles.container}>
       {displayInputs.map((todo) => (
         <TodoItem
           todo={todo}
-          onDeleteTodo={handleTodoDelete}
+          onTodoDelete={handleTodoDelete}
           key={todo.id}
-          onEditTodo={handleTodoEdit}
-          onCheckTodo={handleTodoCheck}
+          onTodoEdit={handleTodoEdit}
+          onTodoCheck={handleTodoCheck}
         />
       ))}
     </div>

@@ -5,7 +5,7 @@ import { faTrashCan, faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useState, useRef } from "react";
 
-const TodoItem = ({ todo, onDeleteTodo, onEditTodo, onCheckTodo }) => {
+const TodoItem = ({ todo, onTodoDelete, onTodoEdit, onTodoCheck }) => {
   const editedText = useRef(null);
 
   const [isEditClicked, setIsEditClicked] = useState(false);
@@ -19,7 +19,7 @@ const TodoItem = ({ todo, onDeleteTodo, onEditTodo, onCheckTodo }) => {
 
     setUpdatedText("");
     setIsEditClicked(false);
-    onEditTodo(updatedText, todo.id);
+    onTodoEdit(updatedText, todo.id);
   };
 
   const openEdit = () => {
@@ -41,11 +41,11 @@ const TodoItem = ({ todo, onDeleteTodo, onEditTodo, onCheckTodo }) => {
   };
 
   const onDelete = (id) => {
-    onDeleteTodo(id);
+    onTodoDelete(id);
   };
 
   const onCheck = (id) => {
-    onCheckTodo(id);
+    onTodoCheck(id);
   };
 
   const isChecked = todo.isFinished;

@@ -50,13 +50,13 @@ const Todo = ({ db, displayInputs, syncTodoItemWithFirestore }) => {
         <div className={styles.titleContainer}>
           <h1 className={styles.title}>Todo list</h1>
         </div>
-        <TodoInput onSubmitTodo={handleTodoSubmit} />
+        <TodoInput onTodoSubmit={handleTodoSubmit} />
       </div>
       <TodoItems
         displayInputs={displayInputs}
-        onCheckTodo={handleTodoCheck}
-        onEditTodo={handleTodoEdit}
-        onDeleteTodo={handleTodoDelete}
+        onTodoCheck={handleTodoCheck}
+        onTodoEdit={handleTodoEdit}
+        onTodoDelete={handleTodoDelete}
         db={db}
         syncTodoItemWithFirestore={syncTodoItemWithFirestore}
       />
