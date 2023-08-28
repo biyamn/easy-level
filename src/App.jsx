@@ -7,9 +7,12 @@ import { initializeApp } from "firebase/app";
 import { key } from "../key";
 
 const App = () => {
+  const [displayInputs, setDisplayInputs] = useState([]);
+
   const firebaseConfig = key;
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
+
   const syncTodoItemWithFirestore = () => {
     getDocs(collection(db, "todoItem")).then((querySnapshot) => {
       const firestoreTodoItemList = [];
@@ -23,8 +26,6 @@ const App = () => {
       setDisplayInputs(firestoreTodoItemList);
     });
   };
-
-  const [displayInputs, setDisplayInputs] = useState([]);
 
   useEffect(() => {
     syncTodoItemWithFirestore();

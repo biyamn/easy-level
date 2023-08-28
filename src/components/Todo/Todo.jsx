@@ -1,6 +1,6 @@
 import React from "react";
 import TodoInput from "./TodoInput";
-import TodoList from "./TodoList";
+import TodoItems from "./TodoItems";
 import styles from "./Todo.module.css";
 
 import {
@@ -12,7 +12,7 @@ import {
 } from "firebase/firestore";
 
 const Todo = ({ db, displayInputs, syncTodoItemWithFirestore }) => {
-  const submitEditedContent = async (updatedText, id) => {
+  const handleTodoEdit = async (updatedText, id) => {
     const todoItemRef = doc(db, "todoItem", id);
     await updateDoc(todoItemRef, {
       text: updatedText,
@@ -20,7 +20,7 @@ const Todo = ({ db, displayInputs, syncTodoItemWithFirestore }) => {
     syncTodoItemWithFirestore();
   };
 
-  const onSaveTodo = async (enteredTodo) => {
+  const handleTodoSubmit = async (enteredTodo) => {
     await addDoc(collection(db, "todoItem"), {
       text: enteredTodo,
       isFinished: false,
@@ -29,13 +29,13 @@ const Todo = ({ db, displayInputs, syncTodoItemWithFirestore }) => {
     syncTodoItemWithFirestore();
   };
 
-  const onDelete = async (id) => {
+  const handleTodoDelete = async (id) => {
     const todoItemRef = doc(db, "todoItem", id);
     await deleteDoc(todoItemRef);
     syncTodoItemWithFirestore();
   };
 
-  const onCheck = async (id) => {
+  const handleTodoCheck = async (id) => {
     const todoItemRef = doc(db, "todoItem", id);
 
     await updateDoc(todoItemRef, {
@@ -50,16 +50,15 @@ const Todo = ({ db, displayInputs, syncTodoItemWithFirestore }) => {
         <div className={styles.titleContainer}>
           <h1 className={styles.title}>Todo list</h1>
         </div>
-        <TodoInput onSaveTodo={onSaveTodo} />
+        <TodoInput onSubmitTodo={handleTodoSubmit} />
       </div>
-      <TodoList
-        item={displayInputs}
-        onDelete={onDelete}
-        submitEditedContent={submitEditedContent}
+      <TodoItems
+        displayInputs={displayInputs}
+        onCheckTodo={handleTodoCheck}
+        onEditTodo={handleTodoEdit}
+        onDeleteTodo={handleTodoDelete}
         db={db}
         syncTodoItemWithFirestore={syncTodoItemWithFirestore}
-        onCheck={onCheck}
-        displayInputs={displayInputs}
       />
     </div>
   );

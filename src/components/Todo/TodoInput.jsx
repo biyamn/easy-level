@@ -4,7 +4,7 @@ import styles from "./TodoInput.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
-const TodoInput = (props) => {
+const TodoInput = ({ onSubmitTodo }) => {
   const [enteredTodo, setEnteredTodo] = useState("");
   const [isValid, setIsValid] = useState(true);
 
@@ -22,7 +22,7 @@ const TodoInput = (props) => {
     }
     setIsValid(true);
 
-    props.onSaveTodo(enteredTodo);
+    onSubmitTodo(enteredTodo);
     setEnteredTodo("");
   };
 
