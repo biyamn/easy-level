@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./App.module.css";
-import Todo from "./components/Todo/Todo/Todo";
-import Goal from "./components/Goal/Goal/Goal";
+import Todo from "./components/Todo/Todo";
+import Goal from "./components/Goal/Goal";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { key } from "../key";

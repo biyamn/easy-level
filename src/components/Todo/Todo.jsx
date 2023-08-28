@@ -1,6 +1,6 @@
 import React from "react";
-import TodoInput from "../TodoInput/TodoInput";
-import TodoList from "../TodoList/TodoList";
+import TodoInput from "./TodoInput";
+import TodoList from "./TodoList";
 import styles from "./Todo.module.css";
 
 import {
