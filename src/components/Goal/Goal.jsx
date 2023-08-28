@@ -1,8 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import styles from "./Goal.module.css";
-import GoalInput from "../GoalInput/GoalInput";
-import GoalTitle from "../GoalTitle/GoalTitle";
+import GoalInput from "./GoalInput";
+import GoalTitle from "./GoalTitle";
 
 const Goal = () => {
   const [displayInputs, setDisplayInputs] = useState([]);

@@ -5,27 +5,26 @@ import { faTrashCan, faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useState, useRef } from "react";
 
-const TodoItem = (props) => {
+const TodoItem = ({ todo, onTodoDelete, onTodoEdit, onTodoCheck }) => {
   const editedText = useRef(null);
 
   const [isEditClicked, setIsEditClicked] = useState(false);
   const [isDeleteClicked, setIsDeleteClicked] = useState(false);
-  const [isChecked, setIsChecked] = useState(false);
   const [updatedText, setUpdatedText] = useState("");
-
   const submitEditedContent = () => {
     if (updatedText === "") {
       setIsEditClicked(false);
       return;
     }
-    props.submitEditedContent(updatedText, props.todo.id);
+
     setUpdatedText("");
     setIsEditClicked(false);
+    onTodoEdit(updatedText, todo.id);
   };
 
   const openEdit = () => {
     setIsEditClicked(true);
-    editedText.current.focus();
+    editedText.current?.focus();
   };
 
   const openDelete = () => {
@@ -42,14 +41,23 @@ const TodoItem = (props) => {
   };
 
   const onDelete = (id) => {
-    props.onDelete(id);
+    onTodoDelete(id);
   };
 
+  const onCheck = (id) => {
+    onTodoCheck(id);
+  };
+
+  const isChecked = todo.isFinished;
   return (
     <div className={styles.container}>
       <div className={styles.checkboxAndText}>
         <label>
-          <input type="checkbox" onClick={() => setIsChecked(!isChecked)} />
+          <input
+            type="checkbox"
+            onChange={() => onCheck(todo.id)}
+            checked={todo.isFinished}
+          />
           <div>
             <FontAwesomeIcon
               icon={faCheck}
@@ -66,7 +74,7 @@ const TodoItem = (props) => {
             value={updatedText}
             onChange={(e) => setUpdatedText(e.target.value)}
             ref={editedText}
-            placeholder={props.todo.text}
+            placeholder={todo.text}
           />
         ) : (
           <div
@@ -74,7 +82,7 @@ const TodoItem = (props) => {
               isChecked ? `${styles.text} ${styles.checked}` : `${styles.text}`
             }
           >
-            {props.todo.text}
+            {todo.text}
           </div>
         )}
       </div>
@@ -92,7 +100,7 @@ const TodoItem = (props) => {
           <>
             <button
               className={styles.submitIcon}
-              onClick={() => onDelete(props.todo.id)}
+              onClick={() => onDelete(todo.id)}
             >
               <FontAwesomeIcon icon={faCheck} size="2x" color="white" />
             </button>
