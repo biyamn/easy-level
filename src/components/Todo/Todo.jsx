@@ -11,8 +11,28 @@ import {
   updateDoc,
 } from "firebase/firestore";
 
-const Todo = ({ db, displayInputs, syncTodoItemWithFirestore }) => {
+const Todo = ({
+  db,
+  displayInputs,
+  setDisplayInputs,
+  syncTodoItemWithFirestore,
+}) => {
   const handleTodoEdit = async (updatedText, id) => {
+    setDisplayInputs(
+      displayInputs.map((todo) => {
+        if (todo.id === id) {
+          return {
+            ...todo,
+            text: updatedText,
+          };
+        }
+        return todo;
+      })
+    );
+    handleEditSync(updatedText, id);
+  };
+
+  const handleEditSync = async (updatedText, id) => {
     const todoItemRef = doc(db, "todoItem", id);
     await updateDoc(todoItemRef, {
       text: updatedText,
