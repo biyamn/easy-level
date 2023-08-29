@@ -44,6 +44,7 @@ const Todo = ({
     await addDoc(collection(db, "todoItem"), {
       text: enteredTodo,
       isFinished: false,
+      createdTime: Math.floor(Date.now() / 1000),
     });
 
     syncTodoItemWithFirestore();
