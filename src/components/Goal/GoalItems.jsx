@@ -5,11 +5,9 @@ import GoalItem from "./GoalItem";
 const GoalItems = ({ goals }) => {
   return (
     <div className={styles.container}>
-      <div className={styles.title}>
-        {goals.map((goal) => (
-          <GoalItem key={goal.id} goal={goal} />
-        ))}
-      </div>
+      {goals.map((goal) => (
+        <GoalItem key={goal.id} goal={goal} />
+      ))}
     </div>
   );
 };
