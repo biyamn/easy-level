@@ -64,7 +64,12 @@ const App = () => {
   return (
     <div className={styles.App}>
       <div className={styles.box}>
-        <Goal goals={goals} setGoals={setGoals} />
+        <Goal
+          db={db}
+          goals={goals}
+          setGoals={setGoals}
+          syncGoalItemWithFirestore={syncGoalItemWithFirestore}
+        />
         <Todo
           db={db}
           todos={todos}
