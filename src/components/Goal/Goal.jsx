@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Goal.module.css";
 import GoalInput from "./GoalInput";
-import GoalTitle from "./GoalTitle";
+import GoalItems from "./GoalItems";
 
 const Goal = ({ goals, setGoals }) => {
   const handleGoalSubmit = (goal) => {
@@ -11,7 +11,7 @@ const Goal = ({ goals, setGoals }) => {
     <div className={styles.container}>
       <h1 className={styles.title}>Goal</h1>
       <GoalInput onGoalSubmit={handleGoalSubmit} />
-      <GoalTitle input={goals} />
+      <GoalItems input={goals} />
     </div>
   );
 };

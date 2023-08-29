@@ -1,7 +1,7 @@
 import React from "react";
-import styles from "./GoalTitle.module.css";
+import styles from "./GoalItems.module.css";
 
-const GoalTitle = ({ goals }) => {
+const GoalItems = ({ goals }) => {
   return (
     <div className={styles.container}>
       <div className={styles.title}>{goals}</div>
@@ -9,4 +9,4 @@ const GoalTitle = ({ goals }) => {
   );
 };
 
-export default GoalTitle;
+export default GoalItems;
