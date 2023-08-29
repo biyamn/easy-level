@@ -1,14 +1,11 @@
 import React from "react";
-import { useState } from "react";
 import styles from "./Goal.module.css";
 import GoalInput from "./GoalInput";
 import GoalTitle from "./GoalTitle";
 
-const Goal = () => {
-  const [displayInputs, setDisplayInputs] = useState([]);
-
+const Goal = ({ setGoals }) => {
   const onSaveGoal = (goal) => {
-    setDisplayInputs(goal);
+    setGoals(goal);
   };
   return (
     <div className={styles.container}>

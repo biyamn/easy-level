@@ -14,6 +14,7 @@ import { key } from "../key";
 
 const App = () => {
   const [todos, setTodos] = useState([]);
+  const [goals, setGoals] = useState([]);
 
   const firebaseConfig = key;
   const app = initializeApp(firebaseConfig);
@@ -36,14 +37,34 @@ const App = () => {
     });
   };
 
+  const syncGoalItemWithFirestore = () => {
+    const q = query(collection(db, "goalItem"), orderBy("createdTime", "asc"));
+
+    getDocs(q).then((querySnapshot) => {
+      const firestoreGoalItemList = [];
+      querySnapshot.forEach((doc) => {
+        firestoreGoalItemList.push({
+          id: doc.id,
+          text: doc.data().text,
+          createdTime: doc.data().createdTime,
+        });
+      });
+      setGoals(firestoreGoalItemList);
+    });
+  };
+
   useEffect(() => {
     syncTodoItemWithFirestore();
+  }, []);
+
+  useEffect(() => {
+    syncGoalItemWithFirestore();
   }, []);
 
   return (
     <div className={styles.App}>
       <div className={styles.box}>
-        <Goal />
+        <Goal goals={goals} setGoals={setGoals} />
         <Todo
           db={db}
           todos={todos}
