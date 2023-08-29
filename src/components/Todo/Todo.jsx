@@ -11,15 +11,10 @@ import {
   updateDoc,
 } from "firebase/firestore";
 
-const Todo = ({
-  db,
-  displayInputs,
-  setDisplayInputs,
-  syncTodoItemWithFirestore,
-}) => {
+const Todo = ({ db, todos, setTodos, syncTodoItemWithFirestore }) => {
   const handleTodoEdit = async (updatedText, id) => {
-    setDisplayInputs(
-      displayInputs.map((todo) => {
+    setTodos(
+      todos.map((todo) => {
         if (todo.id === id) {
           return {
             ...todo,
@@ -60,7 +55,7 @@ const Todo = ({
     const todoItemRef = doc(db, "todoItem", id);
 
     await updateDoc(todoItemRef, {
-      isFinished: !displayInputs.find((todo) => todo.id === id).isFinished,
+      isFinished: !todos.find((todo) => todo.id === id).isFinished,
     });
     syncTodoItemWithFirestore();
   };
@@ -74,7 +69,7 @@ const Todo = ({
         <TodoInput onTodoSubmit={handleTodoSubmit} />
       </div>
       <TodoItems
-        displayInputs={displayInputs}
+        todos={todos}
         onTodoCheck={handleTodoCheck}
         onTodoEdit={handleTodoEdit}
         onTodoDelete={handleTodoDelete}

@@ -13,7 +13,7 @@ import { initializeApp } from "firebase/app";
 import { key } from "../key";
 
 const App = () => {
-  const [displayInputs, setDisplayInputs] = useState([]);
+  const [todos, setTodos] = useState([]);
 
   const firebaseConfig = key;
   const app = initializeApp(firebaseConfig);
@@ -32,7 +32,7 @@ const App = () => {
           createdTime: doc.data().createdTime,
         });
       });
-      setDisplayInputs(firestoreTodoItemList);
+      setTodos(firestoreTodoItemList);
     });
   };
 
@@ -46,8 +46,8 @@ const App = () => {
         <Goal />
         <Todo
           db={db}
-          displayInputs={displayInputs}
-          setDisplayInputs={setDisplayInputs}
+          todos={todos}
+          setTodos={setTodos}
           syncTodoItemWithFirestore={syncTodoItemWithFirestore}
         />
       </div>
