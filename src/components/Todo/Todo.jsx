@@ -11,7 +11,13 @@ import {
   updateDoc,
 } from "firebase/firestore";
 
-const Todo = ({ db, todos, setTodos, syncTodoItemWithFirestore }) => {
+const Todo = ({
+  db,
+  todos,
+  setTodos,
+  syncTodoItemWithFirestore,
+  selectedGoal,
+}) => {
   const handleTodoEdit = async (updatedText, id) => {
     setTodos(
       todos.map((todo) => {
@@ -36,10 +42,12 @@ const Todo = ({ db, todos, setTodos, syncTodoItemWithFirestore }) => {
   };
 
   const handleTodoSubmit = async (enteredTodo) => {
+    console.log("selectedGoal", selectedGoal);
     await addDoc(collection(db, "todoItem"), {
       text: enteredTodo,
       isFinished: false,
       createdTime: Math.floor(Date.now() / 1000),
+      goalId: selectedGoal,
     });
 
     syncTodoItemWithFirestore();
@@ -75,6 +83,7 @@ const Todo = ({ db, todos, setTodos, syncTodoItemWithFirestore }) => {
         onTodoDelete={handleTodoDelete}
         db={db}
         syncTodoItemWithFirestore={syncTodoItemWithFirestore}
+        selectedGoal={selectedGoal}
       />
     </div>
   );

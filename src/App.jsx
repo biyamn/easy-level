@@ -15,6 +15,13 @@ import { key } from "../key";
 const App = () => {
   const [todos, setTodos] = useState([]);
   const [goals, setGoals] = useState([]);
+  const [selectedGoal, setSelectedGoal] = useState(null);
+
+  const handleSelectedGoal = (id) => {
+    setSelectedGoal(id);
+  };
+
+  console.log("selectedGoal: ", selectedGoal);
 
   const firebaseConfig = key;
   const app = initializeApp(firebaseConfig);
@@ -31,6 +38,7 @@ const App = () => {
           text: doc.data().text,
           isFinished: doc.data().isFinished,
           createdTime: doc.data().createdTime,
+          goalId: doc.data().goalId,
         });
       });
       setTodos(firestoreTodoItemList);
@@ -47,6 +55,7 @@ const App = () => {
           id: doc.id,
           text: doc.data().text,
           createdTime: doc.data().createdTime,
+          isFinished: doc.data().isFinished,
         });
       });
       setGoals(firestoreGoalItemList);
@@ -69,12 +78,14 @@ const App = () => {
           goals={goals}
           setGoals={setGoals}
           syncGoalItemWithFirestore={syncGoalItemWithFirestore}
+          onSelectGoal={handleSelectedGoal}
         />
         <Todo
           db={db}
           todos={todos}
           setTodos={setTodos}
           syncTodoItemWithFirestore={syncTodoItemWithFirestore}
+          selectedGoal={selectedGoal}
         />
       </div>
     </div>

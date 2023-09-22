@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Goal.module.css";
 import GoalInput from "./GoalInput";
 import GoalItems from "./GoalItems";
@@ -10,7 +10,13 @@ import {
   updateDoc,
 } from "firebase/firestore";
 
-const Goal = ({ goals, setGoals, db, syncGoalItemWithFirestore }) => {
+const Goal = ({
+  goals,
+  setGoals,
+  db,
+  syncGoalItemWithFirestore,
+  onSelectGoal,
+}) => {
   const handleGoalEdit = async (updatedText, id) => {
     setGoals(
       goals.map((goal) => {
@@ -37,6 +43,7 @@ const Goal = ({ goals, setGoals, db, syncGoalItemWithFirestore }) => {
   const handleGoalSubmit = async (enteredGoal) => {
     await addDoc(collection(db, "goalItem"), {
       text: enteredGoal,
+      isFinished: false,
       createdTime: Math.floor(Date.now() / 1000),
     });
 
@@ -58,6 +65,10 @@ const Goal = ({ goals, setGoals, db, syncGoalItemWithFirestore }) => {
     syncGoalItemWithFirestore();
   };
 
+  const handleSelectedGoal = (id) => {
+    onSelectGoal(id);
+  };
+
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Goal</h1>
@@ -69,6 +80,7 @@ const Goal = ({ goals, setGoals, db, syncGoalItemWithFirestore }) => {
         onGoalDelete={handleGoalDelete}
         db={db}
         syncGoalItemWithFirestore={syncGoalItemWithFirestore}
+        onSelectGoal={handleSelectedGoal}
       />
     </div>
   );

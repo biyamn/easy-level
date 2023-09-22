@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faPenToSquare } from "@fortawesome/free-regular-svg-icons";
@@ -6,12 +6,19 @@ import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useState, useRef } from "react";
 import styles from "./GoalItem.module.css";
 
-const GoalItem = ({ goal, onGoalDelete, onGoalEdit, onGoalCheck }) => {
+const GoalItem = ({
+  goal,
+  onGoalDelete,
+  onGoalEdit,
+  onGoalCheck,
+  onSelectGoal,
+}) => {
   const editedText = useRef(null);
 
   const [isEditClicked, setIsEditClicked] = useState(false);
   const [isDeleteClicked, setIsDeleteClicked] = useState(false);
   const [updatedText, setUpdatedText] = useState("");
+  const [isGoalItemClicked, setIsGoalItemClicked] = useState(false);
   const submitEditedContent = () => {
     if (updatedText === "") {
       setIsEditClicked(false);
@@ -49,10 +56,19 @@ const GoalItem = ({ goal, onGoalDelete, onGoalEdit, onGoalCheck }) => {
     onGoalCheck(id);
   };
 
+  const goalItemClicked = (id) => {
+    console.log("goal item clicked");
+    setIsGoalItemClicked(() => !isGoalItemClicked);
+    onSelectGoal(id);
+  };
+
   const isChecked = goal.isFinished;
 
   return (
-    <Container>
+    <Container
+      onClick={() => goalItemClicked(goal.id)}
+      $isGoalItemClicked={isGoalItemClicked}
+    >
       <div className={styles.checkboxAndText}>
         <label>
           <input
@@ -126,7 +142,8 @@ const GoalItem = ({ goal, onGoalDelete, onGoalEdit, onGoalCheck }) => {
 };
 
 const Container = styled.div`
-  background-color: #a8dcfa;
+  background-color: ${({ $isGoalItemClicked }) =>
+    $isGoalItemClicked ? "#a8dcfa" : "#ccc"};
   border-radius: 8px;
   padding: 5%;
   width: 15rem;
