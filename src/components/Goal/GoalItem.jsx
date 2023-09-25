@@ -13,7 +13,6 @@ const GoalItem = ({
   onSelectGoal,
   backgroundColor,
 }) => {
-  console.log("goalitem 컴포넌트 시작");
   const editedText = useRef(null);
 
   const [isEditClicked, setIsEditClicked] = useState(false);
@@ -57,12 +56,10 @@ const GoalItem = ({
   };
 
   const goalItemClicked = (id) => {
-    // console.log("goal item clicked");
     onSelectGoal(id);
   };
 
   const isChecked = goal.isFinished;
-  console.log("goalitem의 goal.id: ", goal.id);
   return (
     <Container
       onClick={() => goalItemClicked(goal.id)}

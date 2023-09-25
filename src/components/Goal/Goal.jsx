@@ -70,7 +70,6 @@ const Goal = ({
     onSelectGoal(id);
   };
 
-  // console.log("goals(Goal 컴포넌트): ", goals);
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Goal</h1>

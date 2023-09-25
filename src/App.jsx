@@ -21,8 +21,6 @@ const App = () => {
     setSelectedGoal(id);
   };
 
-  // console.log("selectedGoal: ", selectedGoal);
-
   const firebaseConfig = key;
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);

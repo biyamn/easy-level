@@ -42,7 +42,6 @@ const Todo = ({
   };
 
   const handleTodoSubmit = async (enteredTodo) => {
-    // console.log("selectedGoal", selectedGoal);
     await addDoc(collection(db, "todoItem"), {
       text: enteredTodo,
       isFinished: false,
