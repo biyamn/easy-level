@@ -15,7 +15,7 @@ const TodoItems = ({
 
   const handleTodoCheck = (id) => onTodoCheck(id);
 
-  console.log("todos: ", todos);
+  // console.log("todos: ", todos);
   const selectedTodos = todos.filter((todo) => todo.goalId === selectedGoal);
 
   return (

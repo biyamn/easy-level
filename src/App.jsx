@@ -21,7 +21,7 @@ const App = () => {
     setSelectedGoal(id);
   };
 
-  console.log("selectedGoal: ", selectedGoal);
+  // console.log("selectedGoal: ", selectedGoal);
 
   const firebaseConfig = key;
   const app = initializeApp(firebaseConfig);
@@ -79,6 +79,7 @@ const App = () => {
           setGoals={setGoals}
           syncGoalItemWithFirestore={syncGoalItemWithFirestore}
           onSelectGoal={handleSelectedGoal}
+          selectedGoal={selectedGoal}
         />
         <Todo
           db={db}

@@ -16,6 +16,7 @@ const Goal = ({
   db,
   syncGoalItemWithFirestore,
   onSelectGoal,
+  selectedGoal,
 }) => {
   const handleGoalEdit = async (updatedText, id) => {
     setGoals(
@@ -69,6 +70,7 @@ const Goal = ({
     onSelectGoal(id);
   };
 
+  // console.log("goals(Goal 컴포넌트): ", goals);
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Goal</h1>
@@ -79,8 +81,8 @@ const Goal = ({
         onGoalEdit={handleGoalEdit}
         onGoalDelete={handleGoalDelete}
         db={db}
-        syncGoalItemWithFirestore={syncGoalItemWithFirestore}
         onSelectGoal={handleSelectedGoal}
+        selectedGoal={selectedGoal}
       />
     </div>
   );

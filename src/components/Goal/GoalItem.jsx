@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
-import { useState, useRef } from "react";
 import styles from "./GoalItem.module.css";
 
 const GoalItem = ({
@@ -12,13 +11,14 @@ const GoalItem = ({
   onGoalEdit,
   onGoalCheck,
   onSelectGoal,
+  backgroundColor,
 }) => {
+  console.log("goalitem 컴포넌트 시작");
   const editedText = useRef(null);
 
   const [isEditClicked, setIsEditClicked] = useState(false);
   const [isDeleteClicked, setIsDeleteClicked] = useState(false);
   const [updatedText, setUpdatedText] = useState("");
-  const [isGoalItemClicked, setIsGoalItemClicked] = useState(false);
   const submitEditedContent = () => {
     if (updatedText === "") {
       setIsEditClicked(false);
@@ -57,17 +57,16 @@ const GoalItem = ({
   };
 
   const goalItemClicked = (id) => {
-    console.log("goal item clicked");
-    setIsGoalItemClicked(() => !isGoalItemClicked);
+    // console.log("goal item clicked");
     onSelectGoal(id);
   };
 
   const isChecked = goal.isFinished;
-
+  console.log("goalitem의 goal.id: ", goal.id);
   return (
     <Container
       onClick={() => goalItemClicked(goal.id)}
-      $isGoalItemClicked={isGoalItemClicked}
+      $backgroundColor={backgroundColor}
     >
       <div className={styles.checkboxAndText}>
         <label>
@@ -142,8 +141,7 @@ const GoalItem = ({
 };
 
 const Container = styled.div`
-  background-color: ${({ $isGoalItemClicked }) =>
-    $isGoalItemClicked ? "#a8dcfa" : "#ccc"};
+  background: ${(props) => props.$backgroundColor};
   border-radius: 8px;
   padding: 5%;
   width: 15rem;
