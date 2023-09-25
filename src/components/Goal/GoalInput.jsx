@@ -4,16 +4,16 @@ import styles from "./GoalInput.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
-const GoalInput = (props) => {
+const GoalInput = ({ onGoalSubmit }) => {
   const [enteredGoal, setEnteredGoal] = useState("");
   const [isValid, setIsValid] = useState(true);
 
-  const goalChangeHandler = (e) => {
+  const handleGoalChange = (e) => {
     setEnteredGoal(e.target.value);
     setIsValid(true);
   };
 
-  const submitHandler = (e) => {
+  const handleGoalSubmit = (e) => {
     e.preventDefault();
     if (enteredGoal.trim() === "") {
       setIsValid(false);
@@ -21,18 +21,18 @@ const GoalInput = (props) => {
       return;
     }
     setIsValid(true);
-    props.onSaveGoal(enteredGoal);
+    onGoalSubmit(enteredGoal);
     setEnteredGoal("");
   };
   return (
-    <form className={styles.container} onSubmit={submitHandler}>
+    <form className={styles.container} onSubmit={handleGoalSubmit}>
       <input
         className={
           !isValid ? `${styles.input} ${styles.invalid}` : `${styles.input}`
         }
         type="text"
         value={enteredGoal}
-        onChange={goalChangeHandler}
+        onChange={handleGoalChange}
         placeholder="Set Goal"
       />
       <button className={styles.button} type="submit">

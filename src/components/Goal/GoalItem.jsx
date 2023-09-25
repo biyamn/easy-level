@@ -1,31 +1,37 @@
-import React from "react";
-import styles from "./TodoItem.module.css";
+import React, { useState, useRef } from "react";
+import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
-import { useState, useRef } from "react";
+import styles from "./GoalItem.module.css";
 
-const TodoItem = (props) => {
+const GoalItem = ({
+  goal,
+  onGoalDelete,
+  onGoalEdit,
+  onGoalCheck,
+  onSelectGoal,
+  backgroundColor,
+}) => {
   const editedText = useRef(null);
 
   const [isEditClicked, setIsEditClicked] = useState(false);
   const [isDeleteClicked, setIsDeleteClicked] = useState(false);
-  const [isChecked, setIsChecked] = useState(false);
   const [updatedText, setUpdatedText] = useState("");
-
   const submitEditedContent = () => {
     if (updatedText === "") {
       setIsEditClicked(false);
       return;
     }
-    props.submitEditedContent(updatedText, props.todo.id);
+
     setUpdatedText("");
     setIsEditClicked(false);
+    onGoalEdit(updatedText, goal.id);
   };
 
   const openEdit = () => {
     setIsEditClicked(true);
-    editedText.current.focus();
+    editedText.current?.focus();
   };
 
   const openDelete = () => {
@@ -42,14 +48,30 @@ const TodoItem = (props) => {
   };
 
   const onDelete = (id) => {
-    props.onDelete(id);
+    onGoalDelete(id);
   };
 
+  const onCheck = (id) => {
+    onGoalCheck(id);
+  };
+
+  const goalItemClicked = (id) => {
+    onSelectGoal(id);
+  };
+
+  const isChecked = goal.isFinished;
   return (
-    <div className={styles.container}>
+    <Container
+      onClick={() => goalItemClicked(goal.id)}
+      $backgroundColor={backgroundColor}
+    >
       <div className={styles.checkboxAndText}>
         <label>
-          <input type="checkbox" onClick={() => setIsChecked(!isChecked)} />
+          <input
+            type="checkbox"
+            onChange={() => onCheck(goal.id)}
+            checked={goal.isFinished}
+          />
           <div>
             <FontAwesomeIcon
               icon={faCheck}
@@ -66,7 +88,7 @@ const TodoItem = (props) => {
             value={updatedText}
             onChange={(e) => setUpdatedText(e.target.value)}
             ref={editedText}
-            placeholder={props.todo.text}
+            placeholder={goal.text}
           />
         ) : (
           <div
@@ -74,7 +96,7 @@ const TodoItem = (props) => {
               isChecked ? `${styles.text} ${styles.checked}` : `${styles.text}`
             }
           >
-            {props.todo.text}
+            {goal.text}
           </div>
         )}
       </div>
@@ -92,7 +114,7 @@ const TodoItem = (props) => {
           <>
             <button
               className={styles.submitIcon}
-              onClick={() => onDelete(props.todo.id)}
+              onClick={() => onDelete(goal.id)}
             >
               <FontAwesomeIcon icon={faCheck} size="2x" color="white" />
             </button>
@@ -111,8 +133,25 @@ const TodoItem = (props) => {
           </>
         )}
       </div>
-    </div>
+    </Container>
   );
 };
 
-export default TodoItem;
+const Container = styled.div`
+  background: ${(props) => props.$backgroundColor};
+  border-radius: 8px;
+  padding: 5%;
+  width: 15rem;
+  height: 10rem;
+  margin-bottom: 5%;
+  margin-right: 5%;
+`;
+
+const Title = styled.div`
+  font-size: 1rem;
+  color: #1a202c;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+`;
+
+export default GoalItem;

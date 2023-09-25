@@ -1,17 +1,8 @@
 .container {
   display: flex;
-  justify-content: center;
-  align-items: center;
   padding: 30px;
   width: 100%;
-}
-
-.title {
-  font-size: 2rem;
-  color: yellow;
-  word-break: keep-all;
-  text-align: center;
-  overflow-wrap: anywhere;
+  flex-wrap: wrap;
 }
 
 @media screen and (max-width: 768px) {

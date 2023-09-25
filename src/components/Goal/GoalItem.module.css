@@ -1,0 +1,128 @@
+.container {
+  width: 100%;
+  color: white;
+  font-size: 1.5rem;
+  border: 1px solid #232934;
+  border-radius: 7px;
+  background-color: #232934;
+  margin-bottom: 25px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2% 3%;
+}
+
+.actionBtns {
+  display: flex;
+}
+
+.checkboxAndText {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.checkboxAndText label {
+  margin-right: 10px;
+}
+
+.checkboxAndText > div {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+}
+
+.deleteIcon,
+.submitIcon,
+.cancelIcon,
+.editIcon {
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+label div {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #1a202c;
+  border: 3px solid rgb(73, 220, 73);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+input[type="checkbox"]:checked + div {
+  background-color: rgb(73, 220, 73);
+}
+
+.text {
+  font-size: 1rem;
+  color: #1a202c;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  min-height: 35px;
+  margin: 0;
+  padding: 0;
+}
+
+.text.checked {
+  color: rgb(107, 107, 107);
+}
+
+input.text {
+  border: 0 none;
+  background-color: transparent;
+  height: 35px;
+  color: white;
+  font-size: 1.5rem;
+  width: 100%;
+}
+
+.checkIcon {
+  width: 0%;
+}
+
+input[type="checkbox"]:checked + div .checkIcon {
+  transition: 0.2s ease;
+  width: 30.2px;
+  height: 24px;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    margin-bottom: 10px;
+    font-size: 1rem;
+    padding: 2% 3%;
+  }
+
+  .deleteIcon,
+  .submitIcon,
+  .cancelIcon,
+  .editIcon {
+    height: 30px;
+    width: 30px;
+  }
+
+  .editIcon,
+  .submitIcon {
+    margin-right: 4px;
+  }
+
+  input.text {
+    font-size: 1.2rem;
+  }
+
+  label div {
+    width: 30px;
+    height: 30px;
+  }
+}
