@@ -38,23 +38,23 @@ const firebaseConfig = config;
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+// 이부분에 문제가 있음
+const provider = new GoogleAuthProvider();
+const auth = getAuth(app);
+
 const App = () => {
   const [todos, setTodos] = useState([]);
   const [goals, setGoals] = useState([]);
   const [selectedGoal, setSelectedGoal] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
 
-  // 이부분에 문제가 있음
-  // const provider = new GoogleAuthProvider();
-  // const auth = getAuth(app);
-
-  // onAuthStateChanged(auth, (user) => {
-  //   if (user) {
-  //     setCurrentUser(user.uid);
-  //   } else {
-  //     setCurrentUser(null);
-  //   }
-  // });
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      setCurrentUser(user.uid);
+    } else {
+      setCurrentUser(null);
+    }
+  });
 
   const handleSelectedGoal = (id) => {
     setSelectedGoal(id);
@@ -105,11 +105,11 @@ const App = () => {
 
   return (
     <div className={styles.App}>
-      {/* <TodoListAppBar
+      <TodoListAppBar
         provider={provider}
         auth={auth}
         currentUser={currentUser}
-      /> */}
+      />
       <div className={styles.box}>
         <Goal
           db={db}
