@@ -48,13 +48,34 @@ const App = () => {
   const [selectedGoal, setSelectedGoal] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
 
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      setCurrentUser(user.uid);
-    } else {
-      setCurrentUser(null);
-    }
-  });
+  // 무한루프가 걸리는 오류
+  //  onAuthStateChanged: Firebase Authentication 상태가 변경될 때 호출되는 이벤트 핸들러
+  // https://firebase.google.com/docs/reference/js/v8/firebase.auth.Auth#onauthstatechanged
+  // 이벤트 핸들러 내에서 setCurrentUser 함수를 호출하면 상태가 변경될 때마다 컴포넌트가 다시 렌더링됨 -> 무한루프
+  // onAuthStateChanged(auth, (user) => {
+  //   if (user) {
+  //     setCurrentUser(user.uid);
+  //   } else {
+  //     setCurrentUser(null);
+  //   }
+  // });
+
+  // useEffect(() => {return() => function cleanup(){}})
+  // useEffect 훅을 사용하여 onAuthStateChanged 이벤트 핸들러를 한 번만 등록하고
+  // 컴포넌트가 언마운트될 때 해당 이벤트 핸들러를 해제
+  useEffect(() => {
+    // onAuthStateChanged 이벤트 핸들러 등록
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setCurrentUser(user.uid);
+      } else {
+        setCurrentUser(null);
+      }
+    });
+    // https://react.dev/learn/lifecycle-of-reactive-effects
+    // 컴포넌트가 언마운트될 때 이벤트 핸들러를 해제
+    return () => unsubscribe();
+  }, []); // 빈 배열을 전달하여 처음 한 번만 실행되도록 함
 
   const handleSelectedGoal = (id) => {
     setSelectedGoal(id);
