@@ -2,52 +2,106 @@ import React, { useState, useEffect } from "react";
 import styles from "./App.module.css";
 import Todo from "./components/Todo/Todo";
 import Goal from "./components/Goal/Goal";
+import TodoListAppBar from "./components/AppBar/TodoListAppBar";
+import { initializeApp } from "firebase/app";
 import {
   getFirestore,
   collection,
   getDocs,
   query,
   orderBy,
+  where,
 } from "firebase/firestore";
-import { initializeApp } from "firebase/app";
-// import { key } from "../key";
+import { GoogleAuthProvider, getAuth, onAuthStateChanged } from "firebase/auth";
+
+const {
+  VITE_API_KEY,
+  VITE_AUTH_DOMAIN,
+  VITE_PROJECT_ID,
+  VITE_STORAGE_BUCKET,
+  VITE_MESSAGING_SENDERID,
+  VITE_APP_ID,
+  VITE_MEASUREMENT_ID,
+} = import.meta.env;
+
+const config = {
+  apiKey: VITE_API_KEY,
+  authDomain: VITE_AUTH_DOMAIN,
+  projectId: VITE_PROJECT_ID,
+  storageBucket: VITE_STORAGE_BUCKET,
+  messagingSenderId: VITE_MESSAGING_SENDERID,
+  appId: VITE_APP_ID,
+  measurementId: VITE_MEASUREMENT_ID,
+};
+
+// Initialize Firebase
+const firebaseConfig = config;
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// 이부분에 문제가 있음
+const provider = new GoogleAuthProvider();
+const auth = getAuth(app);
+
 const App = () => {
-  const {
-    VITE_API_KEY,
-    VITE_AUTH_DOMAIN,
-    VITE_PROJECT_ID,
-    VITE_STORAGE_BUCKET,
-    VITE_MESSAGING_SENDERID,
-    VITE_APP_ID,
-    VITE_MEASUREMENT_ID,
-  } = import.meta.env;
-
-  const config = {
-    apiKey: VITE_API_KEY,
-    authDomain: VITE_AUTH_DOMAIN,
-    projectId: VITE_PROJECT_ID,
-    storageBucket: VITE_STORAGE_BUCKET,
-    messagingSenderId: VITE_MESSAGING_SENDERID,
-    appId: VITE_APP_ID,
-    measurementId: VITE_MEASUREMENT_ID,
-  };
-
-  console.log("config: ", config);
   const [todos, setTodos] = useState([]);
   const [goals, setGoals] = useState([]);
   const [selectedGoal, setSelectedGoal] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
+
+  // 오류 발생
+  // 무한루프가 걸리는 오류
+  //  onAuthStateChanged: Firebase Authentication 상태가 변경될 때 호출되는 이벤트 핸들러
+  // https://firebase.google.com/docs/reference/js/v8/firebase.auth.Auth#onauthstatechanged
+  // 이벤트 핸들러 내에서 setCurrentUser 함수를 호출하면 상태가 변경될 때마다 컴포넌트가 다시 렌더링됨 -> 무한루프
+  // onAuthStateChanged(auth, (user) => {
+  //   if (user) {
+  //     setCurrentUser(user.uid);
+  //   } else {
+  //     setCurrentUser(null);
+  //   }
+  // });
+
+  // 오류 해결1
+  // 이렇게 해도 되긴 함
+  // useEffect(() => {
+  //   onAuthStateChanged(auth, (user) => {
+  //     if (user) {
+  //       setCurrentUser(user.uid);
+  //     } else {
+  //       setCurrentUser(null);
+  //     }
+  //   });
+  // }, []);
+
+  // 오류 해결2
+  // useEffect(() => {return() => function cleanup(){}})
+  // useEffect 훅을 사용하여 onAuthStateChanged 이벤트 핸들러를 한 번만 등록하고
+  // 컴포넌트가 언마운트될 때 해당 이벤트 핸들러를 해제
+  useEffect(() => {
+    // onAuthStateChanged 이벤트 핸들러 등록
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setCurrentUser(user.uid);
+      } else {
+        setCurrentUser(null);
+      }
+    });
+    // https://react.dev/learn/lifecycle-of-reactive-effects
+    // 컴포넌트가 언마운트될 때 이벤트 핸들러를 해제
+    return () => unsubscribe();
+  }, []); // 빈 배열을 전달하여 처음 한 번만 실행되도록 함
 
   const handleSelectedGoal = (id) => {
     setSelectedGoal(id);
   };
 
-  const firebaseConfig = config;
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-
   const syncTodoItemWithFirestore = () => {
-    const q = query(collection(db, "todoItem"), orderBy("createdTime", "asc"));
-
+    const q = query(
+      collection(db, "todoItem"),
+      where("userId", "==", currentUser),
+      orderBy("createdTime", "desc")
+    );
     getDocs(q).then((querySnapshot) => {
       const firestoreTodoItemList = [];
       querySnapshot.forEach((doc) => {
@@ -57,6 +111,7 @@ const App = () => {
           isFinished: doc.data().isFinished,
           createdTime: doc.data().createdTime,
           goalId: doc.data().goalId,
+          userId: doc.data().userId,
         });
       });
       setTodos(firestoreTodoItemList);
@@ -64,8 +119,11 @@ const App = () => {
   };
 
   const syncGoalItemWithFirestore = () => {
-    const q = query(collection(db, "goalItem"), orderBy("createdTime", "asc"));
-
+    const q = query(
+      collection(db, "goalItem"),
+      where("userId", "==", currentUser),
+      orderBy("createdTime", "desc")
+    );
     getDocs(q).then((querySnapshot) => {
       const firestoreGoalItemList = [];
       querySnapshot.forEach((doc) => {
@@ -74,6 +132,7 @@ const App = () => {
           text: doc.data().text,
           createdTime: doc.data().createdTime,
           isFinished: doc.data().isFinished,
+          userId: doc.data().userId,
         });
       });
       setGoals(firestoreGoalItemList);
@@ -82,14 +141,19 @@ const App = () => {
 
   useEffect(() => {
     syncTodoItemWithFirestore();
-  }, []);
+  }, [currentUser]);
 
   useEffect(() => {
     syncGoalItemWithFirestore();
-  }, []);
+  }, [currentUser]);
 
   return (
     <div className={styles.App}>
+      <TodoListAppBar
+        provider={provider}
+        auth={auth}
+        currentUser={currentUser}
+      />
       <div className={styles.box}>
         <Goal
           db={db}
@@ -98,6 +162,7 @@ const App = () => {
           syncGoalItemWithFirestore={syncGoalItemWithFirestore}
           onSelectGoal={handleSelectedGoal}
           selectedGoal={selectedGoal}
+          currentUser={currentUser}
         />
         <Todo
           db={db}
@@ -105,6 +170,7 @@ const App = () => {
           setTodos={setTodos}
           syncTodoItemWithFirestore={syncTodoItemWithFirestore}
           selectedGoal={selectedGoal}
+          currentUser={currentUser}
         />
       </div>
     </div>

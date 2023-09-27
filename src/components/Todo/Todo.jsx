@@ -17,6 +17,7 @@ const Todo = ({
   setTodos,
   syncTodoItemWithFirestore,
   selectedGoal,
+  currentUser,
 }) => {
   const handleTodoEdit = async (updatedText, id) => {
     setTodos(
@@ -47,6 +48,7 @@ const Todo = ({
       isFinished: false,
       createdTime: Math.floor(Date.now() / 1000),
       goalId: selectedGoal,
+      userId: currentUser,
     });
 
     syncTodoItemWithFirestore();
