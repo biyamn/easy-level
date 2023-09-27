@@ -3,6 +3,7 @@ import styles from "./App.module.css";
 import Todo from "./components/Todo/Todo";
 import Goal from "./components/Goal/Goal";
 import TodoListAppBar from "./components/AppBar/TodoListAppBar";
+import { initializeApp } from "firebase/app";
 import {
   getFirestore,
   collection,
@@ -10,41 +11,54 @@ import {
   query,
   orderBy,
 } from "firebase/firestore";
-import { initializeApp } from "firebase/app";
-// import { key } from "../key";
+import { GoogleAuthProvider, getAuth, onAuthStateChanged } from "firebase/auth";
+
+const {
+  VITE_API_KEY,
+  VITE_AUTH_DOMAIN,
+  VITE_PROJECT_ID,
+  VITE_STORAGE_BUCKET,
+  VITE_MESSAGING_SENDERID,
+  VITE_APP_ID,
+  VITE_MEASUREMENT_ID,
+} = import.meta.env;
+
+const config = {
+  apiKey: VITE_API_KEY,
+  authDomain: VITE_AUTH_DOMAIN,
+  projectId: VITE_PROJECT_ID,
+  storageBucket: VITE_STORAGE_BUCKET,
+  messagingSenderId: VITE_MESSAGING_SENDERID,
+  appId: VITE_APP_ID,
+  measurementId: VITE_MEASUREMENT_ID,
+};
+
+// Initialize Firebase
+const firebaseConfig = config;
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
 const App = () => {
-  const {
-    VITE_API_KEY,
-    VITE_AUTH_DOMAIN,
-    VITE_PROJECT_ID,
-    VITE_STORAGE_BUCKET,
-    VITE_MESSAGING_SENDERID,
-    VITE_APP_ID,
-    VITE_MEASUREMENT_ID,
-  } = import.meta.env;
-
-  const config = {
-    apiKey: VITE_API_KEY,
-    authDomain: VITE_AUTH_DOMAIN,
-    projectId: VITE_PROJECT_ID,
-    storageBucket: VITE_STORAGE_BUCKET,
-    messagingSenderId: VITE_MESSAGING_SENDERID,
-    appId: VITE_APP_ID,
-    measurementId: VITE_MEASUREMENT_ID,
-  };
-
-  console.log("config: ", config);
   const [todos, setTodos] = useState([]);
   const [goals, setGoals] = useState([]);
   const [selectedGoal, setSelectedGoal] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
+
+  // 이부분에 문제가 있음
+  // const provider = new GoogleAuthProvider();
+  // const auth = getAuth(app);
+
+  // onAuthStateChanged(auth, (user) => {
+  //   if (user) {
+  //     setCurrentUser(user.uid);
+  //   } else {
+  //     setCurrentUser(null);
+  //   }
+  // });
 
   const handleSelectedGoal = (id) => {
     setSelectedGoal(id);
   };
-
-  const firebaseConfig = config;
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
 
   const syncTodoItemWithFirestore = () => {
     const q = query(collection(db, "todoItem"), orderBy("createdTime", "asc"));
@@ -91,7 +105,11 @@ const App = () => {
 
   return (
     <div className={styles.App}>
-      <TodoListAppBar />
+      {/* <TodoListAppBar
+        provider={provider}
+        auth={auth}
+        currentUser={currentUser}
+      /> */}
       <div className={styles.box}>
         <Goal
           db={db}

@@ -1,11 +1,19 @@
 import React from "react";
 import styled from "styled-components";
+import { signInWithRedirect, signOut } from "firebase/auth";
 
-const TodoListAppBar = () => {
+const TodoListAppBar = ({ provider, auth, currentUser }) => {
+  const loginWithGoogleButton = (
+    <Button onClick={() => signInWithRedirect(auth, provider)}>
+      LOGIN WITH GOOGLE
+    </Button>
+  );
+  const logoutButton = <Button onClick={() => signOut(auth)}>LOGOUT</Button>;
+  const button = currentUser === null ? loginWithGoogleButton : logoutButton;
   return (
     <AppBar>
       <Logo>Todo List App</Logo>
-      <Button>Log In</Button>
+      {button}
     </AppBar>
   );
 };
