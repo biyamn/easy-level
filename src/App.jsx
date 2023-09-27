@@ -48,6 +48,7 @@ const App = () => {
   const [selectedGoal, setSelectedGoal] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
 
+  // 오류 발생
   // 무한루프가 걸리는 오류
   //  onAuthStateChanged: Firebase Authentication 상태가 변경될 때 호출되는 이벤트 핸들러
   // https://firebase.google.com/docs/reference/js/v8/firebase.auth.Auth#onauthstatechanged
@@ -60,6 +61,19 @@ const App = () => {
   //   }
   // });
 
+  // 오류 해결1
+  // 이렇게 해도 되긴 함
+  // useEffect(() => {
+  //   onAuthStateChanged(auth, (user) => {
+  //     if (user) {
+  //       setCurrentUser(user.uid);
+  //     } else {
+  //       setCurrentUser(null);
+  //     }
+  //   });
+  // }, []);
+
+  // 오류 해결2
   // useEffect(() => {return() => function cleanup(){}})
   // useEffect 훅을 사용하여 onAuthStateChanged 이벤트 핸들러를 한 번만 등록하고
   // 컴포넌트가 언마운트될 때 해당 이벤트 핸들러를 해제
