@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./App.module.css";
 import Todo from "./components/Todo/Todo";
 import Goal from "./components/Goal/Goal";
+import TodoListAppBar from "./components/AppBar/TodoListAppBar";
 import {
   getFirestore,
   collection,
@@ -90,6 +91,7 @@ const App = () => {
 
   return (
     <div className={styles.App}>
+      <TodoListAppBar />
       <div className={styles.box}>
         <Goal
           db={db}
