@@ -10,6 +10,7 @@ import {
   getDocs,
   query,
   orderBy,
+  where,
 } from "firebase/firestore";
 import { GoogleAuthProvider, getAuth, onAuthStateChanged } from "firebase/auth";
 
@@ -96,8 +97,11 @@ const App = () => {
   };
 
   const syncTodoItemWithFirestore = () => {
-    const q = query(collection(db, "todoItem"), orderBy("createdTime", "asc"));
-
+    const q = query(
+      collection(db, "todoItem"),
+      where("userId", "==", currentUser),
+      orderBy("createdTime", "desc")
+    );
     getDocs(q).then((querySnapshot) => {
       const firestoreTodoItemList = [];
       querySnapshot.forEach((doc) => {
@@ -107,6 +111,7 @@ const App = () => {
           isFinished: doc.data().isFinished,
           createdTime: doc.data().createdTime,
           goalId: doc.data().goalId,
+          userId: doc.data().userId,
         });
       });
       setTodos(firestoreTodoItemList);
@@ -114,8 +119,11 @@ const App = () => {
   };
 
   const syncGoalItemWithFirestore = () => {
-    const q = query(collection(db, "goalItem"), orderBy("createdTime", "asc"));
-
+    const q = query(
+      collection(db, "goalItem"),
+      where("userId", "==", currentUser),
+      orderBy("createdTime", "desc")
+    );
     getDocs(q).then((querySnapshot) => {
       const firestoreGoalItemList = [];
       querySnapshot.forEach((doc) => {
@@ -124,6 +132,7 @@ const App = () => {
           text: doc.data().text,
           createdTime: doc.data().createdTime,
           isFinished: doc.data().isFinished,
+          userId: doc.data().userId,
         });
       });
       setGoals(firestoreGoalItemList);
@@ -132,11 +141,11 @@ const App = () => {
 
   useEffect(() => {
     syncTodoItemWithFirestore();
-  }, []);
+  }, [currentUser]);
 
   useEffect(() => {
     syncGoalItemWithFirestore();
-  }, []);
+  }, [currentUser]);
 
   return (
     <div className={styles.App}>
@@ -153,6 +162,7 @@ const App = () => {
           syncGoalItemWithFirestore={syncGoalItemWithFirestore}
           onSelectGoal={handleSelectedGoal}
           selectedGoal={selectedGoal}
+          currentUser={currentUser}
         />
         <Todo
           db={db}
@@ -160,6 +170,7 @@ const App = () => {
           setTodos={setTodos}
           syncTodoItemWithFirestore={syncTodoItemWithFirestore}
           selectedGoal={selectedGoal}
+          currentUser={currentUser}
         />
       </div>
     </div>

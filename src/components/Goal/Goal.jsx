@@ -17,6 +17,7 @@ const Goal = ({
   syncGoalItemWithFirestore,
   onSelectGoal,
   selectedGoal,
+  currentUser,
 }) => {
   const handleGoalEdit = async (updatedText, id) => {
     setGoals(
@@ -46,6 +47,7 @@ const Goal = ({
       text: enteredGoal,
       isFinished: false,
       createdTime: Math.floor(Date.now() / 1000),
+      userId: currentUser,
     });
 
     syncGoalItemWithFirestore();
