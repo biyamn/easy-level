@@ -65,74 +65,70 @@ const GoalItem = ({
       onClick={() => goalItemClicked(goal.id)}
       $backgroundColor={backgroundColor}
     >
-      <div className={styles.checkboxAndText}>
-        <label>
-          <input
-            type="checkbox"
-            onChange={() => onCheck(goal.id)}
-            checked={goal.isFinished}
+      {/* <label>
+        <input
+          type="checkbox"
+          onChange={() => onCheck(goal.id)}
+          checked={goal.isFinished}
+        />
+        <div>
+          <FontAwesomeIcon
+            icon={faCheck}
+            color="#1a202c"
+            className={styles.checkIcon}
           />
-          <div>
-            <FontAwesomeIcon
-              icon={faCheck}
-              color="#1a202c"
-              className={styles.checkIcon}
-            />
-          </div>
-        </label>
-        {isEditClicked ? (
-          <input
-            className={
-              isChecked ? `${styles.text} ${styles.checked}` : `${styles.text}`
-            }
-            value={updatedText}
-            onChange={(e) => setUpdatedText(e.target.value)}
-            ref={editedText}
-            placeholder={goal.text}
-          />
-        ) : (
-          <div
-            className={
-              isChecked ? `${styles.text} ${styles.checked}` : `${styles.text}`
-            }
+        </div>
+      </label> */}
+      {isEditClicked ? (
+        <input
+          className={
+            isChecked ? `${styles.text} ${styles.checked}` : `${styles.text}`
+          }
+          value={updatedText}
+          onChange={(e) => setUpdatedText(e.target.value)}
+          ref={editedText}
+          placeholder={goal.text}
+        />
+      ) : (
+        <Text
+          className={
+            isChecked ? `${styles.text} ${styles.checked}` : `${styles.text}`
+          }
+        >
+          {goal.text}
+        </Text>
+      )}
+      {isEditClicked && !isDeleteClicked ? (
+        <ActionButtons>
+          <button className={styles.submitIcon} onClick={submitEditedContent}>
+            <FontAwesomeIcon icon={faCheck} size="2x" color="white" />
+          </button>
+          <button className={styles.cancelIcon} onClick={cancelEdit}>
+            <FontAwesomeIcon icon={faXmark} size="2x" color="white" />
+          </button>
+        </ActionButtons>
+      ) : !isEditClicked && isDeleteClicked ? (
+        <ActionButtons>
+          <button
+            className={styles.submitIcon}
+            onClick={() => onDelete(goal.id)}
           >
-            {goal.text}
-          </div>
-        )}
-      </div>
-      <div className={styles.actionBtns}>
-        {isEditClicked && !isDeleteClicked ? (
-          <>
-            <button className={styles.submitIcon} onClick={submitEditedContent}>
-              <FontAwesomeIcon icon={faCheck} size="2x" color="white" />
-            </button>
-            <button className={styles.cancelIcon} onClick={cancelEdit}>
-              <FontAwesomeIcon icon={faXmark} size="2x" color="white" />
-            </button>
-          </>
-        ) : !isEditClicked && isDeleteClicked ? (
-          <>
-            <button
-              className={styles.submitIcon}
-              onClick={() => onDelete(goal.id)}
-            >
-              <FontAwesomeIcon icon={faCheck} size="2x" color="white" />
-            </button>
-            <button className={styles.cancelIcon} onClick={cancelDelete}>
-              <FontAwesomeIcon icon={faXmark} size="2x" color="white" />
-            </button>
-          </>
-        ) : (
-          <>
-            <button className={styles.editIcon} onClick={openEdit}>
-              <FontAwesomeIcon icon={faPenToSquare} size="2x" color="white" />
-            </button>
-            <button className={styles.deleteIcon} onClick={openDelete}>
-              <FontAwesomeIcon icon={faTrashCan} size="2x" color="white" />
-            </button>
-          </>
-        )}
-      </div>
+            <FontAwesomeIcon icon={faCheck} size="2x" color="white" />
+          </button>
+          <button className={styles.cancelIcon} onClick={cancelDelete}>
+            <FontAwesomeIcon icon={faXmark} size="2x" color="white" />
+          </button>
+        </ActionButtons>
+      ) : (
+        <ActionButtons>
+          <button className={styles.editIcon} onClick={openEdit}>
+            <FontAwesomeIcon icon={faPenToSquare} size="2x" color="white" />
+          </button>
+          <button className={styles.deleteIcon} onClick={openDelete}>
+            <FontAwesomeIcon icon={faTrashCan} size="2x" color="white" />
+          </button>
+        </ActionButtons>
+      )}
     </Container>
   );
 };
@@ -140,15 +136,23 @@ const GoalItem = ({
 const Container = styled.div`
   background: ${(props) => props.$backgroundColor};
   border-radius: 8px;
-  padding: 5%;
   width: 15rem;
   height: 10rem;
-  margin-bottom: 5%;
-  margin-right: 5%;
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+  padding: 1rem;
+  justify-content: space-between;
 `;
 
-const Title = styled.div`
-  font-size: 1rem;
+const ActionButtons = styled.div`
+  display: flex;
+  justify-content: right;
+  width: 100%;
+`;
+
+const Text = styled.div`
+  font-size: 1.2rem;
   color: #1a202c;
   word-break: keep-all;
   overflow-wrap: anywhere;
