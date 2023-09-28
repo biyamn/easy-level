@@ -1,24 +1,3 @@
-.container {
-  width: 100%;
-  color: white;
-  font-size: 1.5rem;
-  border: 1px solid #232934;
-  border-radius: 7px;
-  background-color: #232934;
-  margin-bottom: 25px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  align-items: center;
-  padding: 2% 3%;
-}
-
-.actionBtns {
-  display: flex;
-  justify-content: right;
-}
-
 .checkboxAndText label {
   margin-right: 10px;
 }
@@ -60,27 +39,20 @@ input[type="checkbox"]:checked + div {
   background-color: rgb(73, 220, 73);
 }
 
-.text {
-  font-size: 1rem;
-  color: #1a202c;
-  word-break: keep-all;
-  overflow-wrap: anywhere;
-  min-height: 35px;
-  margin: 0;
-  padding: 0;
-}
-
 .text.checked {
   color: rgb(107, 107, 107);
 }
 
 input.text {
+  padding: 0;
   border: 0 none;
   background-color: transparent;
-  height: 35px;
   color: white;
-  font-size: 1.5rem;
+  font-size: 1rem;
   width: 100%;
+  color: #1a202c;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
 }
 
 .checkIcon {
