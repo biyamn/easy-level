@@ -65,41 +65,39 @@ const GoalItem = ({
       onClick={() => goalItemClicked(goal.id)}
       $backgroundColor={backgroundColor}
     >
-      <div className={styles.checkboxAndText}>
-        <label>
-          <input
-            type="checkbox"
-            onChange={() => onCheck(goal.id)}
-            checked={goal.isFinished}
+      <label>
+        <input
+          type="checkbox"
+          onChange={() => onCheck(goal.id)}
+          checked={goal.isFinished}
+        />
+        <div>
+          <FontAwesomeIcon
+            icon={faCheck}
+            color="#1a202c"
+            className={styles.checkIcon}
           />
-          <div>
-            <FontAwesomeIcon
-              icon={faCheck}
-              color="#1a202c"
-              className={styles.checkIcon}
-            />
-          </div>
-        </label>
-        {isEditClicked ? (
-          <input
-            className={
-              isChecked ? `${styles.text} ${styles.checked}` : `${styles.text}`
-            }
-            value={updatedText}
-            onChange={(e) => setUpdatedText(e.target.value)}
-            ref={editedText}
-            placeholder={goal.text}
-          />
-        ) : (
-          <div
-            className={
-              isChecked ? `${styles.text} ${styles.checked}` : `${styles.text}`
-            }
-          >
-            {goal.text}
-          </div>
-        )}
-      </div>
+        </div>
+      </label>
+      {isEditClicked ? (
+        <input
+          className={
+            isChecked ? `${styles.text} ${styles.checked}` : `${styles.text}`
+          }
+          value={updatedText}
+          onChange={(e) => setUpdatedText(e.target.value)}
+          ref={editedText}
+          placeholder={goal.text}
+        />
+      ) : (
+        <Text
+          className={
+            isChecked ? `${styles.text} ${styles.checked}` : `${styles.text}`
+          }
+        >
+          {goal.text}
+        </Text>
+      )}
       <div className={styles.actionBtns}>
         {isEditClicked && !isDeleteClicked ? (
           <>
@@ -140,18 +138,21 @@ const GoalItem = ({
 const Container = styled.div`
   background: ${(props) => props.$backgroundColor};
   border-radius: 8px;
-  padding: 5%;
   width: 15rem;
   height: 10rem;
   margin-bottom: 5%;
   margin-right: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
-const Title = styled.div`
-  font-size: 1rem;
+const Text = styled.div`
+  font-size: 1.5rem;
   color: #1a202c;
   word-break: keep-all;
   overflow-wrap: anywhere;
+  text-align: center;
 `;
 
 export default GoalItem;

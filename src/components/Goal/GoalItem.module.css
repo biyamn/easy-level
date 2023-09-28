@@ -7,20 +7,16 @@
   background-color: #232934;
   margin-bottom: 25px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
+
   align-items: center;
   padding: 2% 3%;
 }
 
 .actionBtns {
   display: flex;
-}
-
-.checkboxAndText {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: right;
 }
 
 .checkboxAndText label {
