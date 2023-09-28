@@ -18,6 +18,7 @@ const Goal = ({
   setGoals,
   db,
   syncGoalItemWithFirestore,
+  syncTodoItemWithFirestore,
   onSelectGoal,
   selectedGoal,
   currentUser,
@@ -66,6 +67,7 @@ const Goal = ({
       where("goalId", "==", id),
       where("userId", "==", currentUser)
     );
+
     getDocs(q).then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         deleteDoc(doc.ref);
@@ -73,6 +75,7 @@ const Goal = ({
     });
 
     syncGoalItemWithFirestore();
+    syncTodoItemWithFirestore(); // 오류
   };
 
   const handleGoalCheck = async (id) => {
