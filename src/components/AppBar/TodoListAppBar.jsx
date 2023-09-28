@@ -25,7 +25,7 @@ const TodoListAppBar = ({ provider, auth, currentUser }) => {
 };
 
 const AppBar = styled.div`
-  background-color: #dcf2ff;
+  background-color: #1a202c;
   position: sticky;
   overflow: auto;
   top: 0;
@@ -38,20 +38,21 @@ const AppBar = styled.div`
 `;
 
 const Logo = styled.div`
-  font-size: 1.5rem;
-  color: #1861f4;
+  font-size: 2.2rem;
+  color: #7eccf9;
   font-weight: bold;
   margin: 0 2rem;
 `;
 
 const Button = styled.button`
-  background-color: #6a9cff;
-  color: white;
+  background-color: transparent;
+  color: #a8dcfa;
   border: none;
-  font-size: 1rem;
+  font-size: 1.5rem;
   height: 3rem;
   cursor: pointer;
   margin: 0 2rem;
+  font-weight: bold;
 `;
 
 export default TodoListAppBar;
