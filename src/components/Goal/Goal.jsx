@@ -8,6 +8,9 @@ import {
   doc,
   deleteDoc,
   updateDoc,
+  query,
+  where,
+  getDocs,
 } from "firebase/firestore";
 
 const Goal = ({
@@ -15,6 +18,7 @@ const Goal = ({
   setGoals,
   db,
   syncGoalItemWithFirestore,
+  syncTodoItemWithFirestore,
   onSelectGoal,
   selectedGoal,
   currentUser,
@@ -56,7 +60,22 @@ const Goal = ({
   const handleGoalDelete = async (id) => {
     const goalItemRef = doc(db, "goalItem", id);
     await deleteDoc(goalItemRef);
+
+    // todoItem의 goalId가 id와 같으면 해당 item 삭제
+    const q = query(
+      collection(db, "todoItem"),
+      where("goalId", "==", id),
+      where("userId", "==", currentUser)
+    );
+
+    getDocs(q).then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        deleteDoc(doc.ref);
+      });
+    });
+
     syncGoalItemWithFirestore();
+    syncTodoItemWithFirestore(); // 오류
   };
 
   const handleGoalCheck = async (id) => {

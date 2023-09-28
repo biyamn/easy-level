@@ -160,6 +160,7 @@ const App = () => {
           goals={goals}
           setGoals={setGoals}
           syncGoalItemWithFirestore={syncGoalItemWithFirestore}
+          syncTodoItemWithFirestore={syncTodoItemWithFirestore}
           onSelectGoal={handleSelectedGoal}
           selectedGoal={selectedGoal}
           currentUser={currentUser}

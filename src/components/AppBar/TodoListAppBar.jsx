@@ -3,11 +3,11 @@ import styled from "styled-components";
 import { signInWithRedirect, signOut } from "firebase/auth";
 
 const TodoListAppBar = ({ provider, auth, currentUser }) => {
-  console.log("currenUser", currentUser);
+  // console.log("currenUser", currentUser);
   const loginWithGoogleButton = (
     <Button
       onClick={() => {
-        console.log("sign in clicked");
+        // console.log("sign in clicked");
         signInWithRedirect(auth, provider);
       }}
     >
