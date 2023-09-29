@@ -11,10 +11,10 @@ const TodoListAppBar = ({ provider, auth, currentUser }) => {
         signInWithRedirect(auth, provider);
       }}
     >
-      LOGIN WITH GOOGLE
+      로그인
     </Button>
   );
-  const logoutButton = <Button onClick={() => signOut(auth)}>LOGOUT</Button>;
+  const logoutButton = <Button onClick={() => signOut(auth)}>로그아웃</Button>;
   const button = currentUser === null ? loginWithGoogleButton : logoutButton;
   return (
     <AppBar>
