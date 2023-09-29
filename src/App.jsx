@@ -93,7 +93,13 @@ const App = () => {
   }, []); // 빈 배열을 전달하여 처음 한 번만 실행되도록 함
 
   const handleSelectedGoal = (id) => {
-    setSelectedGoal(id);
+    if (id === selectedGoal) {
+      console.log("동일한 goal을 선택했음");
+      setSelectedGoal(null);
+    } else {
+      console.log("다른 goal을 선택했음");
+      setSelectedGoal(id);
+    }
   };
 
   const syncTodoItemWithFirestore = () => {
