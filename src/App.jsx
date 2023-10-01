@@ -43,6 +43,15 @@ const db = getFirestore(app);
 const provider = new GoogleAuthProvider();
 const auth = getAuth(app);
 
+const today = new Date();
+const WEEKDAY = ["일", "월", "화", "수", "목", "금", "토"];
+const year = today.getFullYear();
+const month = today.getMonth() + 1;
+const date = today.getDate();
+const day = WEEKDAY[today.getDay()];
+const todayString = `${month}월 ${date}일 ${day}요일`;
+console.log("todayString: ", todayString);
+
 const App = () => {
   const [todos, setTodos] = useState([]);
   const [goals, setGoals] = useState([]);
@@ -155,7 +164,12 @@ const App = () => {
 
   return (
     <div className={styles.App}>
-      <Navbar provider={provider} auth={auth} currentUser={currentUser} />
+      <Navbar
+        provider={provider}
+        auth={auth}
+        currentUser={currentUser}
+        todayString={todayString}
+      />
       <div className={styles.box}>
         <Goal
           db={db}

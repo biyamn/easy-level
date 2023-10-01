@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { signInWithRedirect, signOut } from "firebase/auth";
 
-const Navbar = ({ provider, auth, currentUser }) => {
+const Navbar = ({ provider, auth, currentUser, todayString }) => {
   const loginButton = (
     <Button
       onClick={() => {
@@ -14,9 +14,11 @@ const Navbar = ({ provider, auth, currentUser }) => {
   );
   const logoutButton = <Button onClick={() => signOut(auth)}>로그아웃</Button>;
   const button = currentUser === null ? loginButton : logoutButton;
+
   return (
     <Container>
       <Logo>Todo List App</Logo>
+      <Date>{todayString}</Date>
       {button}
     </Container>
   );
@@ -38,6 +40,13 @@ const Container = styled.div`
 const Logo = styled.div`
   font-size: 2.2rem;
   color: #7eccf9;
+  font-weight: bold;
+  margin: 0 2rem;
+`;
+
+const Date = styled.div`
+  font-size: 1.5rem;
+  color: white;
   font-weight: bold;
   margin: 0 2rem;
 `;
