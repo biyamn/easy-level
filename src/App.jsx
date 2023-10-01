@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./App.module.css";
 import Todo from "./components/Todo/Todo";
 import Goal from "./components/Goal/Goal";
-import TodoListAppBar from "./components/AppBar/TodoListAppBar";
+import Navbar from "./components/Navbar/Navbar";
 import { initializeApp } from "firebase/app";
 import {
   getFirestore,
@@ -155,11 +155,7 @@ const App = () => {
 
   return (
     <div className={styles.App}>
-      <TodoListAppBar
-        provider={provider}
-        auth={auth}
-        currentUser={currentUser}
-      />
+      <Navbar provider={provider} auth={auth} currentUser={currentUser} />
       <div className={styles.box}>
         <Goal
           db={db}

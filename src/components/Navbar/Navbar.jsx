@@ -2,12 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import { signInWithRedirect, signOut } from "firebase/auth";
 
-const TodoListAppBar = ({ provider, auth, currentUser }) => {
-  // console.log("currenUser", currentUser);
-  const loginWithGoogleButton = (
+const Navbar = ({ provider, auth, currentUser }) => {
+  const loginButton = (
     <Button
       onClick={() => {
-        // console.log("sign in clicked");
         signInWithRedirect(auth, provider);
       }}
     >
@@ -15,16 +13,16 @@ const TodoListAppBar = ({ provider, auth, currentUser }) => {
     </Button>
   );
   const logoutButton = <Button onClick={() => signOut(auth)}>로그아웃</Button>;
-  const button = currentUser === null ? loginWithGoogleButton : logoutButton;
+  const button = currentUser === null ? loginButton : logoutButton;
   return (
-    <AppBar>
+    <Container>
       <Logo>Todo List App</Logo>
       {button}
-    </AppBar>
+    </Container>
   );
 };
 
-const AppBar = styled.div`
+const Container = styled.div`
   background-color: #1a202c;
   position: sticky;
   overflow: auto;
@@ -55,4 +53,4 @@ const Button = styled.button`
   font-weight: bold;
 `;
 
-export default TodoListAppBar;
+export default Navbar;

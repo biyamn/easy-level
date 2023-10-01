@@ -91,8 +91,8 @@ $ npm run dev
 ```
 📦src
  ┣ 📂components
- ┃ ┣ 📂AppBar
- ┃ ┃ ┗ 📜TodoListAppBar.jsx
+ ┃ ┣ 📂Navbar
+ ┃ ┃ ┗ 📜Navbar.jsx
  ┃ ┣ 📂Goal
  ┃ ┃ ┣ 📜Goal.jsx
  ┃ ┃ ┣ 📜GoalInput.jsx
