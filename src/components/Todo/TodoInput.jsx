@@ -27,20 +27,22 @@ const TodoInput = ({ onTodoSubmit }) => {
   };
 
   return (
-    <form className={styles.container} onSubmit={submitHandler}>
-      <input
-        className={
-          !isValid ? `${styles.input} ${styles.invalid}` : `${styles.input}`
-        }
-        type="text"
-        value={enteredTodo}
-        onChange={goalChangeHandler}
-        placeholder="Add Todo"
-      />
-      <button className={styles.button} type="submit">
-        <FontAwesomeIcon icon={faPlus} color="#1a202c" />
-      </button>
-    </form>
+    <div className={styles.container}>
+      <form className={styles.form} onSubmit={submitHandler}>
+        <input
+          className={
+            !isValid ? `${styles.input} ${styles.invalid}` : `${styles.input}`
+          }
+          type="text"
+          value={enteredTodo}
+          onChange={goalChangeHandler}
+          placeholder="Add Todo"
+        />
+        <button className={styles.button} type="submit">
+          <FontAwesomeIcon icon={faPlus} color="#1a202c" />
+        </button>
+      </form>
+    </div>
   );
 };
 

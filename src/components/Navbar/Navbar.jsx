@@ -18,8 +18,10 @@ const Navbar = ({ provider, auth, currentUser, todayString }) => {
   return (
     <Container>
       <Logo>Todo List App</Logo>
-      <Date>{todayString}</Date>
-      {button}
+      <Wrapper>
+        <Date>{todayString}</Date>
+        {button}
+      </Wrapper>
     </Container>
   );
 };
@@ -44,6 +46,12 @@ const Logo = styled.div`
   margin: 0 2rem;
 `;
 
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 const Date = styled.div`
   font-size: 1.5rem;
   color: white;
@@ -60,6 +68,7 @@ const Button = styled.button`
   cursor: pointer;
   margin: 0 2rem;
   font-weight: bold;
+  padding: 0;
 `;
 
 export default Navbar;

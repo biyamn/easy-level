@@ -17,13 +17,13 @@
 
 .title {
   text-align: center;
-  font-size: 3rem;
+  font-size: 2rem;
   color: white;
 }
 
 @media screen and (max-width: 768px) {
   .title {
-    font-size: 2.5rem;
+    font-size: 2rem;
     width: 350px;
     margin-top: 5%;
     margin-bottom: 2%;

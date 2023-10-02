@@ -25,20 +25,22 @@ const GoalInput = ({ onGoalSubmit }) => {
     setEnteredGoal("");
   };
   return (
-    <form className={styles.container} onSubmit={handleGoalSubmit}>
-      <input
-        className={
-          !isValid ? `${styles.input} ${styles.invalid}` : `${styles.input}`
-        }
-        type="text"
-        value={enteredGoal}
-        onChange={handleGoalChange}
-        placeholder="Set Goal"
-      />
-      <button className={styles.button} type="submit">
-        <FontAwesomeIcon icon={faPlus} color="#1a202c" />
-      </button>
-    </form>
+    <div className={styles.container}>
+      <form className={styles.form} onSubmit={handleGoalSubmit}>
+        <input
+          className={
+            !isValid ? `${styles.input} ${styles.invalid}` : `${styles.input}`
+          }
+          type="text"
+          value={enteredGoal}
+          onChange={handleGoalChange}
+          placeholder="Set Goal"
+        />
+        <button className={styles.button} type="submit">
+          <FontAwesomeIcon icon={faPlus} color="#1a202c" />
+        </button>
+      </form>
+    </div>
   );
 };
 

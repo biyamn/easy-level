@@ -1,6 +1,6 @@
 import React from "react";
 import TodoItem from "./TodoItem";
-import styles from "./TodoList.module.css";
+import styles from "./TodoItems.module.css";
 
 const TodoItems = ({
   todos,
@@ -19,15 +19,17 @@ const TodoItems = ({
 
   return (
     <div className={styles.container}>
-      {selectedTodos.map((todo) => (
-        <TodoItem
-          todo={todo}
-          onTodoDelete={handleTodoDelete}
-          key={todo.id}
-          onTodoEdit={handleTodoEdit}
-          onTodoCheck={handleTodoCheck}
-        />
-      ))}
+      <div className={styles.items}>
+        {selectedTodos.map((todo) => (
+          <TodoItem
+            todo={todo}
+            onTodoDelete={handleTodoDelete}
+            key={todo.id}
+            onTodoEdit={handleTodoEdit}
+            onTodoCheck={handleTodoCheck}
+          />
+        ))}
+      </div>
     </div>
   );
 };
