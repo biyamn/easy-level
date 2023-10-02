@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-const User = () => {
+const Main = () => {
   console.log("user 시작");
   const Title = () => {
     return (
@@ -54,4 +54,4 @@ const StatusDescription = styled.div`
   color: white;
 `;
 
-export default User;
+export default Main;

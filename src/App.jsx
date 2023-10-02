@@ -3,7 +3,7 @@ import styles from "./App.module.css";
 import Todo from "./components/Todo/Todo";
 import Goal from "./components/Goal/Goal";
 import Navbar from "./components/Navbar/Navbar";
-import User from "./components/Main/Main";
+import Main from "./components/Main/Main";
 import { initializeApp } from "firebase/app";
 import {
   getFirestore,
@@ -193,7 +193,7 @@ const App = () => {
             currentUser={currentUser}
           />
         ) : (
-          <User />
+          <Main />
         )}
       </div>
     </div>
