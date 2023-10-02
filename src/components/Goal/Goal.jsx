@@ -22,6 +22,7 @@ const Goal = ({
   onSelectGoal,
   selectedGoal,
   currentUser,
+  year,
 }) => {
   const handleGoalEdit = async (updatedText, id) => {
     setGoals(
@@ -93,7 +94,7 @@ const Goal = ({
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Goal</h1>
+      <h1 className={styles.title}>{year}년 목표</h1>
       <GoalInput onGoalSubmit={handleGoalSubmit} />
       <GoalItems
         goals={goals}
