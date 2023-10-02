@@ -3,6 +3,7 @@ import styles from "./App.module.css";
 import Todo from "./components/Todo/Todo";
 import Goal from "./components/Goal/Goal";
 import Navbar from "./components/Navbar/Navbar";
+import User from "./components/User/User";
 import { initializeApp } from "firebase/app";
 import {
   getFirestore,
@@ -180,15 +181,20 @@ const App = () => {
           onSelectGoal={handleSelectedGoal}
           selectedGoal={selectedGoal}
           currentUser={currentUser}
+          year={year}
         />
-        <Todo
-          db={db}
-          todos={todos}
-          setTodos={setTodos}
-          syncTodoItemWithFirestore={syncTodoItemWithFirestore}
-          selectedGoal={selectedGoal}
-          currentUser={currentUser}
-        />
+        {selectedGoal ? (
+          <Todo
+            db={db}
+            todos={todos}
+            setTodos={setTodos}
+            syncTodoItemWithFirestore={syncTodoItemWithFirestore}
+            selectedGoal={selectedGoal}
+            currentUser={currentUser}
+          />
+        ) : (
+          <User />
+        )}
       </div>
     </div>
   );

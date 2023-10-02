@@ -71,14 +71,13 @@ const Todo = ({
 
   return (
     <div className={styles.container}>
-      {selectedGoal && (
-        <div className={styles.bar}>
-          <div className={styles.titleContainer}>
-            <h1 className={styles.title}>Todo list</h1>
-          </div>
-          <TodoInput onTodoSubmit={handleTodoSubmit} />
+      <div className={styles.bar}>
+        <div className={styles.titleContainer}>
+          <h1 className={styles.title}>Todo list</h1>
         </div>
-      )}
+        <TodoInput onTodoSubmit={handleTodoSubmit} />
+      </div>
+
       <TodoItems
         todos={todos}
         onTodoCheck={handleTodoCheck}
