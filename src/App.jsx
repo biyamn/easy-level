@@ -40,7 +40,7 @@ const firebaseConfig = config;
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// 이부분에 문제가 있음
+// 이부분에 문제가 있었음
 const provider = new GoogleAuthProvider();
 const auth = getAuth(app);
 
@@ -51,7 +51,6 @@ const month = today.getMonth() + 1;
 const date = today.getDate();
 const day = WEEKDAY[today.getDay()];
 const todayString = `${month}월 ${date}일 ${day}요일`;
-console.log("todayString: ", todayString);
 
 const App = () => {
   const [todos, setTodos] = useState([]);
@@ -104,10 +103,8 @@ const App = () => {
 
   const handleSelectedGoal = (id) => {
     if (id === selectedGoal) {
-      console.log("동일한 goal을 선택했음");
       setSelectedGoal(null);
     } else {
-      console.log("다른 goal을 선택했음");
       setSelectedGoal(id);
     }
   };

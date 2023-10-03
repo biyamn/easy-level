@@ -64,7 +64,6 @@ const Todo = ({
 
   const handleTodoCheck = async (id) => {
     const todoItemRef = doc(db, "todoItem", id);
-    console.log("todoItemRef", todoItemRef);
     await updateDoc(todoItemRef, {
       isFinished: !todos.find((todo) => todo.id === id).isFinished,
     });
