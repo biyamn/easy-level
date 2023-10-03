@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import TodoInput from "./TodoInput";
 import TodoItems from "./TodoItems";
 import styles from "./Todo.module.css";
-
+import styled from "styled-components";
 import {
   collection,
   addDoc,
@@ -19,6 +19,8 @@ const Todo = ({
   selectedGoal,
   currentUser,
 }) => {
+  const [isCompleted, setIsCompleted] = useState(false);
+
   const handleTodoEdit = async (updatedText, id) => {
     setTodos(
       todos.map((todo) => {
@@ -77,7 +79,11 @@ const Todo = ({
         </div>
         <TodoInput onTodoSubmit={handleTodoSubmit} />
       </div>
-
+      <Completion>
+        <Button disabled={isCompleted} onClick={() => console.log("clicked")}>
+          완료
+        </Button>
+      </Completion>
       <TodoItems
         todos={todos}
         onTodoCheck={handleTodoCheck}
@@ -92,3 +98,20 @@ const Todo = ({
 };
 
 export default Todo;
+
+const Completion = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Button = styled.button`
+  height: 30px;
+  margin-left: 10px;
+  border: 1px solid transparent;
+  color: black;
+  background: #cccccc;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 1rem;
+`;
