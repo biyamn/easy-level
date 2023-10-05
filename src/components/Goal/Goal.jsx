@@ -53,6 +53,7 @@ const Goal = ({
       isFinished: false,
       createdTime: Math.floor(Date.now() / 1000),
       userId: currentUser,
+      isCompleted: false, // Todo
     });
 
     syncGoalItemWithFirestore();

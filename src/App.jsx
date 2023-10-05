@@ -57,6 +57,7 @@ const App = () => {
   const [goals, setGoals] = useState([]);
   const [selectedGoal, setSelectedGoal] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
+  const [isCompleted, setIsCompleted] = useState([]);
 
   // 오류 발생
   // 무한루프가 걸리는 오류
@@ -144,7 +145,7 @@ const App = () => {
           id: doc.id,
           text: doc.data().text,
           createdTime: doc.data().createdTime,
-          isFinished: doc.data().isFinished,
+          isCompleted: doc.data().isCompleted,
           userId: doc.data().userId,
         });
       });
@@ -184,10 +185,14 @@ const App = () => {
           <Todo
             db={db}
             todos={todos}
+            goals={goals}
             setTodos={setTodos}
             syncTodoItemWithFirestore={syncTodoItemWithFirestore}
+            syncGoalItemWithFirestore={syncGoalItemWithFirestore}
             selectedGoal={selectedGoal}
             currentUser={currentUser}
+            isCompleted={isCompleted}
+            setIsCompleted={setIsCompleted}
           />
         ) : (
           <Main />
