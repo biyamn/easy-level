@@ -23,18 +23,24 @@ const Main = () => {
 
   return (
     <Container>
-      <Title />
-      <Status />
+      <Wrapper>
+        <Title />
+        <Status />
+      </Wrapper>
     </Container>
   );
 };
 
 const Container = styled.div`
-  flex-direction: column;
-  flex: 3;
-  white-space: pre-line;
+  display: flex;
   justify-content: center;
-  align-items: center;
+  flex: 3;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  white-space: pre-line;
 `;
 
 const TitleText = styled.h1`
