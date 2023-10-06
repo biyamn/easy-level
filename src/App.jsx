@@ -180,6 +180,8 @@ const App = () => {
           selectedGoal={selectedGoal}
           currentUser={currentUser}
           year={year}
+          isCompleted={isCompleted}
+          setIsCompleted={setIsCompleted}
         />
         {selectedGoal ? (
           <Todo

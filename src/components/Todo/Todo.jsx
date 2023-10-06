@@ -24,8 +24,7 @@ const Todo = ({
   isCompleted,
   setIsCompleted,
 }) => {
-  // console.log("todos", todos);
-  const [buttonDisabled, setButtonDisabled] = useState(false);
+  const [isAllFinished, setIsAllFinished] = useState(false);
   const handleTodoEdit = async (updatedText, id) => {
     setTodos(
       todos.map((todo) => {
@@ -58,13 +57,6 @@ const Todo = ({
       userId: currentUser,
     });
 
-    setIsCompleted([
-      ...isCompleted,
-      {
-        id: selectedGoal,
-        isCompleted: false,
-      },
-    ]);
     // console.log("submit isCompleted: ", isCompleted);
     syncTodoItemWithFirestore();
   };
@@ -76,49 +68,58 @@ const Todo = ({
   };
 
   const handleTodoCheck = async (id) => {
+    const newTodo = todos.map((todo) => {
+      if (todo.id === id) {
+        return {
+          ...todo,
+          isFinished: !todo.isFinished,
+        };
+      }
+      return todo;
+    });
+
     const todoItemRef = doc(db, "todoItem", id);
     await updateDoc(todoItemRef, {
       isFinished: !todos.find((todo) => todo.id === id).isFinished,
     });
     syncTodoItemWithFirestore();
-    // TODO: 버튼 활성화, 비활성화
-    // todoItem에서 userId, goalId가 같은 todo를 찾아서
-    // 그 todo의 isFinished가 모두 true이면 goalItem의 isCompleted를 true로 변경
-    // db에서 todoItem을 찾아서 모든 todoitem을 보여준다
 
-    // syncGoalItemWithFirestore();
+    const newIsAllFinished = newTodo.every((item) => item.isFinished === true);
+    console.log("newIsAllFinished: ", newIsAllFinished);
+    if (newIsAllFinished) {
+      console.log("모두 true");
+      setIsCompleted(
+        isCompleted.map((goal) => {
+          if (goal.id === selectedGoal) {
+            return {
+              ...goal,
+              isCompleted: true,
+            };
+          }
+          return goal;
+        })
+      );
+    } else {
+      setIsCompleted(
+        isCompleted.map((goal) => {
+          if (goal.id === selectedGoal) {
+            return {
+              ...goal,
+              isCompleted: false,
+            };
+          }
+          return goal;
+        })
+      );
+    }
 
-    // console.log("todos: ", todos);
-    todos.map((todo) => {
-      if (todo.isFinished === true) {
-        setIsCompleted([
-          ...isCompleted,
-          {
-            id: selectedGoal,
-            isCompleted: true,
-          },
-        ]);
-      }
-    });
-    // console.log("edit isCompleted: ", isCompleted);
+    setIsAllFinished(newIsAllFinished);
 
-    console.log("isCompleted: ", isCompleted);
-    setButtonDisabled(
-      isCompleted.find((goal) => goal.id === selectedGoal).isCompleted
-    );
-
-    console.log("buttonDisabled: ", buttonDisabled);
-
-    // selectedGoal의 isCompleted가 true인지 false인지를 isGoalCompleted에 저장
-    console.log("goals: ", goals);
-    console.log(
-      "find: ",
-      goals.find((goal) => goal.id === selectedGoal)
-    );
     const goalItemRef = doc(db, "goalItem", id);
     await updateDoc(goalItemRef, {
-      isCompleted: buttonDisabled,
+      isCompleted: newIsAllFinished,
     });
+
     syncGoalItemWithFirestore();
   };
 
@@ -131,12 +132,7 @@ const Todo = ({
         <TodoInput onTodoSubmit={handleTodoSubmit} />
       </div>
       <Completion>
-        <Input
-          type="button"
-          disabled={buttonDisabled}
-          onClick={() => console.log(buttonDisabled)}
-          value="목표 달성"
-        />
+        <Input type="button" disabled={!isAllFinished} value="목표 달성" />
       </Completion>
       <TodoItems
         todos={todos}
@@ -164,8 +160,14 @@ const Input = styled.input`
   margin-left: 10px;
   border: 1px solid transparent;
   color: black;
-  background: #cccccc;
+  background: yellow;
   cursor: pointer;
   border-radius: 3px;
   font-size: 1rem;
+
+  &:disabled {
+    color: white;
+    cursor: not-allowed;
+    background: #ccc;
+  }
 `;
