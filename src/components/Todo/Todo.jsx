@@ -115,7 +115,7 @@ const Todo = ({
 
     setIsAllFinished(newIsAllFinished);
 
-    const goalItemRef = doc(db, "goalItem", id);
+    const goalItemRef = doc(db, "goalItem", selectedGoal);
     await updateDoc(goalItemRef, {
       isCompleted: newIsAllFinished,
     });
