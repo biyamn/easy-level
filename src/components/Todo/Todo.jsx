@@ -37,6 +37,16 @@ const Todo = ({
     setIsModalVisible(false);
   };
 
+  const handleSubmitCompletion = () => {
+    const goalItemRef = doc(db, "goalItem", selectedGoal);
+    updateDoc(goalItemRef, {
+      isCompleted: isAllFinished,
+    });
+
+    syncGoalItemWithFirestore();
+    setIsModalVisible(false);
+  };
+
   const handleTodoEdit = async (updatedText, id) => {
     setTodos(
       todos.map((todo) => {
@@ -80,15 +90,16 @@ const Todo = ({
   };
 
   const handleTodoCheck = async (id) => {
-    const newTodo = todos.map((todo) => {
-      if (todo.id === id) {
-        return {
-          ...todo,
-          isFinished: !todo.isFinished,
-        };
-      }
-      return todo;
-    });
+    // const newTodo = todos.map((todo) => {
+    //   if (todo.id === id) {
+    //     return {
+    //       ...todo,
+    //       isFinished: !todo.isFinished,
+    //     };
+    //   }
+    //   return todo;
+    // });
+    // const newIsAllFinished = newTodo.every((item) => item.isFinished === true);
 
     const todoItemRef = doc(db, "todoItem", id);
     await updateDoc(todoItemRef, {
@@ -96,43 +107,50 @@ const Todo = ({
     });
     syncTodoItemWithFirestore();
 
-    const newIsAllFinished = newTodo.every((item) => item.isFinished === true);
-    console.log("newIsAllFinished: ", newIsAllFinished);
-    if (newIsAllFinished) {
-      console.log("모두 true");
-      setIsCompleted(
-        isCompleted.map((goal) => {
-          if (goal.id === selectedGoal) {
-            return {
-              ...goal,
-              isCompleted: true,
-            };
-          }
-          return goal;
-        })
-      );
-    } else {
-      setIsCompleted(
-        isCompleted.map((goal) => {
-          if (goal.id === selectedGoal) {
-            return {
-              ...goal,
-              isCompleted: false,
-            };
-          }
-          return goal;
-        })
-      );
-    }
-
+    // goalId도 동일한지 봐야 함
+    const sameGoalId = todos.filter((todo) => todo.goalId === selectedGoal);
+    const newIsAllFinished = sameGoalId.every(
+      (item) => item.isFinished === true
+    );
+    console.log("all todo finished: ", newIsAllFinished);
     setIsAllFinished(newIsAllFinished);
 
-    const goalItemRef = doc(db, "goalItem", selectedGoal);
-    await updateDoc(goalItemRef, {
-      isCompleted: newIsAllFinished,
-    });
+    // console.log("newIsAllFinished: ", newIsAllFinished);
+    // if (newIsAllFinished) {
+    //   console.log("모두 true");
+    //   setIsCompleted(
+    //     isCompleted.map((goal) => {
+    //       if (goal.id === selectedGoal) {
+    //         return {
+    //           ...goal,
+    //           isCompleted: true,
+    //         };
+    //       }
+    //       return goal;
+    //     })
+    //   );
+    // } else {
+    //   setIsCompleted(
+    //     isCompleted.map((goal) => {
+    //       if (goal.id === selectedGoal) {
+    //         return {
+    //           ...goal,
+    //           isCompleted: false,
+    //         };
+    //       }
+    //       return goal;
+    //     })
+    //   );
+    // }
 
-    syncGoalItemWithFirestore();
+    // setIsAllFinished(newIsAllFinished);
+
+    // const goalItemRef = doc(db, "goalItem", selectedGoal);
+    // await updateDoc(goalItemRef, {
+    //   isCompleted: newIsAllFinished,
+    // });
+
+    // syncGoalItemWithFirestore();
   };
 
   return (
@@ -152,8 +170,12 @@ const Todo = ({
         />
       </Completion>
       {isModalVisible && (
-        <Modal visible={isModalVisible} handleModalClose={handleModalClose}>
-          Hello
+        <Modal
+          visible={isModalVisible}
+          handleModalClose={handleModalClose}
+          handleSubmitCompletion={handleSubmitCompletion}
+        >
+          목표 달성을 체크하시겠습니까?
         </Modal>
       )}
       <TodoItems

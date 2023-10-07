@@ -1,13 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 
-const Modal = ({ children, visible, handleModalClose }) => {
+const Modal = ({
+  children,
+  visible,
+  handleModalClose,
+  handleSubmitCompletion,
+}) => {
   return (
     <>
       <ModalOverlay visible={visible} />
       <ModalWrapper visible={visible}>
-        <button onClick={handleModalClose}>X</button>
         {children}
+        <button onClick={handleModalClose}>취소</button>
+        <button onClick={handleSubmitCompletion}>확인</button>
       </ModalWrapper>
     </>
   );

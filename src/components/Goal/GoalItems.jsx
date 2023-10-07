@@ -14,7 +14,7 @@ const GoalItems = ({
 
   const handleGoalEdit = (updatedText, id) => onGoalEdit(updatedText, id);
 
-  const handleGoalCheck = (id) => onGoalCheck(id);
+  // const handleGoalCheck = (id) => onGoalCheck(id);
 
   const handleSelectedGoal = (id) => onSelectGoal(id);
 
@@ -36,7 +36,7 @@ const GoalItems = ({
             goal={goal}
             onGoalDelete={handleGoalDelete}
             onGoalEdit={handleGoalEdit}
-            onGoalCheck={handleGoalCheck}
+            // onGoalCheck={handleGoalCheck}
             onSelectGoal={handleSelectedGoal}
             backgroundColor={backgroundColor}
           />

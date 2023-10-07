@@ -100,14 +100,14 @@ const Goal = ({
     syncTodoItemWithFirestore(); // 오류
   };
 
-  const handleGoalCheck = async (id) => {
-    const goalItemRef = doc(db, "goalItem", id);
+  // const handleGoalCheck = async (id) => {
+  //   const goalItemRef = doc(db, "goalItem", id);
 
-    await updateDoc(goalItemRef, {
-      isFinished: !goals.find((goal) => goal.id === id).isFinished,
-    });
-    syncGoalItemWithFirestore();
-  };
+  //   await updateDoc(goalItemRef, {
+  //     isFinished: !goals.find((goal) => goal.id === id).isFinished,
+  //   });
+  //   syncGoalItemWithFirestore();
+  // };
 
   const handleSelectedGoal = (id) => {
     onSelectGoal(id);
@@ -119,7 +119,7 @@ const Goal = ({
       <GoalInput onGoalSubmit={handleGoalSubmit} />
       <GoalItems
         goals={goals}
-        onGoalCheck={handleGoalCheck}
+        // onGoalCheck={handleGoalCheck}
         onGoalEdit={handleGoalEdit}
         onGoalDelete={handleGoalDelete}
         db={db}
