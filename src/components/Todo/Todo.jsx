@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import TodoInput from "./TodoInput";
 import TodoItems from "./TodoItems";
+import Modal from "../Modal/Modal";
+
 import styles from "./Todo.module.css";
 import styled from "styled-components";
 import {
@@ -25,6 +27,16 @@ const Todo = ({
   setIsCompleted,
 }) => {
   const [isAllFinished, setIsAllFinished] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const handleModalOpen = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalVisible(false);
+  };
+
   const handleTodoEdit = async (updatedText, id) => {
     setTodos(
       todos.map((todo) => {
@@ -132,8 +144,18 @@ const Todo = ({
         <TodoInput onTodoSubmit={handleTodoSubmit} />
       </div>
       <Completion>
-        <Input type="button" disabled={!isAllFinished} value="목표 달성" />
+        <Input
+          type="button"
+          onClick={handleModalOpen}
+          disabled={!isAllFinished}
+          value="목표 달성"
+        />
       </Completion>
+      {isModalVisible && (
+        <Modal visible={isModalVisible} handleModalClose={handleModalClose}>
+          Hello
+        </Modal>
+      )}
       <TodoItems
         todos={todos}
         onTodoCheck={handleTodoCheck}
@@ -146,8 +168,6 @@ const Todo = ({
     </div>
   );
 };
-
-export default Todo;
 
 const Completion = styled.div`
   display: flex;
@@ -171,3 +191,5 @@ const Input = styled.input`
     background: #ccc;
   }
 `;
+
+export default Todo;
