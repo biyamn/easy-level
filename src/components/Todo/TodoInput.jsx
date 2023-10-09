@@ -4,7 +4,7 @@ import styles from "./TodoInput.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
-const TodoInput = ({ onTodoSubmit }) => {
+const TodoInput = ({ onTodoSubmit, isChangeBlocked }) => {
   const [enteredTodo, setEnteredTodo] = useState("");
   const [isValid, setIsValid] = useState(true);
 
@@ -26,6 +26,7 @@ const TodoInput = ({ onTodoSubmit }) => {
     setEnteredTodo("");
   };
 
+  console.log("isChangeBlocked", isChangeBlocked);
   return (
     <div className={styles.container}>
       <form className={styles.form} onSubmit={submitHandler}>
@@ -37,8 +38,13 @@ const TodoInput = ({ onTodoSubmit }) => {
           value={enteredTodo}
           onChange={goalChangeHandler}
           placeholder="Add Todo"
+          disabled={isChangeBlocked}
         />
-        <button className={styles.button} type="submit">
+        <button
+          className={styles.button}
+          type="submit"
+          disabled={isChangeBlocked}
+        >
           <FontAwesomeIcon icon={faPlus} color="#1a202c" />
         </button>
       </form>

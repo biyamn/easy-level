@@ -16,6 +16,7 @@ import {
 const Todo = ({
   db,
   todos,
+  goals,
   setTodos,
   syncTodoItemWithFirestore,
   syncGoalItemWithFirestore,
@@ -24,7 +25,8 @@ const Todo = ({
 }) => {
   const [isAllFinished, setIsAllFinished] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
-
+  const [isChangeBlocked, setIsChangeBlocked] = useState(false);
+  const [isSelectedGoalCompleted, setIsSelectedGoalCompleted] = useState(false);
   const handleModalOpen = () => {
     setIsModalVisible(true);
   };
@@ -40,6 +42,7 @@ const Todo = ({
     });
 
     syncGoalItemWithFirestore();
+    setIsSelectedGoalCompleted(true);
     setIsModalVisible(false);
   };
 
@@ -99,20 +102,43 @@ const Todo = ({
     setIsAllFinished(newIsAllFinished);
   }, [todos]);
 
+  useEffect(() => {
+    const selectedGoalItem = goals.find((goal) => goal.id === selectedGoal);
+    if (selectedGoalItem?.isCompleted === true) {
+      console.log("isCompleted true라고했음방금");
+      setIsChangeBlocked(true);
+    } else {
+      setIsChangeBlocked(false);
+    }
+  }, [goals, selectedGoal]);
+
   return (
     <div className={styles.container}>
       <div className={styles.bar}>
         <div className={styles.titleContainer}>
           <h1 className={styles.title}>투두리스트</h1>
         </div>
-        <TodoInput onTodoSubmit={handleTodoSubmit} />
+        <TodoInput
+          onTodoSubmit={handleTodoSubmit}
+          isChangeBlocked={isChangeBlocked}
+        />
       </div>
       <Completion>
+        {!isSelectedGoalCompleted ? (
+          <Input
+            type="button"
+            onClick={handleModalOpen}
+            disabled={!isAllFinished}
+            value="목표 달성"
+          />
+        ) : (
+          <span style={{ color: "white" }}>목표를 달성하셨어요!</span>
+        )}
         <Input
           type="button"
           onClick={handleModalOpen}
-          disabled={!isAllFinished}
-          value="목표 달성"
+          disabled={!isSelectedGoalCompleted}
+          value="달성 해제"
         />
       </Completion>
       {isModalVisible && (
@@ -132,6 +158,7 @@ const Todo = ({
         db={db}
         syncTodoItemWithFirestore={syncTodoItemWithFirestore}
         selectedGoal={selectedGoal}
+        isChangeBlocked={isChangeBlocked}
       />
     </div>
   );

@@ -5,7 +5,13 @@ import { faTrashCan, faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useState, useRef } from "react";
 
-const TodoItem = ({ todo, onTodoDelete, onTodoEdit, onTodoCheck }) => {
+const TodoItem = ({
+  todo,
+  onTodoDelete,
+  onTodoEdit,
+  onTodoCheck,
+  isChangeBlocked,
+}) => {
   const editedText = useRef(null);
 
   const [isEditClicked, setIsEditClicked] = useState(false);
@@ -57,6 +63,7 @@ const TodoItem = ({ todo, onTodoDelete, onTodoEdit, onTodoCheck }) => {
             type="checkbox"
             onChange={() => onCheck(todo.id)}
             checked={todo.isFinished}
+            disabled={isChangeBlocked}
           />
           <div>
             <FontAwesomeIcon
@@ -86,39 +93,44 @@ const TodoItem = ({ todo, onTodoDelete, onTodoEdit, onTodoCheck }) => {
           </div>
         )}
       </div>
-      <div className={styles.actionBtns}>
-        {isEditClicked && !isDeleteClicked ? (
-          <>
-            <button className={styles.submitIcon} onClick={submitEditedContent}>
-              <FontAwesomeIcon icon={faCheck} size="2x" color="white" />
-            </button>
-            <button className={styles.cancelIcon} onClick={cancelEdit}>
-              <FontAwesomeIcon icon={faXmark} size="2x" color="white" />
-            </button>
-          </>
-        ) : !isEditClicked && isDeleteClicked ? (
-          <>
-            <button
-              className={styles.submitIcon}
-              onClick={() => onDelete(todo.id)}
-            >
-              <FontAwesomeIcon icon={faCheck} size="2x" color="white" />
-            </button>
-            <button className={styles.cancelIcon} onClick={cancelDelete}>
-              <FontAwesomeIcon icon={faXmark} size="2x" color="white" />
-            </button>
-          </>
-        ) : (
-          <>
-            <button className={styles.editIcon} onClick={openEdit}>
-              <FontAwesomeIcon icon={faPenToSquare} size="2x" color="white" />
-            </button>
-            <button className={styles.deleteIcon} onClick={openDelete}>
-              <FontAwesomeIcon icon={faTrashCan} size="2x" color="white" />
-            </button>
-          </>
-        )}
-      </div>
+      {!isChangeBlocked && (
+        <div className={styles.actionBtns}>
+          {isEditClicked && !isDeleteClicked ? (
+            <>
+              <button
+                className={styles.submitIcon}
+                onClick={submitEditedContent}
+              >
+                <FontAwesomeIcon icon={faCheck} size="2x" color="white" />
+              </button>
+              <button className={styles.cancelIcon} onClick={cancelEdit}>
+                <FontAwesomeIcon icon={faXmark} size="2x" color="white" />
+              </button>
+            </>
+          ) : !isEditClicked && isDeleteClicked ? (
+            <>
+              <button
+                className={styles.submitIcon}
+                onClick={() => onDelete(todo.id)}
+              >
+                <FontAwesomeIcon icon={faCheck} size="2x" color="white" />
+              </button>
+              <button className={styles.cancelIcon} onClick={cancelDelete}>
+                <FontAwesomeIcon icon={faXmark} size="2x" color="white" />
+              </button>
+            </>
+          ) : (
+            <>
+              <button className={styles.editIcon} onClick={openEdit}>
+                <FontAwesomeIcon icon={faPenToSquare} size="2x" color="white" />
+              </button>
+              <button className={styles.deleteIcon} onClick={openDelete}>
+                <FontAwesomeIcon icon={faTrashCan} size="2x" color="white" />
+              </button>
+            </>
+          )}
+        </div>
+      )}
     </div>
   );
 };
