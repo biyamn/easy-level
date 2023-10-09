@@ -93,10 +93,9 @@ const Todo = ({
   };
 
   useEffect(() => {
-    const sameGoalId = todos.filter((todo) => todo.goalId === selectedGoal);
-    const newIsAllFinished = sameGoalId.every(
-      (item) => item.isFinished === true
-    );
+    const newIsAllFinished = todos
+      .filter((todo) => todo.goalId === selectedGoal)
+      .every((item) => item.isFinished === true);
     setIsAllFinished(newIsAllFinished);
   }, [todos]);
 
