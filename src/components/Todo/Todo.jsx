@@ -11,20 +11,16 @@ import {
   doc,
   deleteDoc,
   updateDoc,
-  getDocs,
 } from "firebase/firestore";
 
 const Todo = ({
   db,
   todos,
-  goals,
   setTodos,
   syncTodoItemWithFirestore,
   syncGoalItemWithFirestore,
   selectedGoal,
   currentUser,
-  isCompleted,
-  setIsCompleted,
 }) => {
   const [isAllFinished, setIsAllFinished] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -79,7 +75,6 @@ const Todo = ({
       userId: currentUser,
     });
 
-    // console.log("submit isCompleted: ", isCompleted);
     syncTodoItemWithFirestore();
   };
 
@@ -90,68 +85,20 @@ const Todo = ({
   };
 
   const handleTodoCheck = async (id) => {
-    // const newTodo = todos.map((todo) => {
-    //   if (todo.id === id) {
-    //     return {
-    //       ...todo,
-    //       isFinished: !todo.isFinished,
-    //     };
-    //   }
-    //   return todo;
-    // });
-    // const newIsAllFinished = newTodo.every((item) => item.isFinished === true);
-
     const todoItemRef = doc(db, "todoItem", id);
     await updateDoc(todoItemRef, {
       isFinished: !todos.find((todo) => todo.id === id).isFinished,
     });
     syncTodoItemWithFirestore();
+  };
 
-    // goalId도 동일한지 봐야 함
+  useEffect(() => {
     const sameGoalId = todos.filter((todo) => todo.goalId === selectedGoal);
     const newIsAllFinished = sameGoalId.every(
       (item) => item.isFinished === true
     );
-    console.log("all todo finished: ", newIsAllFinished);
     setIsAllFinished(newIsAllFinished);
-
-    // console.log("newIsAllFinished: ", newIsAllFinished);
-    // if (newIsAllFinished) {
-    //   console.log("모두 true");
-    //   setIsCompleted(
-    //     isCompleted.map((goal) => {
-    //       if (goal.id === selectedGoal) {
-    //         return {
-    //           ...goal,
-    //           isCompleted: true,
-    //         };
-    //       }
-    //       return goal;
-    //     })
-    //   );
-    // } else {
-    //   setIsCompleted(
-    //     isCompleted.map((goal) => {
-    //       if (goal.id === selectedGoal) {
-    //         return {
-    //           ...goal,
-    //           isCompleted: false,
-    //         };
-    //       }
-    //       return goal;
-    //     })
-    //   );
-    // }
-
-    // setIsAllFinished(newIsAllFinished);
-
-    // const goalItemRef = doc(db, "goalItem", selectedGoal);
-    // await updateDoc(goalItemRef, {
-    //   isCompleted: newIsAllFinished,
-    // });
-
-    // syncGoalItemWithFirestore();
-  };
+  }, [todos]);
 
   return (
     <div className={styles.container}>
