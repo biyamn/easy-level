@@ -51,9 +51,9 @@ const GoalItem = ({
     onGoalDelete(id);
   };
 
-  const onCheck = (id) => {
-    onGoalCheck(id);
-  };
+  // const onCheck = (id) => {
+  //   onGoalCheck(id);
+  // };
 
   const goalItemClicked = (id) => {
     onSelectGoal(id);
@@ -65,11 +65,12 @@ const GoalItem = ({
       onClick={() => goalItemClicked(goal.id)}
       $backgroundColor={backgroundColor}
     >
-      {/* <label>
+      <label>
         <input
           type="checkbox"
-          onChange={() => onCheck(goal.id)}
-          checked={goal.isFinished}
+          // onChange={() => onCheck(goal.id)}
+          readOnly
+          checked={goal.isCompleted}
         />
         <div>
           <FontAwesomeIcon
@@ -78,7 +79,7 @@ const GoalItem = ({
             className={styles.checkIcon}
           />
         </div>
-      </label> */}
+      </label>
       {isEditClicked ? (
         <input
           className={

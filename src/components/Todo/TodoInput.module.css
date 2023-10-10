@@ -33,6 +33,13 @@
   color: black;
 }
 
+.button:disabled {
+  background: #626262;
+}
+.button:active {
+  background: #3b3b3b;
+}
+
 .input {
   flex: 3;
   min-width: 80%;

@@ -40,7 +40,7 @@ const firebaseConfig = config;
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// 이부분에 문제가 있음
+// 이부분에 문제가 있었음
 const provider = new GoogleAuthProvider();
 const auth = getAuth(app);
 
@@ -51,45 +51,15 @@ const month = today.getMonth() + 1;
 const date = today.getDate();
 const day = WEEKDAY[today.getDay()];
 const todayString = `${month}월 ${date}일 ${day}요일`;
-console.log("todayString: ", todayString);
 
 const App = () => {
   const [todos, setTodos] = useState([]);
   const [goals, setGoals] = useState([]);
   const [selectedGoal, setSelectedGoal] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
+  const [isCompleted, setIsCompleted] = useState([]);
 
-  // 오류 발생
-  // 무한루프가 걸리는 오류
-  //  onAuthStateChanged: Firebase Authentication 상태가 변경될 때 호출되는 이벤트 핸들러
-  // https://firebase.google.com/docs/reference/js/v8/firebase.auth.Auth#onauthstatechanged
-  // 이벤트 핸들러 내에서 setCurrentUser 함수를 호출하면 상태가 변경될 때마다 컴포넌트가 다시 렌더링됨 -> 무한루프
-  // onAuthStateChanged(auth, (user) => {
-  //   if (user) {
-  //     setCurrentUser(user.uid);
-  //   } else {
-  //     setCurrentUser(null);
-  //   }
-  // });
-
-  // 오류 해결1
-  // 이렇게 해도 되긴 함
-  // useEffect(() => {
-  //   onAuthStateChanged(auth, (user) => {
-  //     if (user) {
-  //       setCurrentUser(user.uid);
-  //     } else {
-  //       setCurrentUser(null);
-  //     }
-  //   });
-  // }, []);
-
-  // 오류 해결2
-  // useEffect(() => {return() => function cleanup(){}})
-  // useEffect 훅을 사용하여 onAuthStateChanged 이벤트 핸들러를 한 번만 등록하고
-  // 컴포넌트가 언마운트될 때 해당 이벤트 핸들러를 해제
   useEffect(() => {
-    // onAuthStateChanged 이벤트 핸들러 등록
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setCurrentUser(user.uid);
@@ -97,17 +67,13 @@ const App = () => {
         setCurrentUser(null);
       }
     });
-    // https://react.dev/learn/lifecycle-of-reactive-effects
-    // 컴포넌트가 언마운트될 때 이벤트 핸들러를 해제
     return () => unsubscribe();
-  }, []); // 빈 배열을 전달하여 처음 한 번만 실행되도록 함
+  }, []);
 
   const handleSelectedGoal = (id) => {
     if (id === selectedGoal) {
-      console.log("동일한 goal을 선택했음");
       setSelectedGoal(null);
     } else {
-      console.log("다른 goal을 선택했음");
       setSelectedGoal(id);
     }
   };
@@ -130,6 +96,9 @@ const App = () => {
           userId: doc.data().userId,
         });
       });
+      // todos를 firestore에서 가져온 firestoreTodoItemList로 업데이트
+      // 따라서 syncTodoItemWithFirestore를 하고 바로 todos를 사용하면 안됨
+      // 왜냐면 firestoreTodoItemList가 아니라 기존의 todos를 사용할 것이기 때문
       setTodos(firestoreTodoItemList);
     });
   };
@@ -147,7 +116,7 @@ const App = () => {
           id: doc.id,
           text: doc.data().text,
           createdTime: doc.data().createdTime,
-          isFinished: doc.data().isFinished,
+          isCompleted: doc.data().isCompleted,
           userId: doc.data().userId,
         });
       });
@@ -182,15 +151,21 @@ const App = () => {
           selectedGoal={selectedGoal}
           currentUser={currentUser}
           year={year}
+          isCompleted={isCompleted}
+          setIsCompleted={setIsCompleted}
         />
         {selectedGoal ? (
           <Todo
             db={db}
             todos={todos}
+            goals={goals}
             setTodos={setTodos}
             syncTodoItemWithFirestore={syncTodoItemWithFirestore}
+            syncGoalItemWithFirestore={syncGoalItemWithFirestore}
             selectedGoal={selectedGoal}
             currentUser={currentUser}
+            isCompleted={isCompleted}
+            setIsCompleted={setIsCompleted}
           />
         ) : (
           <Main />

@@ -23,6 +23,8 @@ const Goal = ({
   selectedGoal,
   currentUser,
   year,
+  isCompleted,
+  setIsCompleted,
 }) => {
   const handleGoalEdit = async (updatedText, id) => {
     setGoals(
@@ -53,9 +55,28 @@ const Goal = ({
       isFinished: false,
       createdTime: Math.floor(Date.now() / 1000),
       userId: currentUser,
+      isCompleted: false, // Todo
     });
 
     syncGoalItemWithFirestore();
+    // firestore에서 방금 만든 goal의 id 가져오기
+    const q = query(
+      collection(db, "goalItem"),
+      where("userId", "==", currentUser)
+    );
+    getDocs(q).then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        if (doc.data().text === enteredGoal) {
+          setIsCompleted([
+            ...isCompleted,
+            {
+              id: doc.id,
+              isCompleted: false,
+            },
+          ]);
+        }
+      });
+    });
   };
 
   const handleGoalDelete = async (id) => {
@@ -79,14 +100,14 @@ const Goal = ({
     syncTodoItemWithFirestore(); // 오류
   };
 
-  const handleGoalCheck = async (id) => {
-    const goalItemRef = doc(db, "goalItem", id);
+  // const handleGoalCheck = async (id) => {
+  //   const goalItemRef = doc(db, "goalItem", id);
 
-    await updateDoc(goalItemRef, {
-      isFinished: !goals.find((goal) => goal.id === id).isFinished,
-    });
-    syncGoalItemWithFirestore();
-  };
+  //   await updateDoc(goalItemRef, {
+  //     isFinished: !goals.find((goal) => goal.id === id).isFinished,
+  //   });
+  //   syncGoalItemWithFirestore();
+  // };
 
   const handleSelectedGoal = (id) => {
     onSelectGoal(id);
@@ -98,7 +119,7 @@ const Goal = ({
       <GoalInput onGoalSubmit={handleGoalSubmit} />
       <GoalItems
         goals={goals}
-        onGoalCheck={handleGoalCheck}
+        // onGoalCheck={handleGoalCheck}
         onGoalEdit={handleGoalEdit}
         onGoalDelete={handleGoalDelete}
         db={db}
