@@ -12,8 +12,10 @@ const Modal = ({
       <ModalOverlay />
       <ModalWrapper>
         {children}
-        <button onClick={handleModalClose}>취소</button>
-        <button onClick={handleConfirmAction}>확인</button>
+        <Buttons>
+          <Button onClick={handleModalClose}>취소</Button>
+          <Button onClick={handleConfirmAction}>확인</Button>
+        </Buttons>
       </ModalWrapper>
     </>
   );
@@ -32,6 +34,11 @@ const ModalOverlay = styled.div`
 `;
 
 const ModalWrapper = styled.div`
+  font-size: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   box-sizing: border-box;
   /* display: ${(props) => (props.visible ? "block" : "none")}; */
   position: fixed;
@@ -44,11 +51,37 @@ const ModalWrapper = styled.div`
   background-color: #fff;
   border-radius: 10px;
   width: 360px;
+  height: 200px;
   max-width: 480px;
   margin: 0 auto;
-  padding: 40px 20px;
   top: 50%;
   transform: translateY(-50%);
+`;
+
+const Buttons = styled.div`
+  margin-top: 50px;
+  padding: 0 100px;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+`;
+
+const Button = styled.button`
+  height: 30px;
+  width: 50px;
+  border: 1px solid transparent;
+  color: black;
+  background: #bdaaff;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 1rem;
+
+  &:hover,
+  &:active {
+    background: #9172ff;
+    border-color: transparent;
+    color: black;
+  }
 `;
 
 export default Modal;
