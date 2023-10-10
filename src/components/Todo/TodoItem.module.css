@@ -45,11 +45,11 @@
   padding: 0;
 }
 
-input[type="checkbox"] {
+.checkboxLabel input[type="checkbox"] {
   display: none;
 }
 
-label div {
+.checkboxLabel div {
   width: 35px;
   height: 35px;
   display: flex;
@@ -120,7 +120,7 @@ input[type="checkbox"]:checked + div .checkIcon {
     font-size: 1.2rem;
   }
 
-  label div {
+  .checkboxLabel div {
     width: 30px;
     height: 30px;
   }

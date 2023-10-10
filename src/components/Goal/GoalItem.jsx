@@ -65,7 +65,7 @@ const GoalItem = ({
       onClick={() => goalItemClicked(goal.id)}
       $backgroundColor={backgroundColor}
     >
-      <label>
+      <Label $backgroundColor={backgroundColor}>
         <input
           type="checkbox"
           // onChange={() => onCheck(goal.id)}
@@ -79,7 +79,7 @@ const GoalItem = ({
             className={styles.checkIcon}
           />
         </div>
-      </label>
+      </Label>
       {isEditClicked ? (
         <input
           className={
@@ -152,6 +152,23 @@ const ActionButtons = styled.div`
   width: 100%;
 `;
 
+const Label = styled.label`
+  div {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border: 3px solid transparent;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  input[type="checkbox"]:checked + div {
+    background: ${(props) => props.$backgroundColor};
+  }
+`;
 const Text = styled.div`
   font-size: 1.2rem;
   color: #1a202c;

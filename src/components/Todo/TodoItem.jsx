@@ -58,7 +58,7 @@ const TodoItem = ({
   return (
     <div className={styles.container}>
       <div className={styles.checkboxAndText}>
-        <label>
+        <label className={styles.checkboxLabel}>
           <input
             type="checkbox"
             onChange={() => onCheck(todo.id)}
