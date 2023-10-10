@@ -5,15 +5,15 @@ const Modal = ({
   children,
   visible,
   handleModalClose,
-  handleSubmitCompletion,
+  handleConfirmAction,
 }) => {
   return (
     <>
-      <ModalOverlay visible={visible} />
-      <ModalWrapper visible={visible}>
+      <ModalOverlay />
+      <ModalWrapper>
         {children}
         <button onClick={handleModalClose}>취소</button>
-        <button onClick={handleSubmitCompletion}>확인</button>
+        <button onClick={handleConfirmAction}>확인</button>
       </ModalWrapper>
     </>
   );
@@ -21,7 +21,7 @@ const Modal = ({
 
 const ModalOverlay = styled.div`
   box-sizing: border-box;
-  display: ${(props) => (props.visible ? "block" : "none")};
+  /* display: ${(props) => (props.visible ? "block" : "none")}; */
   position: fixed;
   top: 0;
   left: 0;
@@ -33,7 +33,7 @@ const ModalOverlay = styled.div`
 
 const ModalWrapper = styled.div`
   box-sizing: border-box;
-  display: ${(props) => (props.visible ? "block" : "none")};
+  /* display: ${(props) => (props.visible ? "block" : "none")}; */
   position: fixed;
   right: 0;
   bottom: 0;

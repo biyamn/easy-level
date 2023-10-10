@@ -24,18 +24,32 @@ const Todo = ({
   currentUser,
 }) => {
   const [isAllFinished, setIsAllFinished] = useState(false);
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isConfirmModalVisible, setConfirmModalVisible] = useState(false);
+  const [isCancelModalVisible, setIsCancelModalVisible] = useState(false);
   const [isChangeBlocked, setIsChangeBlocked] = useState(false);
   const [isSelectedGoalCompleted, setIsSelectedGoalCompleted] = useState(false);
-  const handleModalOpen = () => {
-    setIsModalVisible(true);
+  const [modalText, setModalText] = useState("");
+
+  const handleConfirmModalOpen = (text) => {
+    setModalText(text);
+    setConfirmModalVisible(true);
   };
 
-  const handleModalClose = () => {
-    setIsModalVisible(false);
+  const handleConfirmModalClose = () => {
+    setConfirmModalVisible(false);
+  };
+
+  const handleCancelModalOpen = (text) => {
+    setModalText(text);
+    setIsCancelModalVisible(true);
+  };
+
+  const handleCancelModalClose = () => {
+    setIsCancelModalVisible(false);
   };
 
   const handleSubmitCompletion = () => {
+    console.log("isAllFinished", isAllFinished);
     const goalItemRef = doc(db, "goalItem", selectedGoal);
     updateDoc(goalItemRef, {
       isCompleted: isAllFinished,
@@ -43,7 +57,18 @@ const Todo = ({
 
     syncGoalItemWithFirestore();
     setIsSelectedGoalCompleted(true);
-    setIsModalVisible(false);
+    setConfirmModalVisible(false);
+  };
+
+  const handleCancelCompletion = () => {
+    const goalItemRef = doc(db, "goalItem", selectedGoal);
+    updateDoc(goalItemRef, {
+      isCompleted: false,
+    });
+
+    syncGoalItemWithFirestore();
+    setIsSelectedGoalCompleted(false);
+    setIsCancelModalVisible(false);
   };
 
   const handleTodoEdit = async (updatedText, id) => {
@@ -127,8 +152,11 @@ const Todo = ({
         {!isSelectedGoalCompleted ? (
           <Input
             type="button"
-            onClick={handleModalOpen}
-            disabled={!isAllFinished}
+            onClick={() => handleConfirmModalOpen("목표를 달성하셨나요? 🎉")}
+            disabled={
+              todos.filter((todo) => todo.goalId === selectedGoal).length ===
+                0 || !isAllFinished
+            }
             value="목표 달성"
           />
         ) : (
@@ -136,18 +164,29 @@ const Todo = ({
         )}
         <Input
           type="button"
-          onClick={handleModalOpen}
+          onClick={() =>
+            handleCancelModalOpen("목표 달성을 해제하시겠어요? 🤔")
+          }
           disabled={!isSelectedGoalCompleted}
           value="달성 해제"
         />
       </Completion>
-      {isModalVisible && (
+      {isConfirmModalVisible && (
         <Modal
-          visible={isModalVisible}
-          handleModalClose={handleModalClose}
-          handleSubmitCompletion={handleSubmitCompletion}
+          // visible={isConfirmModalVisible}
+          handleModalClose={handleConfirmModalClose}
+          handleConfirmAction={handleSubmitCompletion}
         >
-          목표 달성을 체크하시겠습니까?
+          {modalText}
+        </Modal>
+      )}
+      {isCancelModalVisible && (
+        <Modal
+          // visible={isModalVisible}
+          handleModalClose={handleCancelModalClose}
+          handleConfirmAction={handleCancelCompletion}
+        >
+          {modalText}
         </Modal>
       )}
       <TodoItems
