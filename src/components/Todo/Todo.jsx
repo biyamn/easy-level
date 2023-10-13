@@ -148,7 +148,7 @@ const Todo = ({
           isChangeBlocked={isChangeBlocked}
         />
       </div>
-      <Completion>
+      {/* <Completion>
         {!isSelectedGoalCompleted ? (
           <Input
             type="button"
@@ -170,7 +170,7 @@ const Todo = ({
           disabled={!isSelectedGoalCompleted}
           value="달성 해제"
         />
-      </Completion>
+      </Completion> */}
       {isConfirmModalVisible && (
         <Modal
           // visible={isConfirmModalVisible}
