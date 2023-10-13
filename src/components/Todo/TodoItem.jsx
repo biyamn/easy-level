@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import styled from "styled-components";
 
 const TodoItem = ({
   todo,
@@ -64,7 +65,13 @@ const TodoItem = ({
 
   const isChecked = todo.isFinished;
   return (
-    <Accordion style={{ display: "flex", flexDirection: "column" }}>
+    <Accordion
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        backgroundColor: isChecked ? "#fdffd0" : "#ffffff",
+      }}
+    >
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
         aria-controls="panel1a-content"
@@ -80,7 +87,7 @@ const TodoItem = ({
           <div>
             <FontAwesomeIcon
               icon={faCheck}
-              color="#1a202c"
+              color="#000000"
               className={styles.checkIcon}
             />
           </div>
@@ -125,34 +132,41 @@ const TodoItem = ({
           <>
             {isEditClicked && !isDeleteClicked ? (
               <>
-                <button onClick={submitEditedContent}>
-                  <FontAwesomeIcon icon={faCheck} size="2x" color="white" />
-                </button>
-                <button onClick={cancelEdit}>
-                  <FontAwesomeIcon icon={faXmark} size="2x" color="white" />
-                </button>
+                <Button onClick={submitEditedContent}>
+                  <FontAwesomeIcon icon={faCheck} size="2x" color="#8ad4ff" />
+                </Button>
+                <Button onClick={cancelEdit}>
+                  <FontAwesomeIcon icon={faXmark} size="2x" color="#8ad4ff" />
+                </Button>
               </>
             ) : !isEditClicked && isDeleteClicked ? (
               <>
-                <button onClick={() => onDelete(todo.id)}>
-                  <FontAwesomeIcon icon={faCheck} size="2x" color="white" />
-                </button>
-                <button onClick={cancelDelete}>
-                  <FontAwesomeIcon icon={faXmark} size="2x" color="white" />
-                </button>
+                <Button onClick={() => onDelete(todo.id)}>
+                  <FontAwesomeIcon icon={faCheck} size="2x" color="#8ad4ff" />
+                </Button>
+                <Button onClick={cancelDelete}>
+                  <FontAwesomeIcon icon={faXmark} size="2x" color="#8ad4ff" />
+                </Button>
               </>
             ) : (
               <>
-                <button onClick={openEdit}>
+                <Button
+                  style={{ border: "none", background: "none" }}
+                  onClick={openEdit}
+                >
                   <FontAwesomeIcon
                     icon={faPenToSquare}
                     size="2x"
-                    color="white"
+                    color="#8ad4ff"
                   />
-                </button>
-                <button onClick={openDelete}>
-                  <FontAwesomeIcon icon={faTrashCan} size="2x" color="white" />
-                </button>
+                </Button>
+                <Button onClick={openDelete}>
+                  <FontAwesomeIcon
+                    icon={faTrashCan}
+                    size="2x"
+                    color="#8ad4ff"
+                  />
+                </Button>
               </>
             )}
           </>
@@ -161,5 +175,12 @@ const TodoItem = ({
     </Accordion>
   );
 };
+
+const Button = styled.button`
+  background-color: transparent;
+  color: #8ad4ff;
+  border: none;
+  cursor: pointer;
+`;
 
 export default TodoItem;

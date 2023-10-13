@@ -62,7 +62,7 @@
 }
 
 input[type="checkbox"]:checked + div {
-  background-color: white;
+  background-color: #fdffd0;
   border: none;
 }
 
@@ -75,7 +75,7 @@ input[type="checkbox"]:checked + div {
 }
 
 .text.checked {
-  color: rgb(107, 107, 107);
+  color: rgb(0, 0, 0);
 }
 
 input.text {
