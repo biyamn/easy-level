@@ -4,6 +4,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useState, useRef } from "react";
+import Accordion from "@mui/material/Accordion";
+import {
+  AccordionSummary,
+  AccordionDetails,
+  AccordionActions,
+} from "@mui/material";
+import Typography from "@mui/material/Typography";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const TodoItem = ({
   todo,
@@ -56,8 +64,12 @@ const TodoItem = ({
 
   const isChecked = todo.isFinished;
   return (
-    <div className={styles.container}>
-      <div className={styles.checkboxAndText}>
+    <Accordion style={{ display: "flex", flexDirection: "column" }}>
+      <AccordionSummary
+        expandIcon={<ExpandMoreIcon />}
+        aria-controls="panel1a-content"
+        id="panel1a-header"
+      >
         <label className={styles.checkboxLabel}>
           <input
             type="checkbox"
@@ -73,65 +85,80 @@ const TodoItem = ({
             />
           </div>
         </label>
+
         {isEditClicked ? (
-          <input
-            className={
-              isChecked ? `${styles.text} ${styles.checked}` : `${styles.text}`
-            }
-            value={updatedText}
-            onChange={(e) => setUpdatedText(e.target.value)}
-            ref={editedText}
-            placeholder={todo.text}
-          />
+          <Typography>
+            <input
+              className={
+                isChecked
+                  ? `${styles.text} ${styles.checked}`
+                  : `${styles.text}`
+              }
+              value={updatedText}
+              onChange={(e) => setUpdatedText(e.target.value)}
+              ref={editedText}
+              placeholder={todo.text}
+            />
+          </Typography>
         ) : (
-          <div
-            className={
-              isChecked ? `${styles.text} ${styles.checked}` : `${styles.text}`
-            }
-          >
-            {todo.text}
-          </div>
+          <Typography>
+            <div
+              className={
+                isChecked
+                  ? `${styles.text} ${styles.checked}`
+                  : `${styles.text}`
+              }
+            >
+              {todo.text}
+            </div>
+          </Typography>
         )}
-      </div>
-      {!isChangeBlocked && (
-        <div className={styles.actionBtns}>
-          {isEditClicked && !isDeleteClicked ? (
-            <>
-              <button
-                className={styles.submitIcon}
-                onClick={submitEditedContent}
-              >
-                <FontAwesomeIcon icon={faCheck} size="2x" color="white" />
-              </button>
-              <button className={styles.cancelIcon} onClick={cancelEdit}>
-                <FontAwesomeIcon icon={faXmark} size="2x" color="white" />
-              </button>
-            </>
-          ) : !isEditClicked && isDeleteClicked ? (
-            <>
-              <button
-                className={styles.submitIcon}
-                onClick={() => onDelete(todo.id)}
-              >
-                <FontAwesomeIcon icon={faCheck} size="2x" color="white" />
-              </button>
-              <button className={styles.cancelIcon} onClick={cancelDelete}>
-                <FontAwesomeIcon icon={faXmark} size="2x" color="white" />
-              </button>
-            </>
-          ) : (
-            <>
-              <button className={styles.editIcon} onClick={openEdit}>
-                <FontAwesomeIcon icon={faPenToSquare} size="2x" color="white" />
-              </button>
-              <button className={styles.deleteIcon} onClick={openDelete}>
-                <FontAwesomeIcon icon={faTrashCan} size="2x" color="white" />
-              </button>
-            </>
-          )}
-        </div>
-      )}
-    </div>
+      </AccordionSummary>
+      <AccordionDetails>
+        <Typography>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+          malesuada lacus ex, sit amet blandit leo lobortis eget.
+        </Typography>
+      </AccordionDetails>
+      <AccordionActions>
+        {!isChangeBlocked && (
+          <>
+            {isEditClicked && !isDeleteClicked ? (
+              <>
+                <button onClick={submitEditedContent}>
+                  <FontAwesomeIcon icon={faCheck} size="2x" color="white" />
+                </button>
+                <button onClick={cancelEdit}>
+                  <FontAwesomeIcon icon={faXmark} size="2x" color="white" />
+                </button>
+              </>
+            ) : !isEditClicked && isDeleteClicked ? (
+              <>
+                <button onClick={() => onDelete(todo.id)}>
+                  <FontAwesomeIcon icon={faCheck} size="2x" color="white" />
+                </button>
+                <button onClick={cancelDelete}>
+                  <FontAwesomeIcon icon={faXmark} size="2x" color="white" />
+                </button>
+              </>
+            ) : (
+              <>
+                <button onClick={openEdit}>
+                  <FontAwesomeIcon
+                    icon={faPenToSquare}
+                    size="2x"
+                    color="white"
+                  />
+                </button>
+                <button onClick={openDelete}>
+                  <FontAwesomeIcon icon={faTrashCan} size="2x" color="white" />
+                </button>
+              </>
+            )}
+          </>
+        )}
+      </AccordionActions>
+    </Accordion>
   );
 };
 
