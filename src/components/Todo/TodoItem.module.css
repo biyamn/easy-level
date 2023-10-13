@@ -2,7 +2,7 @@
   width: 100%;
   height: 50px;
   color: white;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   border: 1px solid #232934;
   border-radius: 7px;
   background-color: #232934;
@@ -67,6 +67,7 @@ input[type="checkbox"]:checked + div {
 }
 
 .text {
+  font-size: 1.1rem;
   min-height: 35px;
   margin: 0;
   word-break: keep-all;
@@ -83,7 +84,7 @@ input.text {
   background-color: transparent;
   height: 35px;
   color: white;
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   width: 100%;
 }
 
@@ -93,8 +94,8 @@ input.text {
 
 input[type="checkbox"]:checked + div .checkIcon {
   transition: 0.2s ease;
-  width: 30.2px;
-  height: 24px;
+  width: 35px;
+  height: 30px;
 }
 
 @media screen and (max-width: 768px) {
@@ -118,7 +119,7 @@ input[type="checkbox"]:checked + div .checkIcon {
   }
 
   input.text {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
 
   .checkboxLabel div {

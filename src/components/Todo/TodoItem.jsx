@@ -133,19 +133,19 @@ const TodoItem = ({
             {isEditClicked && !isDeleteClicked ? (
               <>
                 <Button onClick={submitEditedContent}>
-                  <FontAwesomeIcon icon={faCheck} size="2x" color="#8ad4ff" />
+                  <FontAwesomeIcon icon={faCheck} size="2x" color="#000000" />
                 </Button>
                 <Button onClick={cancelEdit}>
-                  <FontAwesomeIcon icon={faXmark} size="2x" color="#8ad4ff" />
+                  <FontAwesomeIcon icon={faXmark} size="2x" color="#000000" />
                 </Button>
               </>
             ) : !isEditClicked && isDeleteClicked ? (
               <>
                 <Button onClick={() => onDelete(todo.id)}>
-                  <FontAwesomeIcon icon={faCheck} size="2x" color="#8ad4ff" />
+                  <FontAwesomeIcon icon={faCheck} size="2x" color="#000000" />
                 </Button>
                 <Button onClick={cancelDelete}>
-                  <FontAwesomeIcon icon={faXmark} size="2x" color="#8ad4ff" />
+                  <FontAwesomeIcon icon={faXmark} size="2x" color="#000000" />
                 </Button>
               </>
             ) : (
@@ -157,14 +157,14 @@ const TodoItem = ({
                   <FontAwesomeIcon
                     icon={faPenToSquare}
                     size="2x"
-                    color="#8ad4ff"
+                    color="#000000"
                   />
                 </Button>
                 <Button onClick={openDelete}>
                   <FontAwesomeIcon
                     icon={faTrashCan}
                     size="2x"
-                    color="#8ad4ff"
+                    color="#000000"
                   />
                 </Button>
               </>
@@ -178,7 +178,7 @@ const TodoItem = ({
 
 const Button = styled.button`
   background-color: transparent;
-  color: #8ad4ff;
+  color: #000000;
   border: none;
   cursor: pointer;
 `;
