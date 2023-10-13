@@ -55,14 +55,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #1a202c;
-  border: 3px solid rgb(73, 220, 73);
+  border: 2px solid #1a202c6b;
   border-radius: 50%;
   cursor: pointer;
+  margin-right: 10px;
 }
 
 input[type="checkbox"]:checked + div {
-  background-color: rgb(73, 220, 73);
+  background-color: white;
+  border: none;
 }
 
 .text {
