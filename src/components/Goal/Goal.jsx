@@ -115,7 +115,7 @@ const Goal = ({
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>{year}년 목표</h1>
+      <h1 className={styles.title}>면접 분야</h1>
       <GoalInput onGoalSubmit={handleGoalSubmit} />
       <GoalItems
         goals={goals}

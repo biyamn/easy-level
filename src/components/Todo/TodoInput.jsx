@@ -37,7 +37,7 @@ const TodoInput = ({ onTodoSubmit, isChangeBlocked }) => {
           type="text"
           value={enteredTodo}
           onChange={goalChangeHandler}
-          placeholder="Add Todo"
+          placeholder="예상 질문을 추가해 주세요."
           disabled={isChangeBlocked}
         />
         <button

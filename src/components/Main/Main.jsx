@@ -4,10 +4,8 @@ const Main = () => {
   const Title = () => {
     return (
       <div>
-        <TitleText>[오늘부터 세우는 올해 목표]</TitleText>
-        <TitleDescription>
-          올해의 목표를 세워보아요. 바로 오늘이 남은 올해의 첫 날이에요!
-        </TitleDescription>
+        <TitleText>현황</TitleText>
+        <TitleDescription></TitleDescription>
       </div>
     );
   };
@@ -15,8 +13,8 @@ const Main = () => {
   const Status = () => {
     return (
       <div>
-        <StatusText>[현황]</StatusText>
-        <StatusDescription>0%</StatusDescription>
+        <StatusText></StatusText>
+        <StatusDescription></StatusDescription>
       </div>
     );
   };

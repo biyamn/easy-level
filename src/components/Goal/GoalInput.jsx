@@ -34,7 +34,7 @@ const GoalInput = ({ onGoalSubmit }) => {
           type="text"
           value={enteredGoal}
           onChange={handleGoalChange}
-          placeholder="Set Goal"
+          placeholder="면접 분야를 추가해 주세요."
         />
         <button className={styles.button} type="submit">
           <FontAwesomeIcon icon={faPlus} color="#1a202c" />

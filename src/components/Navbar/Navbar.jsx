@@ -17,7 +17,7 @@ const Navbar = ({ provider, auth, currentUser, todayString }) => {
 
   return (
     <Container>
-      <Logo>Swium</Logo>
+      <Logo>Easy</Logo>
       <Wrapper>
         <Date>{todayString}</Date>
         {button}

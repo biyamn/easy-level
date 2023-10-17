@@ -141,7 +141,7 @@ const Todo = ({
     <div className={styles.container}>
       <div className={styles.bar}>
         <div className={styles.titleContainer}>
-          <h1 className={styles.title}>투두리스트</h1>
+          <h1 className={styles.title}>예상 질문</h1>
         </div>
         <TodoInput
           onTodoSubmit={handleTodoSubmit}
