@@ -36,7 +36,7 @@ const Goal = ({
           };
         }
         return goal;
-      })
+      }),
     );
     handleEditSync(updatedText, id);
   };
@@ -62,7 +62,7 @@ const Goal = ({
     // firestore에서 방금 만든 goal의 id 가져오기
     const q = query(
       collection(db, "goalItem"),
-      where("userId", "==", currentUser)
+      where("userId", "==", currentUser),
     );
     getDocs(q).then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
@@ -87,7 +87,7 @@ const Goal = ({
     const q = query(
       collection(db, "todoItem"),
       where("goalId", "==", id),
-      where("userId", "==", currentUser)
+      where("userId", "==", currentUser),
     );
 
     getDocs(q).then((querySnapshot) => {

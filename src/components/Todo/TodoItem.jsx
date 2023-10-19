@@ -1,40 +1,36 @@
-import React from "react";
-import styles from "./TodoItem.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan, faPenToSquare } from "@fortawesome/free-regular-svg-icons";
-import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
-import { useState, useRef } from "react";
-import Accordion from "@mui/material/Accordion";
+import React from 'react';
+import styles from './TodoItem.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashCan, faPenToSquare } from '@fortawesome/free-regular-svg-icons';
+import { faCheck, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { useState, useRef } from 'react';
+import Accordion from '@mui/material/Accordion';
 import {
   AccordionSummary,
   AccordionDetails,
   AccordionActions,
-} from "@mui/material";
-import Typography from "@mui/material/Typography";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import styled from "styled-components";
+} from '@mui/material';
+import Typography from '@mui/material/Typography';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import styled from 'styled-components';
 
-const TodoItem = ({
-  todo,
-  onTodoDelete,
-  onTodoEdit,
-  onTodoCheck,
-  isChangeBlocked,
-}) => {
+const TodoItem = ({ todo, onTodoDelete, onTodoEdit, onTodoCheck }) => {
   const editedText = useRef(null);
 
   const [isEditClicked, setIsEditClicked] = useState(false);
   const [isDeleteClicked, setIsDeleteClicked] = useState(false);
-  const [updatedText, setUpdatedText] = useState("");
+  const [updatedText, setUpdatedText] =
+    useState('이곳에 답변을 작성해 주세요.');
   const submitEditedContent = () => {
-    if (updatedText === "") {
+    if (updatedText === '') {
       setIsEditClicked(false);
       return;
     }
 
-    setUpdatedText("");
+    // setUpdatedText('');
+    setUpdatedText(updatedText);
     setIsEditClicked(false);
-    onTodoEdit(updatedText, todo.id);
+    // onTodoEdit(updatedText, todo.id);
   };
 
   const openEdit = () => {
@@ -47,7 +43,7 @@ const TodoItem = ({
   };
 
   const cancelEdit = () => {
-    setUpdatedText("");
+    // setUpdatedText('');
     setIsEditClicked(false);
   };
 
@@ -67,9 +63,10 @@ const TodoItem = ({
   return (
     <Accordion
       style={{
-        display: "flex",
-        flexDirection: "column",
-        backgroundColor: isChecked ? "#fdffd0" : "#ffffff",
+        display: 'flex',
+        flexDirection: 'column',
+        backgroundColor: isChecked ? '#fdffd0' : '#ffffff',
+        width: '100%',
       }}
     >
       <AccordionSummary
@@ -82,7 +79,6 @@ const TodoItem = ({
             type="checkbox"
             onChange={() => onCheck(todo.id)}
             checked={todo.isFinished}
-            disabled={isChangeBlocked}
           />
           <div>
             <FontAwesomeIcon
@@ -92,83 +88,59 @@ const TodoItem = ({
             />
           </div>
         </label>
-
-        {isEditClicked ? (
-          <Typography>
-            <input
-              className={
-                isChecked
-                  ? `${styles.text} ${styles.checked}`
-                  : `${styles.text}`
-              }
-              value={updatedText}
-              onChange={(e) => setUpdatedText(e.target.value)}
-              ref={editedText}
-              placeholder={todo.text}
-            />
-          </Typography>
-        ) : (
-          <Typography>
-            <div
-              className={
-                isChecked
-                  ? `${styles.text} ${styles.checked}`
-                  : `${styles.text}`
-              }
-            >
-              {todo.text}
-            </div>
-          </Typography>
-        )}
+        <div
+          className={
+            isChecked ? `${styles.text} ${styles.checked}` : `${styles.text}`
+          }
+        >
+          {todo.text}
+        </div>
       </AccordionSummary>
       <AccordionDetails>
-        <Typography>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-          malesuada lacus ex, sit amet blandit leo lobortis eget.
-        </Typography>
+        {isEditClicked ? (
+          <input
+            className={
+              isChecked ? `${styles.text} ${styles.checked}` : `${styles.text}`
+            }
+            value={updatedText}
+            onChange={(e) => setUpdatedText(e.target.value)}
+            // ref={editedText}
+            placeholder="답변을 작성해 주세요."
+          />
+        ) : (
+          <div>{updatedText}</div>
+        )}
       </AccordionDetails>
       <AccordionActions>
-        {!isChangeBlocked && (
+        {isEditClicked && !isDeleteClicked ? (
           <>
-            {isEditClicked && !isDeleteClicked ? (
-              <>
-                <Button onClick={submitEditedContent}>
-                  <FontAwesomeIcon icon={faCheck} size="2x" color="#000000" />
-                </Button>
-                <Button onClick={cancelEdit}>
-                  <FontAwesomeIcon icon={faXmark} size="2x" color="#000000" />
-                </Button>
-              </>
-            ) : !isEditClicked && isDeleteClicked ? (
-              <>
-                <Button onClick={() => onDelete(todo.id)}>
-                  <FontAwesomeIcon icon={faCheck} size="2x" color="#000000" />
-                </Button>
-                <Button onClick={cancelDelete}>
-                  <FontAwesomeIcon icon={faXmark} size="2x" color="#000000" />
-                </Button>
-              </>
-            ) : (
-              <>
-                <Button
-                  style={{ border: "none", background: "none" }}
-                  onClick={openEdit}
-                >
-                  <FontAwesomeIcon
-                    icon={faPenToSquare}
-                    size="2x"
-                    color="#000000"
-                  />
-                </Button>
-                <Button onClick={openDelete}>
-                  <FontAwesomeIcon
-                    icon={faTrashCan}
-                    size="2x"
-                    color="#000000"
-                  />
-                </Button>
-              </>
-            )}
+            <Button onClick={submitEditedContent}>
+              <FontAwesomeIcon icon={faCheck} size="2x" color="#000000" />
+            </Button>
+            <Button onClick={cancelEdit}>
+              <FontAwesomeIcon icon={faXmark} size="2x" color="#000000" />
+            </Button>
+          </>
+        ) : !isEditClicked && isDeleteClicked ? (
+          <>
+            <Button onClick={() => onDelete(todo.id)}>
+              <FontAwesomeIcon icon={faCheck} size="2x" color="#000000" />
+            </Button>
+            <Button onClick={cancelDelete}>
+              <FontAwesomeIcon icon={faXmark} size="2x" color="#000000" />
+            </Button>
+          </>
+        ) : (
+          <>
+            <Button
+              style={{ border: 'none', background: 'none' }}
+              onClick={openEdit}
+            >
+              <FontAwesomeIcon icon={faPenToSquare} size="2x" color="#000000" />
+            </Button>
+            <Button onClick={openDelete}>
+              <FontAwesomeIcon icon={faTrashCan} size="2x" color="#000000" />
+            </Button>
           </>
         )}
       </AccordionActions>
