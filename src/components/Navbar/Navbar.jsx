@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import { signInWithRedirect, signOut } from "firebase/auth";
+import React from 'react';
+import styled from 'styled-components';
+import { signInWithRedirect, signOut } from 'firebase/auth';
 
 const Navbar = ({ provider, auth, currentUser, todayString }) => {
   const loginButton = (
@@ -17,7 +17,11 @@ const Navbar = ({ provider, auth, currentUser, todayString }) => {
 
   return (
     <Container>
-      <Logo>Easy</Logo>
+      <img
+        src="src\assets\easy.png"
+        width="100px"
+        style={{ margin: '0 2rem' }}
+      />
       <Wrapper>
         <Date>{todayString}</Date>
         {button}
@@ -37,13 +41,6 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-`;
-
-const Logo = styled.div`
-  font-size: 2.2rem;
-  color: #7eccf9;
-  font-weight: bold;
-  margin: 0 2rem;
 `;
 
 const Wrapper = styled.div`
