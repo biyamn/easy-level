@@ -1,18 +1,18 @@
-import React from "react";
-import styles from "./TodoItem.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan, faPenToSquare } from "@fortawesome/free-regular-svg-icons";
-import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
-import { useState, useRef } from "react";
-import Accordion from "@mui/material/Accordion";
+import React from 'react';
+import styles from './TodoItem.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashCan, faPenToSquare } from '@fortawesome/free-regular-svg-icons';
+import { faCheck, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { useState, useRef } from 'react';
+import Accordion from '@mui/material/Accordion';
 import {
   AccordionSummary,
   AccordionDetails,
   AccordionActions,
-} from "@mui/material";
-import Typography from "@mui/material/Typography";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import styled from "styled-components";
+} from '@mui/material';
+import Typography from '@mui/material/Typography';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import styled from 'styled-components';
 
 const TodoItem = ({
   todo,
@@ -25,14 +25,14 @@ const TodoItem = ({
 
   const [isEditClicked, setIsEditClicked] = useState(false);
   const [isDeleteClicked, setIsDeleteClicked] = useState(false);
-  const [updatedText, setUpdatedText] = useState("");
+  const [updatedText, setUpdatedText] = useState('');
   const submitEditedContent = () => {
-    if (updatedText === "") {
+    if (updatedText === '') {
       setIsEditClicked(false);
       return;
     }
 
-    setUpdatedText("");
+    setUpdatedText('');
     setIsEditClicked(false);
     onTodoEdit(updatedText, todo.id);
   };
@@ -47,7 +47,7 @@ const TodoItem = ({
   };
 
   const cancelEdit = () => {
-    setUpdatedText("");
+    setUpdatedText('');
     setIsEditClicked(false);
   };
 
@@ -67,9 +67,10 @@ const TodoItem = ({
   return (
     <Accordion
       style={{
-        display: "flex",
-        flexDirection: "column",
-        backgroundColor: isChecked ? "#fdffd0" : "#ffffff",
+        display: 'flex',
+        flexDirection: 'column',
+        backgroundColor: isChecked ? '#fdffd0' : '#ffffff',
+        width: '100%',
       }}
     >
       <AccordionSummary
@@ -122,10 +123,7 @@ const TodoItem = ({
         )}
       </AccordionSummary>
       <AccordionDetails>
-        <Typography>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-          malesuada lacus ex, sit amet blandit leo lobortis eget.
-        </Typography>
+        <Typography></Typography>
       </AccordionDetails>
       <AccordionActions>
         {!isChangeBlocked && (
@@ -151,7 +149,7 @@ const TodoItem = ({
             ) : (
               <>
                 <Button
-                  style={{ border: "none", background: "none" }}
+                  style={{ border: 'none', background: 'none' }}
                   onClick={openEdit}
                 >
                   <FontAwesomeIcon
