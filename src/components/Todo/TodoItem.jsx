@@ -19,7 +19,8 @@ const TodoItem = ({ todo, onTodoDelete, onTodoEdit, onTodoCheck }) => {
 
   const [isEditClicked, setIsEditClicked] = useState(false);
   const [isDeleteClicked, setIsDeleteClicked] = useState(false);
-  const [updatedText, setUpdatedText] = useState('');
+  const [updatedText, setUpdatedText] =
+    useState('이곳에 답변을 작성해 주세요.');
   const submitEditedContent = () => {
     if (updatedText === '') {
       setIsEditClicked(false);
