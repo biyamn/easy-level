@@ -45,7 +45,7 @@
   padding: 0;
 }
 
-.checkboxLabel input[type="checkbox"] {
+.checkboxLabel input[type='checkbox'] {
   display: none;
 }
 
@@ -61,7 +61,7 @@
   margin-right: 10px;
 }
 
-input[type="checkbox"]:checked + div {
+input[type='checkbox']:checked + div {
   background-color: #fdffd0;
   border: none;
 }
@@ -83,7 +83,7 @@ input.text {
   border: 0 none;
   background-color: transparent;
   height: 35px;
-  color: white;
+  color: gray;
   font-size: 1.1rem;
   width: 100%;
 }
@@ -92,7 +92,7 @@ input.text {
   width: 0%;
 }
 
-input[type="checkbox"]:checked + div .checkIcon {
+input[type='checkbox']:checked + div .checkIcon {
   transition: 0.2s ease;
   width: 35px;
   height: 30px;
