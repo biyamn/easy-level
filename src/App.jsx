@@ -82,7 +82,7 @@ const App = () => {
     const q = query(
       collection(db, "todoItem"),
       where("userId", "==", currentUser),
-      orderBy("createdTime", "desc")
+      orderBy("createdTime", "desc"),
     );
     getDocs(q).then((querySnapshot) => {
       const firestoreTodoItemList = [];
@@ -107,7 +107,7 @@ const App = () => {
     const q = query(
       collection(db, "goalItem"),
       where("userId", "==", currentUser),
-      orderBy("createdTime", "desc")
+      orderBy("createdTime", "desc"),
     );
     getDocs(q).then((querySnapshot) => {
       const firestoreGoalItemList = [];

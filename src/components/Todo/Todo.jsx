@@ -81,7 +81,7 @@ const Todo = ({
           };
         }
         return todo;
-      })
+      }),
     );
     handleEditSync(updatedText, id);
   };
