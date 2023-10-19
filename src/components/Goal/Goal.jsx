@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import styles from "./Goal.module.css";
-import GoalInput from "./GoalInput";
-import GoalItems from "./GoalItems";
+import React, { useState } from 'react';
+import styles from './Goal.module.css';
+import GoalInput from './GoalInput';
+import GoalItems from './GoalItems';
 import {
   collection,
   addDoc,
@@ -11,7 +11,7 @@ import {
   query,
   where,
   getDocs,
-} from "firebase/firestore";
+} from 'firebase/firestore';
 
 const Goal = ({
   goals,
@@ -42,7 +42,7 @@ const Goal = ({
   };
 
   const handleEditSync = async (updatedText, id) => {
-    const goalItemRef = doc(db, "goalItem", id);
+    const goalItemRef = doc(db, 'goalItem', id);
     await updateDoc(goalItemRef, {
       text: updatedText,
     });
@@ -50,7 +50,7 @@ const Goal = ({
   };
 
   const handleGoalSubmit = async (enteredGoal) => {
-    await addDoc(collection(db, "goalItem"), {
+    await addDoc(collection(db, 'goalItem'), {
       text: enteredGoal,
       isFinished: false,
       createdTime: Math.floor(Date.now() / 1000),
@@ -61,8 +61,8 @@ const Goal = ({
     syncGoalItemWithFirestore();
     // firestore에서 방금 만든 goal의 id 가져오기
     const q = query(
-      collection(db, "goalItem"),
-      where("userId", "==", currentUser),
+      collection(db, 'goalItem'),
+      where('userId', '==', currentUser),
     );
     getDocs(q).then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
@@ -80,14 +80,14 @@ const Goal = ({
   };
 
   const handleGoalDelete = async (id) => {
-    const goalItemRef = doc(db, "goalItem", id);
+    const goalItemRef = doc(db, 'goalItem', id);
     await deleteDoc(goalItemRef);
 
     // todoItem의 goalId가 id와 같으면 해당 item 삭제
     const q = query(
-      collection(db, "todoItem"),
-      where("goalId", "==", id),
-      where("userId", "==", currentUser),
+      collection(db, 'todoItem'),
+      where('goalId', '==', id),
+      where('userId', '==', currentUser),
     );
 
     getDocs(q).then((querySnapshot) => {
@@ -115,7 +115,7 @@ const Goal = ({
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>면접 분야</h1>
+      <h1 className={styles.title}>면접 종류</h1>
       <GoalInput onGoalSubmit={handleGoalSubmit} />
       <GoalItems
         goals={goals}
