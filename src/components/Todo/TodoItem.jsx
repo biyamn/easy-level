@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './TodoItem.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan, faPenToSquare } from '@fortawesome/free-regular-svg-icons';
@@ -10,7 +10,6 @@ import {
   AccordionDetails,
   AccordionActions,
 } from '@mui/material';
-import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import styled from 'styled-components';
 
@@ -27,10 +26,9 @@ const TodoItem = ({ todo, onTodoDelete, onTodoEdit, onTodoCheck }) => {
       return;
     }
 
-    // setUpdatedText('');
     setUpdatedText(updatedText);
     setIsEditClicked(false);
-    // onTodoEdit(updatedText, todo.id);
+    onTodoEdit(updatedText, todo.id);
   };
 
   const openEdit = () => {
@@ -43,7 +41,6 @@ const TodoItem = ({ todo, onTodoDelete, onTodoEdit, onTodoCheck }) => {
   };
 
   const cancelEdit = () => {
-    // setUpdatedText('');
     setIsEditClicked(false);
   };
 
@@ -60,6 +57,7 @@ const TodoItem = ({ todo, onTodoDelete, onTodoEdit, onTodoCheck }) => {
   };
 
   const isChecked = todo.isFinished;
+  useEffect(() => console.log('updatedText: ', updatedText), []);
   return (
     <Accordion
       style={{

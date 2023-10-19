@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import styles from "./App.module.css";
-import Todo from "./components/Todo/Todo";
-import Goal from "./components/Goal/Goal";
-import Navbar from "./components/Navbar/Navbar";
-import Main from "./components/Main/Main";
-import { initializeApp } from "firebase/app";
+import React, { useState, useEffect } from 'react';
+import styles from './App.module.css';
+import Todo from './components/Todo/Todo';
+import Goal from './components/Goal/Goal';
+import Navbar from './components/Navbar/Navbar';
+import Main from './components/Main/Main';
+import { initializeApp } from 'firebase/app';
 import {
   getFirestore,
   collection,
@@ -12,8 +12,8 @@ import {
   query,
   orderBy,
   where,
-} from "firebase/firestore";
-import { GoogleAuthProvider, getAuth, onAuthStateChanged } from "firebase/auth";
+} from 'firebase/firestore';
+import { GoogleAuthProvider, getAuth, onAuthStateChanged } from 'firebase/auth';
 
 const {
   VITE_API_KEY,
@@ -45,7 +45,7 @@ const provider = new GoogleAuthProvider();
 const auth = getAuth(app);
 
 const today = new Date();
-const WEEKDAY = ["일", "월", "화", "수", "목", "금", "토"];
+const WEEKDAY = ['일', '월', '화', '수', '목', '금', '토'];
 const year = today.getFullYear();
 const month = today.getMonth() + 1;
 const date = today.getDate();
@@ -80,9 +80,9 @@ const App = () => {
 
   const syncTodoItemWithFirestore = () => {
     const q = query(
-      collection(db, "todoItem"),
-      where("userId", "==", currentUser),
-      orderBy("createdTime", "desc"),
+      collection(db, 'todoItem'),
+      where('userId', '==', currentUser),
+      orderBy('createdTime', 'desc'),
     );
     getDocs(q).then((querySnapshot) => {
       const firestoreTodoItemList = [];
@@ -90,6 +90,7 @@ const App = () => {
         firestoreTodoItemList.push({
           id: doc.id,
           text: doc.data().text,
+          answer: doc.data().answer,
           isFinished: doc.data().isFinished,
           createdTime: doc.data().createdTime,
           goalId: doc.data().goalId,
@@ -105,9 +106,9 @@ const App = () => {
 
   const syncGoalItemWithFirestore = () => {
     const q = query(
-      collection(db, "goalItem"),
-      where("userId", "==", currentUser),
-      orderBy("createdTime", "desc"),
+      collection(db, 'goalItem'),
+      where('userId', '==', currentUser),
+      orderBy('createdTime', 'desc'),
     );
     getDocs(q).then((querySnapshot) => {
       const firestoreGoalItemList = [];

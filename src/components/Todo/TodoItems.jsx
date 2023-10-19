@@ -1,6 +1,6 @@
-import React from "react";
-import TodoItem from "./TodoItem";
-import styles from "./TodoItems.module.css";
+import React from 'react';
+import TodoItem from './TodoItem';
+import styles from './TodoItems.module.css';
 
 const TodoItems = ({
   todos,
@@ -8,7 +8,6 @@ const TodoItems = ({
   onTodoDelete,
   onTodoEdit,
   selectedGoal,
-  isChangeBlocked,
 }) => {
   const handleTodoDelete = (id) => onTodoDelete(id);
 
@@ -28,7 +27,6 @@ const TodoItems = ({
             key={todo.id}
             onTodoEdit={handleTodoEdit}
             onTodoCheck={handleTodoCheck}
-            isChangeBlocked={isChangeBlocked}
           />
         ))}
       </div>
