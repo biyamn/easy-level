@@ -40,7 +40,6 @@ const firebaseConfig = config;
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// 이부분에 문제가 있었음
 const provider = new GoogleAuthProvider();
 const auth = getAuth(app);
 
@@ -59,16 +58,7 @@ const App = () => {
   const [currentUser, setCurrentUser] = useState(null);
   const [isCompleted, setIsCompleted] = useState([]);
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setCurrentUser(user.uid);
-      } else {
-        setCurrentUser(null);
-      }
-    });
-    return () => unsubscribe();
-  }, []);
+  const [answers, setAnswers] = useState([]);
 
   const handleSelectedGoal = (id) => {
     if (id === selectedGoal) {
@@ -97,10 +87,15 @@ const App = () => {
           userId: doc.data().userId,
         });
       });
-      // todos를 firestore에서 가져온 firestoreTodoItemList로 업데이트
-      // 따라서 syncTodoItemWithFirestore를 하고 바로 todos를 사용하면 안됨
-      // 왜냐면 firestoreTodoItemList가 아니라 기존의 todos를 사용할 것이기 때문
       setTodos(firestoreTodoItemList);
+      setAnswers(
+        firestoreTodoItemList.map((todo) => {
+          return {
+            id: todo.id,
+            answer: todo.answer,
+          };
+        }),
+      );
     });
   };
 
@@ -133,6 +128,17 @@ const App = () => {
     syncGoalItemWithFirestore();
   }, [currentUser]);
 
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setCurrentUser(user.uid);
+      } else {
+        setCurrentUser(null);
+      }
+    });
+    return () => unsubscribe();
+  }, []);
+
   return (
     <div className={styles.App}>
       <Navbar
@@ -154,6 +160,8 @@ const App = () => {
           year={year}
           isCompleted={isCompleted}
           setIsCompleted={setIsCompleted}
+          answers={answers}
+          setAnswers={setAnswers}
         />
         {selectedGoal ? (
           <Todo
@@ -167,6 +175,8 @@ const App = () => {
             currentUser={currentUser}
             isCompleted={isCompleted}
             setIsCompleted={setIsCompleted}
+            answers={answers}
+            setAnswers={setAnswers}
           />
         ) : (
           <Main />

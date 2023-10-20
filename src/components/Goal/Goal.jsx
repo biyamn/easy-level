@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './Goal.module.css';
 import GoalInput from './GoalInput';
 import GoalItems from './GoalItems';
@@ -22,7 +22,6 @@ const Goal = ({
   onSelectGoal,
   selectedGoal,
   currentUser,
-  year,
   isCompleted,
   setIsCompleted,
 }) => {
@@ -55,11 +54,10 @@ const Goal = ({
       isFinished: false,
       createdTime: Math.floor(Date.now() / 1000),
       userId: currentUser,
-      isCompleted: false, // Todo
+      isCompleted: false,
     });
 
     syncGoalItemWithFirestore();
-    // firestore에서 방금 만든 goal의 id 가져오기
     const q = query(
       collection(db, 'goalItem'),
       where('userId', '==', currentUser),
@@ -83,7 +81,6 @@ const Goal = ({
     const goalItemRef = doc(db, 'goalItem', id);
     await deleteDoc(goalItemRef);
 
-    // todoItem의 goalId가 id와 같으면 해당 item 삭제
     const q = query(
       collection(db, 'todoItem'),
       where('goalId', '==', id),
@@ -97,17 +94,8 @@ const Goal = ({
     });
 
     syncGoalItemWithFirestore();
-    syncTodoItemWithFirestore(); // 오류
+    syncTodoItemWithFirestore();
   };
-
-  // const handleGoalCheck = async (id) => {
-  //   const goalItemRef = doc(db, "goalItem", id);
-
-  //   await updateDoc(goalItemRef, {
-  //     isFinished: !goals.find((goal) => goal.id === id).isFinished,
-  //   });
-  //   syncGoalItemWithFirestore();
-  // };
 
   const handleSelectedGoal = (id) => {
     onSelectGoal(id);
@@ -119,7 +107,6 @@ const Goal = ({
       <GoalInput onGoalSubmit={handleGoalSubmit} />
       <GoalItems
         goals={goals}
-        // onGoalCheck={handleGoalCheck}
         onGoalEdit={handleGoalEdit}
         onGoalDelete={handleGoalDelete}
         db={db}

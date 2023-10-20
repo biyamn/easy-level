@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styles from './TodoItem.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan, faPenToSquare } from '@fortawesome/free-regular-svg-icons';
@@ -13,22 +13,26 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import styled from 'styled-components';
 
-const TodoItem = ({ todo, onTodoDelete, onTodoEdit, onTodoCheck }) => {
+const TodoItem = ({ todo, onTodoDelete, onTodoEdit, onTodoCheck, answers }) => {
   const editedText = useRef(null);
-
+  const [value, setValue] = useState('이곳에 답변을 작성해 주세요.');
   const [isEditClicked, setIsEditClicked] = useState(false);
   const [isDeleteClicked, setIsDeleteClicked] = useState(false);
-  const [updatedText, setUpdatedText] =
-    useState('이곳에 답변을 작성해 주세요.');
+  let answer =
+    answers && answers.length > 0
+      ? answers.find((answer) => answer.id === todo.id).answer
+      : '';
+
   const submitEditedContent = () => {
-    if (updatedText === '') {
+    if (value === '') {
       setIsEditClicked(false);
       return;
     }
 
-    setUpdatedText(updatedText);
     setIsEditClicked(false);
-    onTodoEdit(updatedText, todo.id);
+    onTodoEdit(value, todo.id);
+
+    setValue(answer);
   };
 
   const openEdit = () => {
@@ -57,7 +61,7 @@ const TodoItem = ({ todo, onTodoDelete, onTodoEdit, onTodoCheck }) => {
   };
 
   const isChecked = todo.isFinished;
-  useEffect(() => console.log('updatedText: ', updatedText), []);
+
   return (
     <Accordion
       style={{
@@ -100,13 +104,12 @@ const TodoItem = ({ todo, onTodoDelete, onTodoEdit, onTodoCheck }) => {
             className={
               isChecked ? `${styles.text} ${styles.checked}` : `${styles.text}`
             }
-            value={updatedText}
-            onChange={(e) => setUpdatedText(e.target.value)}
-            // ref={editedText}
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
             placeholder="답변을 작성해 주세요."
           />
         ) : (
-          <div>{updatedText}</div>
+          <div>{answer}</div>
         )}
       </AccordionDetails>
       <AccordionActions>

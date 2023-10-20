@@ -5,8 +5,8 @@ import TodoItems from './TodoItems';
 import styles from './Todo.module.css';
 import {
   collection,
-  addDoc,
   doc,
+  addDoc,
   deleteDoc,
   updateDoc,
 } from 'firebase/firestore';
@@ -19,12 +19,12 @@ const Todo = ({
   syncTodoItemWithFirestore,
   selectedGoal,
   currentUser,
+  answers,
 }) => {
   const [isAllFinished, setIsAllFinished] = useState(false);
   const [isChangeBlocked, setIsChangeBlocked] = useState(false);
 
   const handleTodoEdit = async (updatedText, id) => {
-    console.log('updatedText: ', updatedText);
     setTodos(
       todos.map((todo) => {
         if (todo.id === id) {
@@ -40,7 +40,6 @@ const Todo = ({
   };
 
   const handleEditSync = async (updatedText, id) => {
-    console.log('todos: ', todos);
     const todoItemRef = doc(db, 'todoItem', id);
     await updateDoc(todoItemRef, {
       answer: updatedText,
@@ -90,7 +89,6 @@ const Todo = ({
       setIsChangeBlocked(false);
     }
   }, [goals, selectedGoal]);
-
   return (
     <div className={styles.container}>
       <div className={styles.bar}>
@@ -103,11 +101,14 @@ const Todo = ({
         />
       </div>
       <TodoItems
+        db={db}
         todos={todos}
         onTodoCheck={handleTodoCheck}
         onTodoEdit={handleTodoEdit}
         onTodoDelete={handleTodoDelete}
         selectedGoal={selectedGoal}
+        currentUser={currentUser}
+        answers={answers}
       />
     </div>
   );

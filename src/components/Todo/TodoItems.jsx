@@ -8,6 +8,9 @@ const TodoItems = ({
   onTodoDelete,
   onTodoEdit,
   selectedGoal,
+  db,
+  currentUser,
+  answers,
 }) => {
   const handleTodoDelete = (id) => onTodoDelete(id);
 
@@ -27,6 +30,9 @@ const TodoItems = ({
             key={todo.id}
             onTodoEdit={handleTodoEdit}
             onTodoCheck={handleTodoCheck}
+            db={db}
+            currentUser={currentUser}
+            answers={answers}
           />
         ))}
       </div>
