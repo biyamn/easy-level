@@ -18,10 +18,7 @@ const TodoItem = ({ todo, onTodoDelete, onTodoEdit, onTodoCheck, answers }) => {
   const [value, setValue] = useState('이곳에 답변을 작성해 주세요.');
   const [isEditClicked, setIsEditClicked] = useState(false);
   const [isDeleteClicked, setIsDeleteClicked] = useState(false);
-  let answer =
-    answers && answers.length > 0
-      ? answers.find((answer) => answer.id === todo.id).answer
-      : '';
+  let answer = answers.find((answer) => answer.id === todo.id).answer;
 
   const submitEditedContent = () => {
     if (value === '') {
