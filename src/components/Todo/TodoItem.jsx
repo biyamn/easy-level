@@ -29,7 +29,7 @@ const TodoItem = ({ todo, onTodoDelete, onTodoEdit, onTodoCheck, answers }) => {
     setIsEditClicked(false);
     onTodoEdit(value, todo.id);
 
-    setValue(answer);
+    setValue(value);
   };
 
   const openEdit = () => {
