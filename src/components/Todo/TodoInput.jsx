@@ -1,11 +1,11 @@
-import React from "react";
-import { useState } from "react";
-import styles from "./TodoInput.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import React from 'react';
+import { useState } from 'react';
+import styles from './TodoInput.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 const TodoInput = ({ onTodoSubmit, isChangeBlocked }) => {
-  const [enteredTodo, setEnteredTodo] = useState("");
+  const [enteredTodo, setEnteredTodo] = useState('');
   const [isValid, setIsValid] = useState(true);
 
   const goalChangeHandler = (e) => {
@@ -15,18 +15,17 @@ const TodoInput = ({ onTodoSubmit, isChangeBlocked }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (enteredTodo.trim() === "") {
+    if (enteredTodo.trim() === '') {
       setIsValid(false);
-      setEnteredTodo("");
+      setEnteredTodo('');
       return;
     }
     setIsValid(true);
 
     onTodoSubmit(enteredTodo);
-    setEnteredTodo("");
+    setEnteredTodo('');
   };
 
-  console.log("isChangeBlocked", isChangeBlocked);
   return (
     <div className={styles.container}>
       <form className={styles.form} onSubmit={submitHandler}>
