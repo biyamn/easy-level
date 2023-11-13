@@ -49,7 +49,7 @@ const year = today.getFullYear();
 const month = today.getMonth() + 1;
 const date = today.getDate();
 const day = WEEKDAY[today.getDay()];
-const todayString = `${month}월 ${date}일 ${day}요일`;
+const todayString = `${year}년 ${month}월 ${date}일 (${day})`;
 
 const App = () => {
   const [todos, setTodos] = useState([]);
@@ -72,7 +72,7 @@ const App = () => {
     const q = query(
       collection(db, 'todoItem'),
       where('userId', '==', currentUser),
-      orderBy('createdTime', 'desc'),
+      orderBy('createdTime', 'desc')
     );
     getDocs(q).then((querySnapshot) => {
       const firestoreTodoItemList = [];
@@ -94,7 +94,7 @@ const App = () => {
             id: todo.id,
             answer: todo.answer,
           };
-        }),
+        })
       );
     });
   };
@@ -103,7 +103,7 @@ const App = () => {
     const q = query(
       collection(db, 'goalItem'),
       where('userId', '==', currentUser),
-      orderBy('createdTime', 'desc'),
+      orderBy('createdTime', 'desc')
     );
     getDocs(q).then((querySnapshot) => {
       const firestoreGoalItemList = [];
