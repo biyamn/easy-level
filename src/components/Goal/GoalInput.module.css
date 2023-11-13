@@ -6,6 +6,7 @@
 
 .form {
   display: flex;
+  flex-basis: 50%;
 }
 
 .button {

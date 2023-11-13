@@ -127,8 +127,8 @@ const GoalItem = ({
 const Container = styled.div`
   background: ${(props) => props.$backgroundColor};
   border-radius: 8px;
-  width: 15rem;
-  height: 10rem;
+  width: 13rem;
+  height: 9rem;
   display: flex;
   flex-direction: column;
   margin: 1rem;

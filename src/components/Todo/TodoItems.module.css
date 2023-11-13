@@ -2,8 +2,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 5%;
   width: 100%;
+  margin: 2rem;
 }
 
 .items {
@@ -11,7 +11,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 70%;
+  width: 75%;
 }
 
 @media screen and (max-width: 768px) {

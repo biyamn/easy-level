@@ -2,9 +2,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 30px;
   width: 100%;
   flex-wrap: wrap;
+  margin: 1rem;
 }
 
 @media screen and (max-width: 768px) {
