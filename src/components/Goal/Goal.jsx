@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import styles from "./Goal.module.css";
-import GoalInput from "./GoalInput";
-import GoalItems from "./GoalItems";
+import React from 'react';
+import styles from './Goal.module.css';
+import GoalInput from './GoalInput';
+import GoalItems from './GoalItems';
 import {
   collection,
   addDoc,
@@ -11,7 +11,7 @@ import {
   query,
   where,
   getDocs,
-} from "firebase/firestore";
+} from 'firebase/firestore';
 
 const Goal = ({
   goals,
@@ -22,6 +22,8 @@ const Goal = ({
   onSelectGoal,
   selectedGoal,
   currentUser,
+  isCompleted,
+  setIsCompleted,
 }) => {
   const handleGoalEdit = async (updatedText, id) => {
     setGoals(
@@ -33,13 +35,13 @@ const Goal = ({
           };
         }
         return goal;
-      })
+      }),
     );
     handleEditSync(updatedText, id);
   };
 
   const handleEditSync = async (updatedText, id) => {
-    const goalItemRef = doc(db, "goalItem", id);
+    const goalItemRef = doc(db, 'goalItem', id);
     await updateDoc(goalItemRef, {
       text: updatedText,
     });
@@ -47,25 +49,42 @@ const Goal = ({
   };
 
   const handleGoalSubmit = async (enteredGoal) => {
-    await addDoc(collection(db, "goalItem"), {
+    await addDoc(collection(db, 'goalItem'), {
       text: enteredGoal,
       isFinished: false,
       createdTime: Math.floor(Date.now() / 1000),
       userId: currentUser,
+      isCompleted: false,
     });
 
     syncGoalItemWithFirestore();
+    const q = query(
+      collection(db, 'goalItem'),
+      where('userId', '==', currentUser),
+    );
+    getDocs(q).then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        if (doc.data().text === enteredGoal) {
+          setIsCompleted([
+            ...isCompleted,
+            {
+              id: doc.id,
+              isCompleted: false,
+            },
+          ]);
+        }
+      });
+    });
   };
 
   const handleGoalDelete = async (id) => {
-    const goalItemRef = doc(db, "goalItem", id);
+    const goalItemRef = doc(db, 'goalItem', id);
     await deleteDoc(goalItemRef);
 
-    // todoItem의 goalId가 id와 같으면 해당 item 삭제
     const q = query(
-      collection(db, "todoItem"),
-      where("goalId", "==", id),
-      where("userId", "==", currentUser)
+      collection(db, 'todoItem'),
+      where('goalId', '==', id),
+      where('userId', '==', currentUser),
     );
 
     getDocs(q).then((querySnapshot) => {
@@ -75,16 +94,7 @@ const Goal = ({
     });
 
     syncGoalItemWithFirestore();
-    syncTodoItemWithFirestore(); // 오류
-  };
-
-  const handleGoalCheck = async (id) => {
-    const goalItemRef = doc(db, "goalItem", id);
-
-    await updateDoc(goalItemRef, {
-      isFinished: !goals.find((goal) => goal.id === id).isFinished,
-    });
-    syncGoalItemWithFirestore();
+    syncTodoItemWithFirestore();
   };
 
   const handleSelectedGoal = (id) => {
@@ -93,11 +103,10 @@ const Goal = ({
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Goal</h1>
+      <h1 className={styles.title}>면접 종류</h1>
       <GoalInput onGoalSubmit={handleGoalSubmit} />
       <GoalItems
         goals={goals}
-        onGoalCheck={handleGoalCheck}
         onGoalEdit={handleGoalEdit}
         onGoalDelete={handleGoalDelete}
         db={db}

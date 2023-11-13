@@ -1,11 +1,11 @@
-import React from "react";
-import { useState } from "react";
-import styles from "./TodoInput.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import React from 'react';
+import { useState } from 'react';
+import styles from './TodoInput.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
-const TodoInput = ({ onTodoSubmit }) => {
-  const [enteredTodo, setEnteredTodo] = useState("");
+const TodoInput = ({ onTodoSubmit, isChangeBlocked }) => {
+  const [enteredTodo, setEnteredTodo] = useState('');
   const [isValid, setIsValid] = useState(true);
 
   const goalChangeHandler = (e) => {
@@ -15,32 +15,39 @@ const TodoInput = ({ onTodoSubmit }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (enteredTodo.trim() === "") {
+    if (enteredTodo.trim() === '') {
       setIsValid(false);
-      setEnteredTodo("");
+      setEnteredTodo('');
       return;
     }
     setIsValid(true);
 
     onTodoSubmit(enteredTodo);
-    setEnteredTodo("");
+    setEnteredTodo('');
   };
 
   return (
-    <form className={styles.container} onSubmit={submitHandler}>
-      <input
-        className={
-          !isValid ? `${styles.input} ${styles.invalid}` : `${styles.input}`
-        }
-        type="text"
-        value={enteredTodo}
-        onChange={goalChangeHandler}
-        placeholder="Add Todo"
-      />
-      <button className={styles.button} type="submit">
-        <FontAwesomeIcon icon={faPlus} color="#1a202c" />
-      </button>
-    </form>
+    <div className={styles.container}>
+      <form className={styles.form} onSubmit={submitHandler}>
+        <input
+          className={
+            !isValid ? `${styles.input} ${styles.invalid}` : `${styles.input}`
+          }
+          type="text"
+          value={enteredTodo}
+          onChange={goalChangeHandler}
+          placeholder="예상 질문을 추가해 주세요."
+          disabled={isChangeBlocked}
+        />
+        <button
+          className={styles.button}
+          type="submit"
+          disabled={isChangeBlocked}
+        >
+          <FontAwesomeIcon icon={faPlus} color="#1a202c" />
+        </button>
+      </form>
+    </div>
   );
 };
 

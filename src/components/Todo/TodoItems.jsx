@@ -1,6 +1,6 @@
-import React from "react";
-import TodoItem from "./TodoItem";
-import styles from "./TodoList.module.css";
+import React from 'react';
+import TodoItem from './TodoItem';
+import styles from './TodoItems.module.css';
 
 const TodoItems = ({
   todos,
@@ -8,6 +8,9 @@ const TodoItems = ({
   onTodoDelete,
   onTodoEdit,
   selectedGoal,
+  db,
+  currentUser,
+  answers,
 }) => {
   const handleTodoDelete = (id) => onTodoDelete(id);
 
@@ -19,15 +22,20 @@ const TodoItems = ({
 
   return (
     <div className={styles.container}>
-      {selectedTodos.map((todo) => (
-        <TodoItem
-          todo={todo}
-          onTodoDelete={handleTodoDelete}
-          key={todo.id}
-          onTodoEdit={handleTodoEdit}
-          onTodoCheck={handleTodoCheck}
-        />
-      ))}
+      <div className={styles.items}>
+        {selectedTodos.map((todo) => (
+          <TodoItem
+            todo={todo}
+            onTodoDelete={handleTodoDelete}
+            key={todo.id}
+            onTodoEdit={handleTodoEdit}
+            onTodoCheck={handleTodoCheck}
+            db={db}
+            currentUser={currentUser}
+            answers={answers}
+          />
+        ))}
+      </div>
     </div>
   );
 };

@@ -1,15 +1,14 @@
-import React, { useState, useRef } from "react";
-import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan, faPenToSquare } from "@fortawesome/free-regular-svg-icons";
-import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
-import styles from "./GoalItem.module.css";
+import React, { useState, useRef } from 'react';
+import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashCan, faPenToSquare } from '@fortawesome/free-regular-svg-icons';
+import { faCheck, faXmark } from '@fortawesome/free-solid-svg-icons';
+import styles from './GoalItem.module.css';
 
 const GoalItem = ({
   goal,
   onGoalDelete,
   onGoalEdit,
-  onGoalCheck,
   onSelectGoal,
   backgroundColor,
 }) => {
@@ -17,14 +16,14 @@ const GoalItem = ({
 
   const [isEditClicked, setIsEditClicked] = useState(false);
   const [isDeleteClicked, setIsDeleteClicked] = useState(false);
-  const [updatedText, setUpdatedText] = useState("");
+  const [updatedText, setUpdatedText] = useState('');
   const submitEditedContent = () => {
-    if (updatedText === "") {
+    if (updatedText === '') {
       setIsEditClicked(false);
       return;
     }
 
-    setUpdatedText("");
+    setUpdatedText('');
     setIsEditClicked(false);
     onGoalEdit(updatedText, goal.id);
   };
@@ -39,7 +38,7 @@ const GoalItem = ({
   };
 
   const cancelEdit = () => {
-    setUpdatedText("");
+    setUpdatedText('');
     setIsEditClicked(false);
   };
 
@@ -49,10 +48,6 @@ const GoalItem = ({
 
   const onDelete = (id) => {
     onGoalDelete(id);
-  };
-
-  const onCheck = (id) => {
-    onGoalCheck(id);
   };
 
   const goalItemClicked = (id) => {
@@ -65,12 +60,8 @@ const GoalItem = ({
       onClick={() => goalItemClicked(goal.id)}
       $backgroundColor={backgroundColor}
     >
-      {/* <label>
-        <input
-          type="checkbox"
-          onChange={() => onCheck(goal.id)}
-          checked={goal.isFinished}
-        />
+      <Label $backgroundColor={backgroundColor}>
+        <input type="checkbox" readOnly checked={goal.isCompleted} />
         <div>
           <FontAwesomeIcon
             icon={faCheck}
@@ -78,7 +69,7 @@ const GoalItem = ({
             className={styles.checkIcon}
           />
         </div>
-      </label> */}
+      </Label>
       {isEditClicked ? (
         <input
           className={
@@ -151,6 +142,23 @@ const ActionButtons = styled.div`
   width: 100%;
 `;
 
+const Label = styled.label`
+  div {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border: 3px solid transparent;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  input[type='checkbox']:checked + div {
+    background: ${(props) => props.$backgroundColor};
+  }
+`;
 const Text = styled.div`
   font-size: 1.2rem;
   color: #1a202c;

@@ -23,20 +23,20 @@ input[type="checkbox"] {
   display: none;
 }
 
-label div {
+.checkboxLabel div {
   width: 35px;
   height: 35px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #1a202c;
-  border: 3px solid rgb(73, 220, 73);
+  background-color: transparent;
+  border: 3px solid transparent;
   border-radius: 50%;
   cursor: pointer;
 }
 
-input[type="checkbox"]:checked + div {
-  background-color: rgb(73, 220, 73);
+.checkboxLabel input[type="checkbox"]:checked + div {
+  background-color: #a8dcfa;
 }
 
 .text.checked {
@@ -89,7 +89,7 @@ input[type="checkbox"]:checked + div .checkIcon {
     font-size: 1.2rem;
   }
 
-  label div {
+  .checkboxLabel div {
     width: 30px;
     height: 30px;
   }

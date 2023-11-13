@@ -1,50 +1,56 @@
-import React from "react";
-import TodoInput from "./TodoInput";
-import TodoItems from "./TodoItems";
-import styles from "./Todo.module.css";
+import React, { useState, useEffect } from 'react';
+import TodoInput from './TodoInput';
+import TodoItems from './TodoItems';
 
+import styles from './Todo.module.css';
 import {
   collection,
-  addDoc,
   doc,
+  addDoc,
   deleteDoc,
   updateDoc,
-} from "firebase/firestore";
+} from 'firebase/firestore';
 
 const Todo = ({
   db,
   todos,
+  goals,
   setTodos,
   syncTodoItemWithFirestore,
   selectedGoal,
   currentUser,
+  answers,
 }) => {
+  const [isAllFinished, setIsAllFinished] = useState(false);
+  const [isChangeBlocked, setIsChangeBlocked] = useState(false);
+
   const handleTodoEdit = async (updatedText, id) => {
     setTodos(
       todos.map((todo) => {
         if (todo.id === id) {
           return {
             ...todo,
-            text: updatedText,
+            answer: updatedText,
           };
         }
         return todo;
-      })
+      }),
     );
     handleEditSync(updatedText, id);
   };
 
   const handleEditSync = async (updatedText, id) => {
-    const todoItemRef = doc(db, "todoItem", id);
+    const todoItemRef = doc(db, 'todoItem', id);
     await updateDoc(todoItemRef, {
-      text: updatedText,
+      answer: updatedText,
     });
     syncTodoItemWithFirestore();
   };
 
   const handleTodoSubmit = async (enteredTodo) => {
-    await addDoc(collection(db, "todoItem"), {
+    await addDoc(collection(db, 'todoItem'), {
       text: enteredTodo,
+      answer: '',
       isFinished: false,
       createdTime: Math.floor(Date.now() / 1000),
       goalId: selectedGoal,
@@ -55,36 +61,54 @@ const Todo = ({
   };
 
   const handleTodoDelete = async (id) => {
-    const todoItemRef = doc(db, "todoItem", id);
+    const todoItemRef = doc(db, 'todoItem', id);
     await deleteDoc(todoItemRef);
     syncTodoItemWithFirestore();
   };
 
   const handleTodoCheck = async (id) => {
-    const todoItemRef = doc(db, "todoItem", id);
-    console.log("todoItemRef", todoItemRef);
+    const todoItemRef = doc(db, 'todoItem', id);
     await updateDoc(todoItemRef, {
       isFinished: !todos.find((todo) => todo.id === id).isFinished,
     });
     syncTodoItemWithFirestore();
   };
 
+  useEffect(() => {
+    const newIsAllFinished = todos
+      .filter((todo) => todo.goalId === selectedGoal)
+      .every((item) => item.isFinished === true);
+    setIsAllFinished(newIsAllFinished);
+  }, [todos]);
+
+  useEffect(() => {
+    const selectedGoalItem = goals.find((goal) => goal.id === selectedGoal);
+    if (selectedGoalItem?.isCompleted === true) {
+      setIsChangeBlocked(true);
+    } else {
+      setIsChangeBlocked(false);
+    }
+  }, [goals, selectedGoal]);
   return (
     <div className={styles.container}>
       <div className={styles.bar}>
         <div className={styles.titleContainer}>
-          <h1 className={styles.title}>Todo list</h1>
+          <h1 className={styles.title}>예상 질문</h1>
         </div>
-        <TodoInput onTodoSubmit={handleTodoSubmit} />
+        <TodoInput
+          onTodoSubmit={handleTodoSubmit}
+          isChangeBlocked={isChangeBlocked}
+        />
       </div>
       <TodoItems
+        db={db}
         todos={todos}
         onTodoCheck={handleTodoCheck}
         onTodoEdit={handleTodoEdit}
         onTodoDelete={handleTodoDelete}
-        db={db}
-        syncTodoItemWithFirestore={syncTodoItemWithFirestore}
         selectedGoal={selectedGoal}
+        currentUser={currentUser}
+        answers={answers}
       />
     </div>
   );
