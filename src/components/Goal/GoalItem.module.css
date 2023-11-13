@@ -19,7 +19,7 @@
   padding: 0;
 }
 
-input[type="checkbox"] {
+input[type='checkbox'] {
   display: none;
 }
 
@@ -35,7 +35,7 @@ input[type="checkbox"] {
   cursor: pointer;
 }
 
-.checkboxLabel input[type="checkbox"]:checked + div {
+.checkboxLabel input[type='checkbox']:checked + div {
   background-color: #a8dcfa;
 }
 
@@ -59,18 +59,18 @@ input.text {
   width: 0%;
 }
 
-input[type="checkbox"]:checked + div .checkIcon {
+input[type='checkbox']:checked + div .checkIcon {
   transition: 0.2s ease;
   width: 30.2px;
   height: 24px;
 }
 
 @media screen and (max-width: 768px) {
-  .container {
+  /* .container {
     margin-bottom: 10px;
     font-size: 1rem;
     padding: 2% 3%;
-  }
+  } */
 
   .deleteIcon,
   .submitIcon,

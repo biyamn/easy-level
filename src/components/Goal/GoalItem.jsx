@@ -134,6 +134,10 @@ const Container = styled.div`
   margin: 1rem;
   padding: 1rem;
   justify-content: space-between;
+
+  @media screen and (max-width: 768px) {
+    margin: 0.5rem;
+  }
 `;
 
 const ActionButtons = styled.div`
