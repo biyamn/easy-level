@@ -8,6 +8,7 @@ const GoalItems = ({
   onGoalEdit,
   onSelectGoal,
   selectedGoal,
+  todos,
 }) => {
   const handleGoalDelete = (id) => onGoalDelete(id);
 
@@ -31,10 +32,12 @@ const GoalItems = ({
           <GoalItem
             key={goal.id}
             goal={goal}
+            todos={todos}
             onGoalDelete={handleGoalDelete}
             onGoalEdit={handleGoalEdit}
             onSelectGoal={handleSelectedGoal}
             backgroundColor={backgroundColor}
+            selectedGoal={selectedGoal}
           />
         );
       })}

@@ -153,6 +153,7 @@ const App = () => {
         <Goal
           db={db}
           goals={goals}
+          todos={todos}
           setGoals={setGoals}
           syncGoalItemWithFirestore={syncGoalItemWithFirestore}
           syncTodoItemWithFirestore={syncTodoItemWithFirestore}

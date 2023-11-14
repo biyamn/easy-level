@@ -15,6 +15,7 @@ import {
 
 const Goal = ({
   goals,
+  todos,
   setGoals,
   db,
   syncGoalItemWithFirestore,
@@ -35,7 +36,7 @@ const Goal = ({
           };
         }
         return goal;
-      }),
+      })
     );
     handleEditSync(updatedText, id);
   };
@@ -60,7 +61,7 @@ const Goal = ({
     syncGoalItemWithFirestore();
     const q = query(
       collection(db, 'goalItem'),
-      where('userId', '==', currentUser),
+      where('userId', '==', currentUser)
     );
     getDocs(q).then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
@@ -84,7 +85,7 @@ const Goal = ({
     const q = query(
       collection(db, 'todoItem'),
       where('goalId', '==', id),
-      where('userId', '==', currentUser),
+      where('userId', '==', currentUser)
     );
 
     getDocs(q).then((querySnapshot) => {
@@ -107,6 +108,7 @@ const Goal = ({
       <GoalInput onGoalSubmit={handleGoalSubmit} />
       <GoalItems
         goals={goals}
+        todos={todos}
         onGoalEdit={handleGoalEdit}
         onGoalDelete={handleGoalDelete}
         db={db}
