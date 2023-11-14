@@ -139,11 +139,11 @@ const GoalItem = ({
               <>
                 <button
                   className={styles.submitIcon}
-                  onClick={submitEditedContent}
+                  onClick={() => onDelete(goal.id)}
                 >
                   <FontAwesomeIcon icon={faCheck} size="2x" color="white" />
                 </button>
-                <button className={styles.cancelIcon} onClick={cancelEdit}>
+                <button className={styles.cancelIcon} onClick={cancelDelete}>
                   <FontAwesomeIcon icon={faXmark} size="2x" color="white" />
                 </button>
               </>
@@ -151,7 +151,7 @@ const GoalItem = ({
           </>
         </ActionButtons>
       ) : (
-        <div>{status}</div>
+        <Status>{status}</Status>
       )}
       {/* 
       {isEditClicked ? (
@@ -216,6 +216,12 @@ const Container = styled.div`
 `;
 
 const ActionButtons = styled.div`
+  display: flex;
+  justify-content: right;
+  width: 100%;
+`;
+
+const Status = styled.div`
   display: flex;
   justify-content: right;
   width: 100%;
