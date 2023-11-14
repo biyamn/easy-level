@@ -21,43 +21,12 @@ const GoalInput = ({ onGoalSubmit }) => {
       return;
     }
     setIsValid(true);
-
-    console.log(selectedInterviewType, enteredGoal);
-    onGoalSubmit(selectedInterviewType, enteredGoal);
+    onGoalSubmit(enteredGoal);
     setEnteredGoal('');
-    setSelectedInterviewType(interviewTypes[0].value);
-  };
-
-  const interviewTypes = [
-    { value: '기술면접' },
-    { value: '인성면접' },
-    { value: '기타' },
-  ];
-
-  const [selectedInterviewType, setSelectedInterviewType] = useState(
-    interviewTypes[0].value
-  );
-
-  const Select = () => {
-    const handleChange = (e) => {
-      setSelectedInterviewType(e.target.value);
-    };
-    return (
-      <>
-        <select onChange={handleChange}>
-          {interviewTypes.map((interviewType) => (
-            <option key={interviewType.value} value={interviewType.value}>
-              {interviewType.value}
-            </option>
-          ))}
-        </select>
-      </>
-    );
   };
   return (
     <div className={styles.container}>
       <form className={styles.form} onSubmit={handleGoalSubmit}>
-        <Select />
         <input
           className={
             !isValid ? `${styles.input} ${styles.invalid}` : `${styles.input}`
