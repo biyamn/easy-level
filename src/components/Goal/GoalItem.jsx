@@ -188,6 +188,10 @@ const Status = styled.div`
   display: flex;
   justify-content: right;
   width: 100%;
+  font-size: 15px;
+  padding: 10px;
+  font-weight: bold;
+  color: #c1fffb;
 `;
 
 const Label = styled.label`
