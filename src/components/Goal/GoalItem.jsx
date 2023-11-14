@@ -71,8 +71,6 @@ const GoalItem = ({
 
   return (
     <Container
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
       onClick={() => goalItemClicked(goal.id)}
       $backgroundColor={backgroundColor}
     >
@@ -105,54 +103,47 @@ const GoalItem = ({
           {goal.text}
         </Text>
       )}
-      {isHovered ? (
-        <ActionButtons>
-          <>
-            {!isEditClicked && !isDeleteClicked && (
-              <>
-                <button className={styles.editIcon} onClick={openEdit}>
-                  <FontAwesomeIcon
-                    icon={faPenToSquare}
-                    size="2x"
-                    color="white"
-                  />
-                </button>
-                <button className={styles.deleteIcon} onClick={openDelete}>
-                  <FontAwesomeIcon icon={faTrashCan} size="2x" color="white" />
-                </button>
-              </>
-            )}
-            {isEditClicked && !isDeleteClicked && (
-              <>
-                <button
-                  className={styles.submitIcon}
-                  onClick={submitEditedContent}
-                >
-                  <FontAwesomeIcon icon={faCheck} size="2x" color="white" />
-                </button>
-                <button className={styles.cancelIcon} onClick={cancelEdit}>
-                  <FontAwesomeIcon icon={faXmark} size="2x" color="white" />
-                </button>
-              </>
-            )}
-            {!isEditClicked && isDeleteClicked && (
-              <>
-                <button
-                  className={styles.submitIcon}
-                  onClick={() => onDelete(goal.id)}
-                >
-                  <FontAwesomeIcon icon={faCheck} size="2x" color="white" />
-                </button>
-                <button className={styles.cancelIcon} onClick={cancelDelete}>
-                  <FontAwesomeIcon icon={faXmark} size="2x" color="white" />
-                </button>
-              </>
-            )}
-          </>
-        </ActionButtons>
-      ) : (
-        <Status>{status}</Status>
-      )}
+      <ActionButtons className="hover-visible">
+        <>
+          {!isEditClicked && !isDeleteClicked && (
+            <>
+              <button className={styles.editIcon} onClick={openEdit}>
+                <FontAwesomeIcon icon={faPenToSquare} size="2x" color="white" />
+              </button>
+              <button className={styles.deleteIcon} onClick={openDelete}>
+                <FontAwesomeIcon icon={faTrashCan} size="2x" color="white" />
+              </button>
+            </>
+          )}
+          {isEditClicked && !isDeleteClicked && (
+            <>
+              <button
+                className={styles.submitIcon}
+                onClick={submitEditedContent}
+              >
+                <FontAwesomeIcon icon={faCheck} size="2x" color="white" />
+              </button>
+              <button className={styles.cancelIcon} onClick={cancelEdit}>
+                <FontAwesomeIcon icon={faXmark} size="2x" color="white" />
+              </button>
+            </>
+          )}
+          {!isEditClicked && isDeleteClicked && (
+            <>
+              <button
+                className={styles.submitIcon}
+                onClick={() => onDelete(goal.id)}
+              >
+                <FontAwesomeIcon icon={faCheck} size="2x" color="white" />
+              </button>
+              <button className={styles.cancelIcon} onClick={cancelDelete}>
+                <FontAwesomeIcon icon={faXmark} size="2x" color="white" />
+              </button>
+            </>
+          )}
+        </>
+      </ActionButtons>
+      <Status className="hover-hidden">{status}</Status>
       {/* 
       {isEditClicked ? (
         <input
@@ -212,6 +203,20 @@ const Container = styled.div`
 
   @media screen and (max-width: 768px) {
     margin: 0.5rem;
+  }
+
+  .hover-visible {
+    display: none;
+  }
+
+  &:hover {
+    .hover-visible {
+      display: flex;
+    }
+
+    .hover-hidden {
+      display: none;
+    }
   }
 `;
 

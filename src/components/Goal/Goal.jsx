@@ -49,9 +49,9 @@ const Goal = ({
     syncGoalItemWithFirestore();
   };
 
-  const handleGoalSubmit = async (enteredGoal) => {
+  const handleGoalSubmit = async (enteredType, enteredGoal) => {
     await addDoc(collection(db, 'goalItem'), {
-      text: enteredGoal,
+      text: `${enteredType}/${enteredGoal}`,
       isFinished: false,
       createdTime: Math.floor(Date.now() / 1000),
       userId: currentUser,
