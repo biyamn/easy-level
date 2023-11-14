@@ -1,9 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
-import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashCan, faPenToSquare } from '@fortawesome/free-regular-svg-icons';
-import { faCheck, faXmark } from '@fortawesome/free-solid-svg-icons';
-import styles from './GoalItem.module.css';
+import React, { useState, useRef, useEffect } from "react";
+import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashCan, faPenToSquare } from "@fortawesome/free-regular-svg-icons";
+import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
+import styles from "./GoalItem.module.css";
 
 const GoalItem = ({
   goal,
@@ -18,16 +18,16 @@ const GoalItem = ({
 
   const [isEditClicked, setIsEditClicked] = useState(false);
   const [isDeleteClicked, setIsDeleteClicked] = useState(false);
-  const [updatedText, setUpdatedText] = useState('');
+  const [updatedText, setUpdatedText] = useState("");
   const [isHovered, setIsHovered] = useState(false);
 
   const submitEditedContent = () => {
-    if (updatedText === '') {
+    if (updatedText === "") {
       setIsEditClicked(false);
       return;
     }
 
-    setUpdatedText('');
+    setUpdatedText("");
     setIsEditClicked(false);
     onGoalEdit(updatedText, goal.id);
   };
@@ -42,7 +42,7 @@ const GoalItem = ({
   };
 
   const cancelEdit = () => {
-    setUpdatedText('');
+    setUpdatedText("");
     setIsEditClicked(false);
   };
 
@@ -74,7 +74,7 @@ const GoalItem = ({
       onClick={() => goalItemClicked(goal.id)}
       $backgroundColor={backgroundColor}
     >
-      <Label $backgroundColor={backgroundColor}>
+      {/* <Label $backgroundColor={backgroundColor}>
         <input type="checkbox" readOnly checked={goal.isCompleted} />
         <div>
           <FontAwesomeIcon
@@ -83,7 +83,8 @@ const GoalItem = ({
             className={styles.checkIcon}
           />
         </div>
-      </Label>
+      </Label> */}
+      {goal.isCompleted ? <span>완료🥳</span> : <span>미완료</span>}
       {isEditClicked ? (
         <input
           className={
@@ -202,7 +203,7 @@ const Label = styled.label`
     cursor: pointer;
   }
 
-  input[type='checkbox']:checked + div {
+  input[type="checkbox"]:checked + div {
     background: ${(props) => props.$backgroundColor};
   }
 `;
