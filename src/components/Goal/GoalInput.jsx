@@ -7,6 +7,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 const GoalInput = ({ onGoalSubmit }) => {
   const [enteredGoal, setEnteredGoal] = useState('');
   const [isValid, setIsValid] = useState(true);
+  const [selectedOption, setSelectedOption] = useState('');
 
   const handleGoalChange = (e) => {
     setEnteredGoal(e.target.value);
@@ -21,12 +22,36 @@ const GoalInput = ({ onGoalSubmit }) => {
       return;
     }
     setIsValid(true);
-    onGoalSubmit(enteredGoal);
+    console.log(selectedOption, enteredGoal);
+    onGoalSubmit(selectedOption, enteredGoal);
     setEnteredGoal('');
+  };
+
+  const options = [
+    { value: '기술면접' },
+    { value: '인성면접' },
+    { value: '포트폴리오' },
+    { value: '기타' },
+  ];
+
+  const Select = () => {
+    const handleChange = (e) => {
+      setSelectedOption(e.target.value);
+      console.log(e.target.value);
+    };
+
+    return (
+      <select onChange={handleChange} value={selectedOption}>
+        {options.map((option) => (
+          <option key={option.value}>{option.value}</option>
+        ))}
+      </select>
+    );
   };
   return (
     <div className={styles.container}>
       <form className={styles.form} onSubmit={handleGoalSubmit}>
+        <Select />
         <input
           className={
             !isValid ? `${styles.input} ${styles.invalid}` : `${styles.input}`
