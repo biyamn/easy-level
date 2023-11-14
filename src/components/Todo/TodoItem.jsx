@@ -15,7 +15,7 @@ import styled from 'styled-components';
 
 const TodoItem = ({ todo, onTodoDelete, onTodoEdit, onTodoCheck, answers }) => {
   const editedText = useRef(null);
-  const [value, setValue] = useState('이곳에 답변을 작성해 주세요.');
+  const [value, setValue] = useState('');
   const [isEditClicked, setIsEditClicked] = useState(false);
   const [isDeleteClicked, setIsDeleteClicked] = useState(false);
   const answer = answers.find((answer) => answer.id === todo.id).answer;
@@ -103,7 +103,7 @@ const TodoItem = ({ todo, onTodoDelete, onTodoEdit, onTodoCheck, answers }) => {
             }
             value={value}
             onChange={(e) => setValue(e.target.value)}
-            placeholder="답변을 작성해 주세요."
+            placeholder="이곳에 답변을 작성해 주세요."
           />
         ) : (
           <div>{answer}</div>

@@ -48,7 +48,7 @@ const Todo = ({
   const handleTodoSubmit = async (enteredTodo) => {
     await addDoc(collection(db, 'todoItem'), {
       text: enteredTodo,
-      answer: '',
+      answer: '이곳에 답변을 작성해 주세요.',
       isFinished: false,
       createdTime: Math.floor(Date.now() / 1000),
       goalId: selectedGoal,
