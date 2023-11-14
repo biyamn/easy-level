@@ -73,9 +73,11 @@ const Todo = ({
   };
 
   useEffect(() => {
-    const newIsAllFinished = todos
-      .filter((todo) => todo.goalId === selectedGoal)
-      .every((item) => item.isFinished === true);
+    const filteredTodos = todos.filter((todo) => todo.goalId === selectedGoal);
+    if (filteredTodos.length === 0) return;
+    const newIsAllFinished = filteredTodos.every(
+      (item) => item.isFinished === true
+    );
     // goal의 isCompleted를 바꾸기
     const goalItemRef = doc(db, 'goalItem', selectedGoal);
     updateDoc(goalItemRef, {

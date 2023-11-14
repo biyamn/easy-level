@@ -4,10 +4,17 @@ import styles from './GoalInput.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
+const options = [
+  { value: '기술면접' },
+  { value: '인성면접' },
+  { value: '포트폴리오' },
+  { value: '기타' },
+];
+
 const GoalInput = ({ onGoalSubmit }) => {
   const [enteredGoal, setEnteredGoal] = useState('');
   const [isValid, setIsValid] = useState(true);
-  const [selectedOption, setSelectedOption] = useState('');
+  const [selectedOption, setSelectedOption] = useState(options[0].value);
 
   const handleGoalChange = (e) => {
     setEnteredGoal(e.target.value);
@@ -25,14 +32,8 @@ const GoalInput = ({ onGoalSubmit }) => {
     console.log(selectedOption, enteredGoal);
     onGoalSubmit(selectedOption, enteredGoal);
     setEnteredGoal('');
+    setSelectedOption(options[0].value);
   };
-
-  const options = [
-    { value: '기술면접' },
-    { value: '인성면접' },
-    { value: '포트폴리오' },
-    { value: '기타' },
-  ];
 
   const Select = () => {
     const handleChange = (e) => {
