@@ -17,13 +17,11 @@ const Todo = ({
   goals,
   setTodos,
   syncTodoItemWithFirestore,
+  syncGoalItemWithFirestore,
   selectedGoal,
   currentUser,
   answers,
 }) => {
-  const [isAllFinished, setIsAllFinished] = useState(false);
-  const [isChangeBlocked, setIsChangeBlocked] = useState(false);
-
   const handleTodoEdit = async (updatedText, id) => {
     setTodos(
       todos.map((todo) => {
@@ -34,7 +32,7 @@ const Todo = ({
           };
         }
         return todo;
-      }),
+      })
     );
     handleEditSync(updatedText, id);
   };
@@ -78,27 +76,21 @@ const Todo = ({
     const newIsAllFinished = todos
       .filter((todo) => todo.goalId === selectedGoal)
       .every((item) => item.isFinished === true);
-    setIsAllFinished(newIsAllFinished);
+    // goal의 isCompleted를 바꾸기
+    const goalItemRef = doc(db, 'goalItem', selectedGoal);
+    updateDoc(goalItemRef, {
+      isCompleted: newIsAllFinished,
+    });
+    syncGoalItemWithFirestore();
   }, [todos]);
 
-  useEffect(() => {
-    const selectedGoalItem = goals.find((goal) => goal.id === selectedGoal);
-    if (selectedGoalItem?.isCompleted === true) {
-      setIsChangeBlocked(true);
-    } else {
-      setIsChangeBlocked(false);
-    }
-  }, [goals, selectedGoal]);
   return (
     <div className={styles.container}>
       <div className={styles.bar}>
         <div className={styles.titleContainer}>
           <h1 className={styles.title}>예상 질문</h1>
         </div>
-        <TodoInput
-          onTodoSubmit={handleTodoSubmit}
-          isChangeBlocked={isChangeBlocked}
-        />
+        <TodoInput onTodoSubmit={handleTodoSubmit} />
       </div>
       <TodoItems
         db={db}

@@ -4,7 +4,7 @@ import styles from './TodoInput.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
-const TodoInput = ({ onTodoSubmit, isChangeBlocked }) => {
+const TodoInput = ({ onTodoSubmit }) => {
   const [enteredTodo, setEnteredTodo] = useState('');
   const [isValid, setIsValid] = useState(true);
 
@@ -37,13 +37,8 @@ const TodoInput = ({ onTodoSubmit, isChangeBlocked }) => {
           value={enteredTodo}
           onChange={goalChangeHandler}
           placeholder="예상 질문을 추가해 주세요."
-          disabled={isChangeBlocked}
         />
-        <button
-          className={styles.button}
-          type="submit"
-          disabled={isChangeBlocked}
-        >
+        <button className={styles.button} type="submit">
           <FontAwesomeIcon icon={faPlus} color="#1a202c" />
         </button>
       </form>
