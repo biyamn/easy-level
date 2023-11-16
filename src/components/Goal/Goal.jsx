@@ -51,7 +51,7 @@ const Goal = ({
 
   const handleGoalSubmit = async (enteredOption, enteredGoal) => {
     await addDoc(collection(db, 'goalItem'), {
-      text: `${enteredOption} / ${enteredGoal}`,
+      text: `[${enteredOption}] ${enteredGoal}`,
       isFinished: false,
       createdTime: Math.floor(Date.now() / 1000),
       userId: currentUser,
