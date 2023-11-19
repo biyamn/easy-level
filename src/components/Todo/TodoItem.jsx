@@ -13,12 +13,14 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import styled from 'styled-components';
 
-const TodoItem = ({ todo, onTodoDelete, onTodoEdit, onTodoCheck, answers }) => {
+const TodoItem = ({ todo, onTodoDelete, onTodoEdit, onTodoCheck }) => {
   const editedText = useRef(null);
   const [value, setValue] = useState('');
   const [isEditClicked, setIsEditClicked] = useState(false);
   const [isDeleteClicked, setIsDeleteClicked] = useState(false);
-  const answer = answers.find((answer) => answer.id === todo.id).answer;
+
+  // firestore에서 todoItem의 answer를 가져옴
+  const answer = todo.answer;
 
   const submitEditedContent = () => {
     if (value === '') {

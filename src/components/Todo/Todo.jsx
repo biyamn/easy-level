@@ -14,13 +14,11 @@ import {
 const Todo = ({
   db,
   todos,
-  goals,
   setTodos,
   syncTodoItemWithFirestore,
   syncGoalItemWithFirestore,
   selectedGoal,
   currentUser,
-  answers,
 }) => {
   const handleTodoEdit = async (updatedText, id) => {
     setTodos(
@@ -66,6 +64,10 @@ const Todo = ({
 
   const handleTodoCheck = async (id) => {
     const todoItemRef = doc(db, 'todoItem', id);
+    console.log(
+      'todos.find((todo) => todo.id === id).isFinished',
+      todos.find((todo) => todo.id === id).isFinished
+    );
     await updateDoc(todoItemRef, {
       isFinished: !todos.find((todo) => todo.id === id).isFinished,
     });
@@ -102,7 +104,6 @@ const Todo = ({
         onTodoDelete={handleTodoDelete}
         selectedGoal={selectedGoal}
         currentUser={currentUser}
-        answers={answers}
       />
     </div>
   );

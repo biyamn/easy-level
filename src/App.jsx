@@ -11,6 +11,7 @@ import {
   getFirestore,
   collection,
   getDocs,
+  addDoc,
   query,
   orderBy,
   where,
@@ -60,8 +61,6 @@ const App = () => {
   const [currentUser, setCurrentUser] = useState(null);
   const [isCompleted, setIsCompleted] = useState([]);
 
-  const [answers, setAnswers] = useState([]);
-
   const handleSelectedGoal = (id) => {
     if (id === selectedGoal) {
       setSelectedGoal(null);
@@ -70,36 +69,22 @@ const App = () => {
     }
   };
 
-  const syncTodoItemWithFirestore = () => {
-    const q = query(
-      collection(db, 'todoItem'),
-      where('userId', '==', currentUser),
-      orderBy('createdTime', 'desc')
-    );
-    getDocs(q).then((querySnapshot) => {
-      const firestoreTodoItemList = [];
-      querySnapshot.forEach((doc) => {
-        firestoreTodoItemList.push({
-          id: doc.id,
-          text: doc.data().text,
-          answer: doc.data().answer,
-          isFinished: doc.data().isFinished,
-          createdTime: doc.data().createdTime,
-          goalId: doc.data().goalId,
-          userId: doc.data().userId,
-        });
-      });
-      setTodos(firestoreTodoItemList);
-      setAnswers(
-        firestoreTodoItemList.map((todo) => {
-          return {
-            id: todo.id,
-            answer: todo.answer,
-          };
-        })
-      );
-    });
-  };
+  const initialGoals = [
+    {
+      id: '1',
+      text: '[기술면접] JavaScript',
+      createdTime: new Date(),
+      isCompleted: false,
+      userId: currentUser,
+    },
+    {
+      id: '2',
+      text: '[기술면접] React',
+      createdTime: new Date(),
+      isCompleted: false,
+      userId: currentUser,
+    },
+  ];
 
   const syncGoalItemWithFirestore = () => {
     const q = query(
@@ -108,7 +93,7 @@ const App = () => {
       orderBy('createdTime', 'desc')
     );
     getDocs(q).then((querySnapshot) => {
-      const firestoreGoalItemList = [];
+      const firestoreGoalItemList = initialGoals;
       querySnapshot.forEach((doc) => {
         firestoreGoalItemList.push({
           id: doc.id,
@@ -121,6 +106,71 @@ const App = () => {
       setGoals(firestoreGoalItemList);
     });
   };
+
+  const initialTodos = [
+    {
+      id: '1_1',
+      text: '호이스팅에 대해 설명해 주세요.',
+      answer: '호이스팅이란~',
+      isFinished: false,
+      createdTime: new Date(),
+      goalId: '1',
+      userId: currentUser,
+    },
+    {
+      id: '1_2',
+      text: '클로저에 대해 설명해 주세요.',
+      answer: '클로저란~',
+      isFinished: false,
+      createdTime: new Date(),
+      goalId: '1',
+      userId: currentUser,
+    },
+    {
+      id: '2_1',
+      text: 'DOM과 Virtual DOM의 차이점에 대해 설명해 주세요.',
+      answer: 'DOM이란~',
+      isFinished: false,
+      createdTime: new Date(),
+      goalId: '2',
+      userId: currentUser,
+    },
+  ];
+
+  const syncTodoItemWithFirestore = () => {
+    const q = query(
+      collection(db, 'todoItem'),
+      where('userId', '==', currentUser),
+      orderBy('createdTime', 'desc')
+    );
+    getDocs(q).then((querySnapshot) => {
+      const firestoreTodoItemList = initialTodos;
+      querySnapshot.forEach((doc) => {
+        firestoreTodoItemList.push({
+          id: doc.id,
+          text: doc.data().text,
+          answer: doc.data().answer,
+          isFinished: doc.data().isFinished,
+          createdTime: doc.data().createdTime,
+          goalId: doc.data().goalId,
+          userId: doc.data().userId,
+        });
+      });
+      setTodos(firestoreTodoItemList);
+    });
+  };
+
+  // useEffect(() => {
+  //   initialGoals.forEach(async (goal) => {
+  //     await addDoc(collection(db, 'goalItem'), goal);
+  //   });
+  // }, []);
+
+  // useEffect(() => {
+  //   initialTodos.forEach(async (todo) => {
+  //     await addDoc(collection(db, 'todoItem'), todo);
+  //   });
+  // }, []);
 
   useEffect(() => {
     syncTodoItemWithFirestore();
@@ -163,8 +213,6 @@ const App = () => {
           year={year}
           isCompleted={isCompleted}
           setIsCompleted={setIsCompleted}
-          answers={answers}
-          setAnswers={setAnswers}
         />
         {selectedGoal ? (
           <Todo
@@ -178,8 +226,6 @@ const App = () => {
             currentUser={currentUser}
             isCompleted={isCompleted}
             setIsCompleted={setIsCompleted}
-            answers={answers}
-            setAnswers={setAnswers}
           />
         ) : (
           <Main />
