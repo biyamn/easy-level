@@ -146,6 +146,10 @@ const App = () => {
             await addDoc(collection(db, 'todoItem'), {
               ...todo,
               goalId: goalResponse.id,
+              answer: '이곳에 답변을 입력해주세요.',
+              isFinished: false,
+              createdTime: new Date(),
+              userId: currentUser,
             });
           });
         });
