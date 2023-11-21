@@ -7,6 +7,8 @@ import Goal from './components/Goal/Goal';
 import Navbar from './components/Navbar/Navbar';
 import Main from './components/Main/Main';
 import { initializeApp } from 'firebase/app';
+import getInitialValue from './utils/getInitialValue';
+
 import {
   getFirestore,
   collection,
@@ -73,45 +75,6 @@ const App = () => {
   // 아예 속성에 todos를 넣어버린다(firestore에는 없음)
   // 여기 todos에는 goalId가 없음
   // goal, todo에 id도 모두 없음(firestore가 만들어 줄 거임)
-  const initialValue = [
-    {
-      text: '[기술면접] JavaScript',
-      createdTime: new Date(),
-      isCompleted: false,
-      userId: currentUser,
-      todos: [
-        {
-          text: '호이스팅에 대해 설명해 주세요.',
-          answer: '호이스팅이란~',
-          isFinished: false,
-          createdTime: new Date(),
-          userId: currentUser,
-        },
-        {
-          text: '클로저에 대해 설명해 주세요.',
-          answer: '클로저란~',
-          isFinished: false,
-          createdTime: new Date(),
-          userId: currentUser,
-        },
-      ],
-    },
-    {
-      text: '[기술면접] React',
-      createdTime: new Date(),
-      isCompleted: false,
-      userId: currentUser,
-      todos: [
-        {
-          text: 'DOM과 Virtual DOM의 차이점에 대해 설명해 주세요.',
-          answer: 'DOM이란~',
-          isFinished: false,
-          createdTime: new Date(),
-          userId: currentUser,
-        },
-      ],
-    },
-  ];
 
   // syncGoalItemWithFirestore, syncTodoItemWithFirestore: firestore에서 데이터를 가져와서 state에 저장
   // firebase에 데이터를 보내는 함수 아님. 가져와서 state에 저장하는 함수임
@@ -163,6 +126,8 @@ const App = () => {
   // 여기를 추가했다
   useEffect(() => {
     // 맨 처음에 firebase에서 'goalItem' 데이터를 가져오는 쿼리를 작성함
+
+    const initialValue = getInitialValue(currentUser);
     const q = query(
       collection(db, 'goalItem'),
       where('userId', '==', currentUser),
