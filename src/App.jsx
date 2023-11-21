@@ -69,23 +69,53 @@ const App = () => {
     }
   };
 
-  const initialGoals = [
+  // 초기값 설정
+  // 아예 속성에 todos를 넣어버린다(firestore에는 없음)
+  // 여기 todos에는 goalId가 없음
+  // goal, todo에 id도 모두 없음(firestore가 만들어 줄 거임)
+  const initialValue = [
     {
-      id: '1',
       text: '[기술면접] JavaScript',
       createdTime: new Date(),
       isCompleted: false,
       userId: currentUser,
+      todos: [
+        {
+          text: '호이스팅에 대해 설명해 주세요.',
+          answer: '호이스팅이란~',
+          isFinished: false,
+          createdTime: new Date(),
+          userId: currentUser,
+        },
+        {
+          text: '클로저에 대해 설명해 주세요.',
+          answer: '클로저란~',
+          isFinished: false,
+          createdTime: new Date(),
+          userId: currentUser,
+        },
+      ],
     },
     {
-      id: '2',
       text: '[기술면접] React',
       createdTime: new Date(),
       isCompleted: false,
       userId: currentUser,
+      todos: [
+        {
+          text: 'DOM과 Virtual DOM의 차이점에 대해 설명해 주세요.',
+          answer: 'DOM이란~',
+          isFinished: false,
+          createdTime: new Date(),
+          userId: currentUser,
+        },
+      ],
     },
   ];
 
+  // syncGoalItemWithFirestore, syncTodoItemWithFirestore: firestore에서 데이터를 가져와서 state에 저장
+  // firebase에 데이터를 보내는 함수 아님. 가져와서 state에 저장하는 함수임
+  // 그래서 여기서 바꿀 건 없음
   const syncGoalItemWithFirestore = () => {
     const q = query(
       collection(db, 'goalItem'),
@@ -93,7 +123,7 @@ const App = () => {
       orderBy('createdTime', 'desc')
     );
     getDocs(q).then((querySnapshot) => {
-      const firestoreGoalItemList = initialGoals;
+      const firestoreGoalItemList = [];
       querySnapshot.forEach((doc) => {
         firestoreGoalItemList.push({
           id: doc.id,
@@ -107,36 +137,6 @@ const App = () => {
     });
   };
 
-  const initialTodos = [
-    {
-      id: '1_1',
-      text: '호이스팅에 대해 설명해 주세요.',
-      answer: '호이스팅이란~',
-      isFinished: false,
-      createdTime: new Date(),
-      goalId: '1',
-      userId: currentUser,
-    },
-    {
-      id: '1_2',
-      text: '클로저에 대해 설명해 주세요.',
-      answer: '클로저란~',
-      isFinished: false,
-      createdTime: new Date(),
-      goalId: '1',
-      userId: currentUser,
-    },
-    {
-      id: '2_1',
-      text: 'DOM과 Virtual DOM의 차이점에 대해 설명해 주세요.',
-      answer: 'DOM이란~',
-      isFinished: false,
-      createdTime: new Date(),
-      goalId: '2',
-      userId: currentUser,
-    },
-  ];
-
   const syncTodoItemWithFirestore = () => {
     const q = query(
       collection(db, 'todoItem'),
@@ -144,7 +144,7 @@ const App = () => {
       orderBy('createdTime', 'desc')
     );
     getDocs(q).then((querySnapshot) => {
-      const firestoreTodoItemList = initialTodos;
+      const firestoreTodoItemList = [];
       querySnapshot.forEach((doc) => {
         firestoreTodoItemList.push({
           id: doc.id,
@@ -160,17 +160,33 @@ const App = () => {
     });
   };
 
-  // useEffect(() => {
-  //   initialGoals.forEach(async (goal) => {
-  //     await addDoc(collection(db, 'goalItem'), goal);
-  //   });
-  // }, []);
-
-  // useEffect(() => {
-  //   initialTodos.forEach(async (todo) => {
-  //     await addDoc(collection(db, 'todoItem'), todo);
-  //   });
-  // }, []);
+  // 여기를 추가했다
+  useEffect(() => {
+    // 맨 처음에 firebase에서 'goalItem' 데이터를 가져오는 쿼리를 작성함
+    const q = query(
+      collection(db, 'goalItem'),
+      where('userId', '==', currentUser),
+      orderBy('createdTime', 'desc')
+    );
+    // 쿼리로 데이터를 가져옴(getDocs)
+    getDocs(q).then((querySnapshot) => {
+      // 가져온 goalItem이 없을 때. 즉 계정이 처음 만들어졌을 때
+      if (querySnapshot.size === 0) {
+        // 구조분해할당으로 initialValue에서 todos와 ...goal을 나눠서 가져옴(goal은 꼭 goal이 아니어도 됨. 그냥 나머지라는 뜻임)
+        initialValue.forEach(async ({ todos, ...goal }) => {
+          // goal을 추가하는 부분. 추가로 끝나는 . 게아니라 goalResponse라는 변수에 저장한다.
+          const goalResponse = await addDoc(collection(db, 'goalItem'), goal);
+          // todo를 추가하는 부분. todos에서 id를 받아 todo의 goalId로 등록하여 firestore에 저장한다.
+          todos.forEach(async (todo) => {
+            await addDoc(collection(db, 'todoItem'), {
+              ...todo,
+              goalId: goalResponse.id,
+            });
+          });
+        });
+      }
+    });
+  }, [currentUser]);
 
   useEffect(() => {
     syncTodoItemWithFirestore();
