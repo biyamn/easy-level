@@ -1,12 +1,12 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 const Main = () => {
   const Title = () => {
     return (
-      <div>
+      <TitleWrapper>
         <TitleText>현황</TitleText>
-        <TitleDescription></TitleDescription>
-      </div>
+        {/* <TitleDescription>면접 준비 현황에 대해 알려드려요.</TitleDescription> */}
+      </TitleWrapper>
     );
   };
 
@@ -31,14 +31,21 @@ const Main = () => {
 
 const Container = styled.div`
   display: flex;
-  justify-content: center;
   flex: 3;
 `;
 
 const Wrapper = styled.div`
   display: flex;
+  width: 100%;
   flex-direction: column;
   white-space: pre-line;
+`;
+
+const TitleWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const TitleText = styled.h1`
