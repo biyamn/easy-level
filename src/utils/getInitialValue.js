@@ -2,13 +2,10 @@ const getInitialValue = (currentUser) => {
   return [
     {
       text: '[기술면접] HTML',
-      createdTime: new Date(),
+      createdTime: +new Date(),
       isCompleted: false,
       userId: currentUser,
       todos: [
-        {
-          text: 'DOM과 Virtual DOM의 차이점에 대해 설명해 주세요.',
-        },
         {
           text: '시맨틱 마크업에 대해 설명해 주세요.',
         },
@@ -17,7 +14,7 @@ const getInitialValue = (currentUser) => {
     },
     {
       text: '[기술면접] CSS',
-      createdTime: new Date(),
+      createdTime: +new Date(),
       isCompleted: false,
       userId: currentUser,
       todos: [
@@ -31,7 +28,7 @@ const getInitialValue = (currentUser) => {
     },
     {
       text: '[기술면접] JavaScript',
-      createdTime: new Date(),
+      createdTime: +new Date(),
       isCompleted: false,
       userId: currentUser,
       todos: [
@@ -60,7 +57,7 @@ const getInitialValue = (currentUser) => {
     },
     {
       text: '[기술면접] React',
-      createdTime: new Date(),
+      createdTime: +new Date(),
       isCompleted: false,
       userId: currentUser,
       todos: [
@@ -73,7 +70,7 @@ const getInitialValue = (currentUser) => {
 
     {
       text: '[기술면접] 프론트엔드',
-      createdTime: new Date(),
+      createdTime: +new Date(),
       isCompleted: false,
       userId: currentUser,
       todos: [
