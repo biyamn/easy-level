@@ -62,6 +62,32 @@ const App = () => {
   const [selectedGoal, setSelectedGoal] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
   const [isCompleted, setIsCompleted] = useState([]);
+  const [status, setStatus] = useState([]);
+  const statusHandler = () => {
+    let statusArray = [];
+    goals.map((goal) => {
+      const filteredTodos = todos.filter((todo) => todo.goalId === goal.id);
+
+      const completedTodosLength = filteredTodos.filter(
+        (todo) => todo.isFinished === true
+      ).length;
+
+      const result = `${completedTodosLength} / ${filteredTodos.length} `;
+
+      statusArray.push({
+        id: goal.id,
+        status: result,
+        text: goal.text,
+        percent: Math.floor(
+          (completedTodosLength / filteredTodos.length) * 100
+        ),
+      });
+    });
+    console.log('status: ', status);
+    console.log('statusArray: ', statusArray);
+    setStatus(statusArray);
+  };
+
   const handleSelectedGoal = (id) => {
     if (id === selectedGoal) {
       setSelectedGoal(null);
@@ -171,6 +197,11 @@ const App = () => {
     return () => unsubscribe();
   }, []);
 
+  useEffect(() => {
+    statusHandler();
+  }, [todos]);
+
+  console.log('status in app: ', status);
   return (
     <div className={styles.App}>
       <Navbar
@@ -208,7 +239,7 @@ const App = () => {
             setIsCompleted={setIsCompleted}
           />
         ) : (
-          <Main />
+          <Main status={status} />
         )}
       </div>
     </div>

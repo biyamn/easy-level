@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-const Main = () => {
+const Main = ({ status }) => {
   const Title = () => {
     return (
       <TitleWrapper>
@@ -11,12 +11,18 @@ const Main = () => {
   };
 
   const Status = () => {
-    return (
-      <div>
-        <StatusText></StatusText>
-        <StatusDescription></StatusDescription>
-      </div>
-    );
+    const text = status.map((item) => {
+      console.log('item: ', item);
+      return (
+        <div key={item.id}>
+          <span>{item.text}</span>
+          <span>{item.status}</span>
+          <span>{item.percent}%</span>
+        </div>
+      );
+    });
+
+    return <StatusText>{text}</StatusText>;
   };
 
   return (
@@ -52,7 +58,7 @@ const TitleText = styled.h1`
   color: white;
 `;
 
-const StatusText = styled.h1`
+const StatusText = styled.div`
   color: white;
 `;
 
