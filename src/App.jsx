@@ -62,7 +62,6 @@ const App = () => {
   const [selectedGoal, setSelectedGoal] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
   const [isCompleted, setIsCompleted] = useState([]);
-
   const handleSelectedGoal = (id) => {
     if (id === selectedGoal) {
       setSelectedGoal(null);
@@ -79,13 +78,13 @@ const App = () => {
   // syncGoalItemWithFirestore, syncTodoItemWithFirestore: firestore에서 데이터를 가져와서 state에 저장
   // firebase에 데이터를 보내는 함수 아님. 가져와서 state에 저장하는 함수임
   // 그래서 여기서 바꿀 건 없음
-  const syncGoalItemWithFirestore = () => {
+  const syncGoalItemWithFirestore = async () => {
     const q = query(
       collection(db, 'goalItem'),
       where('userId', '==', currentUser),
       orderBy('createdTime', 'desc')
     );
-    getDocs(q).then((querySnapshot) => {
+    await getDocs(q).then((querySnapshot) => {
       const firestoreGoalItemList = [];
       querySnapshot.forEach((doc) => {
         firestoreGoalItemList.push({
@@ -100,13 +99,13 @@ const App = () => {
     });
   };
 
-  const syncTodoItemWithFirestore = () => {
+  const syncTodoItemWithFirestore = async () => {
     const q = query(
       collection(db, 'todoItem'),
       where('userId', '==', currentUser),
       orderBy('createdTime', 'desc')
     );
-    getDocs(q).then((querySnapshot) => {
+    await getDocs(q).then((querySnapshot) => {
       const firestoreTodoItemList = [];
       querySnapshot.forEach((doc) => {
         firestoreTodoItemList.push({
@@ -123,10 +122,14 @@ const App = () => {
     });
   };
 
+  useEffect(() => {
+    syncTodoItemWithFirestore();
+    syncGoalItemWithFirestore();
+  }, [currentUser]);
+
   // 여기를 추가했다
   useEffect(() => {
     // 맨 처음에 firebase에서 'goalItem' 데이터를 가져오는 쿼리를 작성함
-
     const initialValue = getInitialValue(currentUser);
     const q = query(
       collection(db, 'goalItem'),
@@ -148,21 +151,13 @@ const App = () => {
               goalId: goalResponse.id,
               answer: '이곳에 답변을 입력해주세요.',
               isFinished: false,
-              createdTime: new Date(),
+              createdTime: +new Date(),
               userId: currentUser,
             });
           });
         });
       }
     });
-  }, [currentUser]);
-
-  useEffect(() => {
-    syncTodoItemWithFirestore();
-  }, [currentUser]);
-
-  useEffect(() => {
-    syncGoalItemWithFirestore();
   }, [currentUser]);
 
   useEffect(() => {
