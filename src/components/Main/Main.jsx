@@ -1,5 +1,9 @@
 import React from 'react';
+import ProgressBar from 'react-bootstrap/ProgressBar';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import styled from 'styled-components';
+
 const Main = ({ status }) => {
   const Title = () => {
     return (
@@ -13,11 +17,13 @@ const Main = ({ status }) => {
   const Status = () => {
     const text = status.map((item) => {
       console.log('item: ', item);
+
       return (
         <div key={item.id}>
           <span>{item.text}</span>
           <span>{item.status}</span>
           <span>{item.percent}%</span>
+          <ProgressBar now={item.percent} label={`${item.percent}%`} />
         </div>
       );
     });
@@ -30,6 +36,7 @@ const Main = ({ status }) => {
       <Wrapper>
         <Title />
         <Status />
+        <ProgressBar animated now={45} />
       </Wrapper>
     </Container>
   );
