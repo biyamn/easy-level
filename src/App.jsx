@@ -4,8 +4,8 @@ import React, { useState, useEffect } from 'react';
 import styles from './App.module.css';
 import Todo from './components/Todo/Todo';
 import Goal from './components/Goal/Goal';
-import Navbar from './components/Navbar/Navbar';
-import Main from './components/Main/Main';
+import Navbar from './components/Navbar';
+import Main from './components/Main';
 import { initializeApp } from 'firebase/app';
 import getInitialValue from './utils/getInitialValue';
 
