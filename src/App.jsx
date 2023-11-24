@@ -73,14 +73,15 @@ const App = () => {
       ).length;
 
       const result = `${completedTodosLength} / ${filteredTodos.length} `;
-
+      const percent =
+        filteredTodos.length === 0
+          ? 0
+          : Math.floor((completedTodosLength / filteredTodos.length) * 100);
       statusArray.push({
         id: goal.id,
         status: result,
         text: goal.text,
-        percent: Math.floor(
-          (completedTodosLength / filteredTodos.length) * 100
-        ),
+        percent: percent,
       });
     });
     console.log('status: ', status);
