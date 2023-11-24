@@ -212,7 +212,7 @@ const Label = styled.label`
   }
 `;
 const Text = styled.div`
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: #1a202c;
   word-break: keep-all;
   overflow-wrap: anywhere;

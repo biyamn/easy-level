@@ -35,7 +35,7 @@ const Main = ({ status }) => {
 
 const Container = styled.div`
   display: flex;
-  flex: 3;
+  flex: 4;
   width: 100%;
   flex-direction: column;
   white-space: pre-line;

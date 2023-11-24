@@ -6,13 +6,34 @@
 
 .form {
   display: flex;
-  flex-basis: 50%;
+}
+
+.input {
+  width: 15rem;
+  height: 50px;
+  border-color: transparent;
+  background-color: #232934;
+  border-radius: 6px;
+  color: white;
+  font-size: 1rem;
+}
+
+.input:focus,
+.input.invalid:focus {
+  border: 2px solid #63c6ff;
+  outline: none;
+  background-color: #1b1e25;
+}
+
+.input.invalid {
+  border: 2px solid red;
+  background-color: #ff0a0a1e;
 }
 
 .button {
   font: inherit;
-  flex: 1;
   height: 50px;
+  width: 4rem;
   margin-left: 10px;
   border: 1px solid transparent;
   color: black;
@@ -33,29 +54,6 @@
   color: black;
 }
 
-.input {
-  flex: 3;
-  min-width: 80%;
-  height: 50px;
-  border-color: transparent;
-  background-color: #232934;
-  border-radius: 6px;
-  color: white;
-  font-size: 1.2rem;
-}
-
-.input:focus,
-.input.invalid:focus {
-  border: 2px solid #63c6ff;
-  outline: none;
-  background-color: #1b1e25;
-}
-
-.input.invalid {
-  border: 2px solid red;
-  background-color: #ff0a0a1e;
-}
-
 @media screen and (max-width: 768px) {
   .container {
     margin: 0 20%;
@@ -63,7 +61,7 @@
 
   .input {
     height: 45px;
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
 
   .button {
@@ -72,6 +70,6 @@
   }
 
   .input::placeholder {
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
 }

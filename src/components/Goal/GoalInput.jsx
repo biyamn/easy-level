@@ -48,7 +48,7 @@ const GoalInput = ({ onGoalSubmit }) => {
     };
 
     return (
-      <Box sx={{ minWidth: 120, mr: '10px', height: '50px' }}>
+      <Box sx={{ minWidth: 100, mr: '10px', height: '50px' }}>
         <FormControl
           variant="filled"
           sx={{
@@ -89,7 +89,7 @@ const GoalInput = ({ onGoalSubmit }) => {
           type="text"
           value={enteredGoal}
           onChange={handleGoalChange}
-          placeholder="상세 면접 종류를 추가해 주세요."
+          placeholder="상세 종류를 추가해 주세요."
         />
         <button className={styles.button} type="submit">
           <FontAwesomeIcon icon={faPlus} color="#1a202c" />

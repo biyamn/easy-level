@@ -2,18 +2,41 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 .form {
   display: flex;
-  flex-basis: 50%;
+  width: 60%;
+}
+
+.input {
+  width: 80%;
+  height: 50px;
+  border-color: transparent;
+  background-color: #232934;
+  border-radius: 6px;
+  font-size: 1rem;
+  color: white;
+}
+
+.input:focus,
+.input.invalid:focus {
+  border: 2px solid #63c6ff;
+  outline: none;
+  background-color: #1b1e25;
+}
+
+.input.invalid {
+  border: 2px solid red;
+  background-color: #ff0a0a1e;
 }
 
 .button {
   font: inherit;
-  flex: 1;
   height: 50px;
-  margin-left: 10px;
+  width: 5rem;
+  margin-left: 1.5rem;
   border: 1px solid transparent;
   color: black;
   background: #a8dcfa;
@@ -40,29 +63,6 @@
   background: #3b3b3b;
 }
 
-.input {
-  flex: 3;
-  min-width: 80%;
-  height: 50px;
-  border-color: transparent;
-  background-color: #232934;
-  border-radius: 6px;
-  font-size: 1.2rem;
-  color: white;
-}
-
-.input:focus,
-.input.invalid:focus {
-  border: 2px solid #63c6ff;
-  outline: none;
-  background-color: #1b1e25;
-}
-
-.input.invalid {
-  border: 2px solid red;
-  background-color: #ff0a0a1e;
-}
-
 @media screen and (max-width: 768px) {
   .container {
     margin: 0 20%;
@@ -74,11 +74,11 @@
   }
 
   .input::placeholder {
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
 
   .button {
     height: 45px;
-    font-size: 1rem;
+    font-size: 0rem;
   }
 }
