@@ -210,7 +210,7 @@ const App = () => {
         currentUser={currentUser}
         todayString={todayString}
       />
-      <div className={styles.box}>
+      <div className={styles.box} style={{ backgroundColor: '#1a202c' }}>
         <Goal
           db={db}
           goals={goals}

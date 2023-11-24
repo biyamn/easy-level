@@ -1,6 +1,5 @@
 import React from 'react';
-import ProgressBar from 'react-bootstrap/ProgressBar';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import Progress from './Progress';
 
 import styled from 'styled-components';
 
@@ -19,12 +18,12 @@ const Main = ({ status }) => {
       console.log('item: ', item);
 
       return (
-        <div key={item.id}>
-          <span>{item.text}</span>
-          <span>{item.status}</span>
-          <span>{item.percent}%</span>
-          <ProgressBar now={item.percent} label={`${item.percent}%`} />
-        </div>
+        <StatusWrapper key={item.id}>
+          <span style={{ color: 'white' }}>
+            {item.text} ({item.status})
+          </span>
+          <Progress now={item.percent} label={`${item.percent}%`} />
+        </StatusWrapper>
       );
     });
 
@@ -36,7 +35,6 @@ const Main = ({ status }) => {
       <Wrapper>
         <Title />
         <Status />
-        <ProgressBar animated now={45} />
       </Wrapper>
     </Container>
   );
@@ -55,6 +53,13 @@ const Wrapper = styled.div`
 `;
 
 const TitleWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const StatusWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
