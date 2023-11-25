@@ -11,6 +11,7 @@ import {
   query,
   where,
   getDocs,
+  serverTimestamp,
 } from 'firebase/firestore';
 
 const Goal = ({
@@ -53,7 +54,7 @@ const Goal = ({
     await addDoc(collection(db, 'goalItem'), {
       text: `[${enteredOption}] ${enteredGoal}`,
       isFinished: false,
-      createdTime: Math.floor(Date.now() / 1000),
+      createdTime: serverTimestamp(),
       userId: currentUser,
       isCompleted: false,
     });

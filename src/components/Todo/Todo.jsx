@@ -9,6 +9,7 @@ import {
   addDoc,
   deleteDoc,
   updateDoc,
+  serverTimestamp,
 } from 'firebase/firestore';
 
 const Todo = ({
@@ -48,7 +49,7 @@ const Todo = ({
       text: enteredTodo,
       answer: '이곳에 답변을 작성해 주세요.',
       isFinished: false,
-      createdTime: Math.floor(Date.now() / 1000),
+      createdTime: serverTimestamp(),
       goalId: selectedGoal,
       userId: currentUser,
     });
