@@ -149,6 +149,21 @@ const App = () => {
     });
   };
 
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setCurrentUser(user.uid);
+      } else {
+        setCurrentUser(null);
+      }
+    });
+    return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    statusHandler();
+  }, [todos]);
+
   // 여기를 추가했다
   useEffect(() => {
     // 맨 처음에 firebase에서 'goalItem' 데이터를 가져오는 쿼리를 작성함
@@ -183,27 +198,15 @@ const App = () => {
         });
       }
     });
-  }, [currentUser]);
 
-  useEffect(() => {
     syncTodoItemWithFirestore();
     syncGoalItemWithFirestore();
   }, [currentUser]);
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setCurrentUser(user.uid);
-      } else {
-        setCurrentUser(null);
-      }
-    });
-    return () => unsubscribe();
-  }, []);
-
-  useEffect(() => {
-    statusHandler();
-  }, [todos]);
+  // useEffect(() => {
+  //   syncTodoItemWithFirestore();
+  //   syncGoalItemWithFirestore();
+  // }, [currentUser]);
 
   console.log('status in app: ', status);
   return (
