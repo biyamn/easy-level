@@ -8,11 +8,7 @@ const Navbar = ({ auth, currentUser, todayString }) => {
 
   return (
     <Container>
-      <img
-        src="src\assets\logo.png"
-        width="200px"
-        style={{ margin: '0 2rem' }}
-      />
+      <img src="assets/logo.png" width="200px" style={{ margin: '0 2rem' }} />
       <Wrapper>
         <Date>{todayString}</Date>
         {button}

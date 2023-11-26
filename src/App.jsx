@@ -224,7 +224,7 @@ const App = () => {
           todayString={todayString}
         />
         <div className={styles.layout}>
-          <h3 style={{ marginBottom: '10%' }}>로그인이 필요합니다.</h3>
+          <h3 style={{ marginBottom: '30px' }}>로그인이 필요합니다.</h3>
           <Button onClick={() => signInWithPopup(auth, provider)}>
             로그인하기
           </Button>
