@@ -1,6 +1,22 @@
+.App {
+  min-height: 100vh;
+  background-color: #1a202c;
+  color: white;
+}
+
 .box {
   display: flex;
+  padding-top: 85px;
   width: 100%;
+}
+
+.layout {
+  text-align: center;
+  padding: 32px 0;
+}
+
+.needLogin h1 {
+  margin-bottom: 16px;
 }
 
 @media screen and (max-width: 768px) {

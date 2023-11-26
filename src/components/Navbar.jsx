@@ -1,19 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { signInWithRedirect, signOut } from 'firebase/auth';
+import { signOut } from 'firebase/auth';
 
-const Navbar = ({ provider, auth, currentUser, todayString }) => {
-  const loginButton = (
-    <Button
-      onClick={() => {
-        signInWithRedirect(auth, provider);
-      }}
-    >
-      로그인
-    </Button>
-  );
+const Navbar = ({ auth, currentUser, todayString }) => {
   const logoutButton = <Button onClick={() => signOut(auth)}>로그아웃</Button>;
-  const button = currentUser === null ? loginButton : logoutButton;
+  const button = currentUser !== null && logoutButton;
 
   return (
     <Container>
@@ -32,12 +23,13 @@ const Navbar = ({ provider, auth, currentUser, todayString }) => {
 
 const Container = styled.div`
   background-color: #1a202c;
-  position: sticky;
+  position: fixed;
+  z-index: 1;
   overflow: auto;
   top: 0;
   left: 0;
   width: 100%;
-  height: 10vh;
+  height: 85px;
   display: flex;
   justify-content: space-between;
   align-items: center;

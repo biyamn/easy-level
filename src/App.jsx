@@ -8,6 +8,8 @@ import Navbar from './components/Navbar';
 import Main from './components/Main';
 import { initializeApp } from 'firebase/app';
 import getInitialValue from './utils/getInitialValue';
+import { signInWithPopup } from 'firebase/auth';
+import { styled } from 'styled-components';
 
 import {
   getFirestore,
@@ -63,6 +65,7 @@ const App = () => {
   const [currentUser, setCurrentUser] = useState(null);
   const [isCompleted, setIsCompleted] = useState([]);
   const [status, setStatus] = useState([]);
+
   const statusHandler = () => {
     let statusArray = [];
     goals.map((goal) => {
@@ -158,7 +161,7 @@ const App = () => {
       }
     });
     return () => unsubscribe();
-  }, []);
+  }, [currentUser]);
 
   useEffect(() => {
     statusHandler();
@@ -166,6 +169,8 @@ const App = () => {
 
   // 여기를 추가했다
   useEffect(() => {
+    if (!currentUser) return;
+
     // 맨 처음에 firebase에서 'goalItem' 데이터를 가져오는 쿼리를 작성함
     const initialValue = getInitialValue(currentUser);
     const q = query(
@@ -174,39 +179,59 @@ const App = () => {
       orderBy('createdTime', 'asc')
     );
     // 쿼리로 데이터를 가져옴(getDocs)
-    getDocs(q).then((querySnapshot) => {
-      console.log('querySnapshot: ', querySnapshot);
-      // 가져온 goalItem이 없을 때. 즉 계정이 처음 만들어졌을 때
-      if (querySnapshot.size === 0) {
-        console.log('querySnapshot.size: ', querySnapshot.size);
-        // 구조분해할당으로 initialValue에서 todos와 ...goal을 나눠서 가져옴(goal은 꼭 goal이 아니어도 됨. 그냥 나머지라는 뜻임)
-        initialValue.forEach(async ({ todos, ...goal }) => {
-          console.log('todos: ', todos);
-          // goal을 추가하는 부분. 추가로 끝나는 . 게아니라 goalResponse라는 변수에 저장한다.
-          const goalResponse = await addDoc(collection(db, 'goalItem'), goal);
+    getDocs(q)
+      .then((querySnapshot) => {
+        // 가져온 goalItem이 없을 때. 즉 계정이 처음 만들어졌을 때
+        if (querySnapshot.size === 0) {
+          // 구조분해할당으로 initialValue에서 todos와 ...goal을 나눠서 가져옴(goal은 꼭 goal이 아니어도 됨. 그냥 나머지라는 뜻임)
+          return Promise.all(
+            initialValue.map(async ({ todos, ...goal }) => {
+              // goal을 추가하는 부분. 추가로 끝나는 . 게아니라 goalResponse라는 변수에 저장한다.
+              const goalResponse = await addDoc(
+                collection(db, 'goalItem'),
+                goal
+              );
 
-          // todo를 추가하는 부분. todos에서 id를 받아 todo의 goalId로 등록하여 firestore에 저장한다.
-          todos.forEach(async (todo) => {
-            await addDoc(collection(db, 'todoItem'), {
-              ...todo,
-              goalId: goalResponse.id,
-              answer: '이곳에 답변을 입력해주세요.',
-              isFinished: false,
-              userId: currentUser,
-            });
-          });
-        });
-      }
-    });
-
-    syncTodoItemWithFirestore();
-    syncGoalItemWithFirestore();
+              // todo를 추가하는 부분. todos에서 id를 받아 todo의 goalId로 등록하여 firestore에 저장한다.
+              await Promise.all(
+                todos.map(
+                  async (todo) =>
+                    await addDoc(collection(db, 'todoItem'), {
+                      ...todo,
+                      goalId: goalResponse.id,
+                      answer: '이곳에 답변을 입력해주세요.',
+                      isFinished: false,
+                      userId: currentUser,
+                    })
+                )
+              );
+            })
+          );
+        }
+      })
+      .finally(() => {
+        syncGoalItemWithFirestore();
+        syncTodoItemWithFirestore();
+      });
   }, [currentUser]);
 
-  // useEffect(() => {
-  //   syncTodoItemWithFirestore();
-  //   syncGoalItemWithFirestore();
-  // }, [currentUser]);
+  if (!currentUser) {
+    return (
+      <div className={styles.App}>
+        <Navbar
+          auth={auth}
+          currentUser={currentUser}
+          todayString={todayString}
+        />
+        <div className={styles.layout}>
+          <h1>로그인이 필요합니다.</h1>
+          <Button onClick={() => signInWithPopup(auth, provider)}>
+            로그인하기
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   console.log('status in app: ', status);
   return (
@@ -217,7 +242,7 @@ const App = () => {
         currentUser={currentUser}
         todayString={todayString}
       />
-      <div className={styles.box} style={{ backgroundColor: '#1a202c' }}>
+      <div className={styles.box}>
         <Goal
           db={db}
           goals={goals}
@@ -252,5 +277,17 @@ const App = () => {
     </div>
   );
 };
+
+const Button = styled.button`
+  background-color: transparent;
+  color: #a8dcfa;
+  border: none;
+  font-size: 1.5rem;
+  height: 3rem;
+  cursor: pointer;
+  margin: 0 2rem;
+  font-weight: bold;
+  padding: 0;
+`;
 
 export default App;
