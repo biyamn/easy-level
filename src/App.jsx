@@ -241,6 +241,8 @@ const App = () => {
         auth={auth}
         currentUser={currentUser}
         todayString={todayString}
+        selectedGoal={selectedGoal}
+        setSelectedGoal={setSelectedGoal}
       />
       <div className={styles.box}>
         <Goal

@@ -2,13 +2,24 @@ import React from 'react';
 import styled from 'styled-components';
 import { signOut } from 'firebase/auth';
 
-const Navbar = ({ auth, currentUser, todayString }) => {
+const Navbar = ({
+  auth,
+  currentUser,
+  todayString,
+  selectedGoal,
+  setSelectedGoal,
+}) => {
   const logoutButton = <Button onClick={() => signOut(auth)}>로그아웃</Button>;
   const button = currentUser !== null && logoutButton;
 
   return (
     <Container>
-      <img src="assets/logo.png" width="200px" style={{ margin: '0 2rem' }} />
+      <img
+        src="assets/logo.png"
+        width="200px"
+        style={{ margin: '0 2rem' }}
+        onClick={() => setSelectedGoal(null)}
+      />
       <Wrapper>
         <Date>{todayString}</Date>
         {button}
