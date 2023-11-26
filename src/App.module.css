@@ -12,7 +12,8 @@
 
 .layout {
   text-align: center;
-  padding: 32px 0;
+  height: 50%;
+  padding: 85px 0;
 }
 
 .needLogin h1 {
