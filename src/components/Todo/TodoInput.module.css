@@ -64,10 +64,6 @@
 }
 
 @media screen and (max-width: 768px) {
-  .container {
-    margin: 0 20%;
-  }
-
   .input {
     height: 45px;
     font-size: 1rem;
@@ -79,6 +75,6 @@
 
   .button {
     height: 45px;
-    font-size: 0rem;
+    font-size: 1rem;
   }
 }
