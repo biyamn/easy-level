@@ -82,18 +82,20 @@ const GoalInput = ({ onGoalSubmit }) => {
     <div className={styles.container}>
       <form className={styles.form} onSubmit={handleGoalSubmit}>
         <SelectType />
-        <input
-          className={
-            !isValid ? `${styles.input} ${styles.invalid}` : `${styles.input}`
-          }
-          type="text"
-          value={enteredGoal}
-          onChange={handleGoalChange}
-          placeholder="상세 종류를 추가해 주세요."
-        />
-        <button className={styles.button} type="submit">
-          <FontAwesomeIcon icon={faPlus} color="#1a202c" />
-        </button>
+        <div>
+          <input
+            className={
+              !isValid ? `${styles.input} ${styles.invalid}` : `${styles.input}`
+            }
+            type="text"
+            value={enteredGoal}
+            onChange={handleGoalChange}
+            placeholder="상세 종류를 추가해 주세요."
+          />
+          <button className={styles.button} type="submit">
+            <FontAwesomeIcon icon={faPlus} color="#1a202c" />
+          </button>
+        </div>
       </form>
     </div>
   );

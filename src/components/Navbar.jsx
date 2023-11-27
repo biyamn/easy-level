@@ -14,10 +14,9 @@ const Navbar = ({
 
   return (
     <Container>
-      <img
+      <Img
         src="assets/logo.png"
         width="200px"
-        style={{ margin: '0 2rem' }}
         onClick={() => setSelectedGoal(null)}
       />
       <Wrapper>
@@ -35,21 +34,31 @@ const Container = styled.div`
   overflow: auto;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   height: 85px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 768px) {
+    padding: 0 1rem;
+    height: 60px;
+  }
+`;
+
+const Img = styled.img`
+  margin: 0 2rem;
+  cursor: pointer;
+  @media (max-width: 768px) {
+    width: 100px;
+    margin: 0;
+  }
 `;
 
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
-  @media (max-width: 768px) {
-    display: none;
-  }
 `;
 
 const Date = styled.div`
@@ -57,6 +66,9 @@ const Date = styled.div`
   color: white;
   font-weight: bold;
   margin: 0 2rem;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const Button = styled.button`
@@ -69,6 +81,11 @@ const Button = styled.button`
   margin: 0 2rem;
   font-weight: bold;
   padding: 0;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    margin: 0;
+  }
 `;
 
 export default Navbar;

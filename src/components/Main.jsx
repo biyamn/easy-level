@@ -59,6 +59,10 @@ const StatusWrapper = styled.div`
 
 const TitleText = styled.h1`
   color: white;
+
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+  }
 `;
 
 export default Main;

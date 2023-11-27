@@ -56,10 +56,11 @@
 
 @media screen and (max-width: 768px) {
   .container {
-    margin: 0 20%;
+    margin: 0;
   }
 
   .input {
+    width: 10rem;
     height: 45px;
     font-size: 0.8rem;
   }
