@@ -24,6 +24,7 @@
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
     "react-slick": "^0.29.0",
+    "slick-carousel": "^1.8.1",
     "styled-components": "^6.0.9",
     "web-vitals": "^2.1.4"
   },
@@ -54,6 +55,7 @@
   },
   "devDependencies": {
     "@babel/preset-react": "^7.22.5",
+    "@types/react-slick": "^0.23.12",
     "@vitejs/plugin-react": "^4.0.4",
     "eslint": "^8.47.0",
     "eslint-plugin-react": "^7.33.2",
