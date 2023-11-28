@@ -48,14 +48,16 @@ const GoalInput = ({ onGoalSubmit }) => {
     };
 
     return (
-      <Box sx={{ minWidth: 100, mr: '10px', height: '50px' }}>
+      <Box sx={{ minWidth: 70, mr: '10px', height: '45px' }}>
         <FormControl
           variant="filled"
           sx={{
+            minWidth: 70,
             bgcolor: '#fff',
             borderRadius: '6px',
             marginBottom: '100px',
             color: 'white',
+            height: '45px',
           }}
           fullWidth
         >

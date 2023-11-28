@@ -10,7 +10,7 @@
 
 .input {
   width: 15rem;
-  height: 50px;
+  height: 45px;
   border-color: transparent;
   background-color: #232934;
   border-radius: 6px;
@@ -32,8 +32,8 @@
 
 .button {
   font: inherit;
-  height: 50px;
-  width: 4rem;
+  height: 45px;
+  width: 3rem;
   margin-left: 10px;
   border: 1px solid transparent;
   color: black;
@@ -61,16 +61,14 @@
 
   .input {
     width: 10rem;
-    height: 45px;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
   }
 
   .button {
-    height: 45px;
     font-size: 1rem;
   }
 
   .input::placeholder {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
   }
 }

@@ -12,7 +12,7 @@
 
 .input {
   width: 80%;
-  height: 50px;
+  height: 45px;
   border-color: transparent;
   background-color: #232934;
   border-radius: 6px;
@@ -34,7 +34,7 @@
 
 .button {
   font: inherit;
-  height: 50px;
+  height: 45px;
   width: 5rem;
   margin-left: 1.5rem;
   border: 1px solid transparent;
@@ -65,16 +65,19 @@
 
 @media screen and (max-width: 768px) {
   .input {
-    height: 45px;
-    font-size: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .form {
+    width: 75%;
   }
 
   .input::placeholder {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
   }
 
   .button {
-    height: 45px;
     font-size: 1rem;
+    margin-left: 0.5rem;
   }
 }

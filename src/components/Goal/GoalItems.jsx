@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from './GoalItems.module.css';
 import GoalItem from './GoalItem';
 import { Carousel } from 'react-bootstrap';
 import styled from 'styled-components';
@@ -23,7 +22,7 @@ const GoalItems = ({
   let backgroundColor = DISABLED;
 
   const mobileView = (
-    <Mobile className={styles.container}>
+    <Mobile>
       <Carousel slide={false}>
         {goals.map((goal) => {
           if (goal.id === selectedGoal) {
@@ -51,7 +50,7 @@ const GoalItems = ({
   );
 
   const desktopView = (
-    <Desktop className={styles.container}>
+    <Desktop>
       {goals.map((goal) => {
         if (goal.id === selectedGoal) {
           backgroundColor = ABLED;
@@ -84,12 +83,22 @@ const GoalItems = ({
 };
 
 const Desktop = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
   @media (max-width: 768px) {
     display: none;
   }
 `;
 
 const Mobile = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
   @media (min-width: 768px) {
     display: none;
   }
