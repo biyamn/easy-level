@@ -5,8 +5,6 @@ import { faTrashCan, faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 import { faCheck, faXmark } from '@fortawesome/free-solid-svg-icons';
 import styles from './GoalItem.module.css';
 
-import { Paper, Button } from '@mui/material';
-
 const GoalItem = ({
   goal,
   onGoalDelete,
@@ -76,83 +74,67 @@ const GoalItem = ({
       onClick={() => goalItemClicked(goal.id)}
       $backgroundColor={backgroundColor}
     >
-      <Paper>
-        {/* <Label $backgroundColor={backgroundColor}>
-        <input type="checkbox" readOnly checked={goal.isCompleted} />
-        <div>
-          <FontAwesomeIcon
-            icon={faCheck}
-            color="#1a202c"
-            className={styles.checkIcon}
-          />
-        </div>
-      </Label> */}
-        {goal.isCompleted ? <span>완료🥳</span> : <span>미완료</span>}
-        {isEditClicked ? (
-          <input
-            className={
-              isChecked ? `${styles.text} ${styles.checked}` : `${styles.text}`
-            }
-            value={updatedText}
-            onChange={(e) => setUpdatedText(e.target.value)}
-            ref={editedText}
-            placeholder={goal.text}
-          />
-        ) : (
-          <Text
-            className={
-              isChecked ? `${styles.text} ${styles.checked}` : `${styles.text}`
-            }
-          >
-            {goal.text}
-          </Text>
-        )}
-        <ActionButtons className="hover-visible">
-          <>
-            {!isEditClicked && !isDeleteClicked && (
-              <>
-                <button className={styles.editIcon} onClick={openEdit}>
-                  <FontAwesomeIcon
-                    icon={faPenToSquare}
-                    size="2x"
-                    color="white"
-                  />
-                </button>
-                <button className={styles.deleteIcon} onClick={openDelete}>
-                  <FontAwesomeIcon icon={faTrashCan} size="2x" color="white" />
-                </button>
-              </>
-            )}
-            {isEditClicked && !isDeleteClicked && (
-              <>
-                <button
-                  className={styles.submitIcon}
-                  onClick={submitEditedContent}
-                >
-                  <FontAwesomeIcon icon={faCheck} size="2x" color="white" />
-                </button>
-                <button className={styles.cancelIcon} onClick={cancelEdit}>
-                  <FontAwesomeIcon icon={faXmark} size="2x" color="white" />
-                </button>
-              </>
-            )}
-            {!isEditClicked && isDeleteClicked && (
-              <>
-                <button
-                  className={styles.submitIcon}
-                  onClick={() => onDelete(goal.id)}
-                >
-                  <FontAwesomeIcon icon={faCheck} size="2x" color="white" />
-                </button>
-                <button className={styles.cancelIcon} onClick={cancelDelete}>
-                  <FontAwesomeIcon icon={faXmark} size="2x" color="white" />
-                </button>
-              </>
-            )}
-          </>
-        </ActionButtons>
-        <Status className="hover-hidden">{status}</Status>
-      </Paper>
+      {goal.isCompleted ? <span>완료🥳</span> : <span>미완료</span>}
+      {isEditClicked ? (
+        <input
+          className={
+            isChecked ? `${styles.text} ${styles.checked}` : `${styles.text}`
+          }
+          value={updatedText}
+          onChange={(e) => setUpdatedText(e.target.value)}
+          ref={editedText}
+          placeholder={goal.text}
+        />
+      ) : (
+        <Text
+          className={
+            isChecked ? `${styles.text} ${styles.checked}` : `${styles.text}`
+          }
+        >
+          {goal.text}
+        </Text>
+      )}
+      <ActionButtons className="hover-visible">
+        <>
+          {!isEditClicked && !isDeleteClicked && (
+            <>
+              <button className={styles.editIcon} onClick={openEdit}>
+                <FontAwesomeIcon icon={faPenToSquare} size="2x" color="white" />
+              </button>
+              <button className={styles.deleteIcon} onClick={openDelete}>
+                <FontAwesomeIcon icon={faTrashCan} size="2x" color="white" />
+              </button>
+            </>
+          )}
+          {isEditClicked && !isDeleteClicked && (
+            <>
+              <button
+                className={styles.submitIcon}
+                onClick={submitEditedContent}
+              >
+                <FontAwesomeIcon icon={faCheck} size="2x" color="white" />
+              </button>
+              <button className={styles.cancelIcon} onClick={cancelEdit}>
+                <FontAwesomeIcon icon={faXmark} size="2x" color="white" />
+              </button>
+            </>
+          )}
+          {!isEditClicked && isDeleteClicked && (
+            <>
+              <button
+                className={styles.submitIcon}
+                onClick={() => onDelete(goal.id)}
+              >
+                <FontAwesomeIcon icon={faCheck} size="2x" color="white" />
+              </button>
+              <button className={styles.cancelIcon} onClick={cancelDelete}>
+                <FontAwesomeIcon icon={faXmark} size="2x" color="white" />
+              </button>
+            </>
+          )}
+        </>
+      </ActionButtons>
+      <Status className="hover-hidden">{status}</Status>
     </Container>
   );
 };

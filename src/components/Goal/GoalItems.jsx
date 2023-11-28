@@ -1,9 +1,7 @@
 import React from 'react';
 import styles from './GoalItems.module.css';
 import GoalItem from './GoalItem';
-
-import Carousel from 'react-material-ui-carousel';
-import { Paper, Button } from '@mui/material';
+import { Carousel } from 'react-bootstrap';
 
 const GoalItems = ({
   goals,
@@ -24,29 +22,31 @@ const GoalItems = ({
   let backgroundColor = DISABLED;
 
   return (
-    <Carousel>
-      <div className={styles.container}>
+    <div className={styles.container}>
+      <Carousel fade>
         {goals.map((goal) => {
           if (goal.id === selectedGoal) {
             backgroundColor = ABLED;
           } else {
             backgroundColor = DISABLED;
           }
+          console.log(goal.id);
           return (
-            <GoalItem
-              key={goal.id}
-              goal={goal}
-              todos={todos}
-              onGoalDelete={handleGoalDelete}
-              onGoalEdit={handleGoalEdit}
-              onSelectGoal={handleSelectedGoal}
-              backgroundColor={backgroundColor}
-              selectedGoal={selectedGoal}
-            />
+            <Carousel.Item key={goal.id}>
+              <GoalItem
+                goal={goal}
+                todos={todos}
+                onGoalDelete={handleGoalDelete}
+                onGoalEdit={handleGoalEdit}
+                onSelectGoal={handleSelectedGoal}
+                backgroundColor={backgroundColor}
+                selectedGoal={selectedGoal}
+              />
+            </Carousel.Item>
           );
         })}
-      </div>
-    </Carousel>
+      </Carousel>
+    </div>
   );
 };
 
