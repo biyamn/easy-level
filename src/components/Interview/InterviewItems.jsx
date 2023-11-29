@@ -4,18 +4,19 @@ import { Carousel } from 'react-bootstrap';
 import styled from 'styled-components';
 
 const InterviewItems = ({
-  goals,
-  onGoalDelete,
-  onGoalEdit,
-  onSelectGoal,
-  selectedGoal,
-  todos,
+  interviews,
+  onInterviewDelete,
+  onInterviewEdit,
+  onSelectInterview,
+  selectedInterview,
+  questions,
 }) => {
-  const handleGoalDelete = (id) => onGoalDelete(id);
+  const handleInterviewDelete = (id) => onInterviewDelete(id);
 
-  const handleGoalEdit = (updatedText, id) => onGoalEdit(updatedText, id);
+  const handleInterviewEdit = (updatedText, id) =>
+    onInterviewEdit(updatedText, id);
 
-  const handleSelectedGoal = (id) => onSelectGoal(id);
+  const handleSelectedInterview = (id) => onSelectInterview(id);
 
   const DISABLED = '#adb3bb';
   const ABLED = '#a8dcfa';
@@ -24,24 +25,24 @@ const InterviewItems = ({
   const mobileView = (
     <Mobile>
       <Carousel slide={true} interval={null}>
-        {goals.map((goal) => {
-          if (goal.id === selectedGoal) {
+        {interviews.map((interview) => {
+          if (interview.id === selectedInterview) {
             backgroundColor = ABLED;
           } else {
             backgroundColor = DISABLED;
           }
-          console.log(goal.id);
+          console.log(interview.id);
           return (
-            <Carousel.Item key={goal.id}>
+            <Carousel.Item key={interview.id}>
               <div style={{ padding: '2rem' }}>
                 <InterviewItem
-                  goal={goal}
-                  todos={todos}
-                  onGoalDelete={handleGoalDelete}
-                  onGoalEdit={handleGoalEdit}
-                  onSelectGoal={handleSelectedGoal}
+                  interview={interview}
+                  questions={questions}
+                  onInterviewDelete={handleInterviewDelete}
+                  onInterviewEdit={handleInterviewEdit}
+                  onSelectInterview={handleSelectedInterview}
                   backgroundColor={backgroundColor}
-                  selectedGoal={selectedGoal}
+                  selectedInterview={selectedInterview}
                 />
               </div>
             </Carousel.Item>
@@ -53,23 +54,23 @@ const InterviewItems = ({
 
   const desktopView = (
     <Desktop>
-      {goals.map((goal) => {
-        if (goal.id === selectedGoal) {
+      {interviews.map((interview) => {
+        if (interview.id === selectedInterview) {
           backgroundColor = ABLED;
         } else {
           backgroundColor = DISABLED;
         }
-        console.log(goal.id);
+        console.log(interview.id);
         return (
           <InterviewItem
-            key={goal.id}
-            goal={goal}
-            todos={todos}
-            onGoalDelete={handleGoalDelete}
-            onGoalEdit={handleGoalEdit}
-            onSelectGoal={handleSelectedGoal}
+            key={interview.id}
+            interview={interview}
+            questions={questions}
+            onInterviewDelete={handleInterviewDelete}
+            onInterviewEdit={handleInterviewEdit}
+            onSelectInterview={handleSelectedInterview}
             backgroundColor={backgroundColor}
-            selectedGoal={selectedGoal}
+            selectedInterview={selectedInterview}
           />
         );
       })}

@@ -6,12 +6,12 @@ import { faCheck, faXmark } from '@fortawesome/free-solid-svg-icons';
 import styles from './InterviewItem.module.css';
 
 const InterviewItem = ({
-  goal,
-  onGoalDelete,
-  onGoalEdit,
-  onSelectGoal,
+  interview,
+  onInterviewDelete,
+  onInterviewEdit,
+  onSelectInterview,
   backgroundColor,
-  todos,
+  questions,
 }) => {
   const editedText = useRef(null);
 
@@ -27,7 +27,7 @@ const InterviewItem = ({
 
     setUpdatedText('');
     setIsEditClicked(false);
-    onGoalEdit(updatedText, goal.id);
+    onInterviewEdit(updatedText, interview.id);
   };
 
   const openEdit = () => {
@@ -49,30 +49,32 @@ const InterviewItem = ({
   };
 
   const onDelete = (id) => {
-    onGoalDelete(id);
+    onInterviewDelete(id);
   };
 
-  const goalItemClicked = (id) => {
-    onSelectGoal(id);
+  const interviewItemClicked = (id) => {
+    onSelectInterview(id);
   };
 
-  const isChecked = goal.isFinished;
+  const isChecked = interview.isFinished;
 
-  // 서버에서 가져온 todos 목록에서 현재 goal에 해당하는 todo만 가져옴
-  const filteredTodos = todos.filter((todo) => todo.goalId === goal.id);
+  // 서버에서 가져온 questions 목록에서 현재 interview에 해당하는 question만 가져옴
+  const filteredQuestions = questions.filter(
+    (question) => question.interviewId === interview.id
+  );
 
-  const completedTodosLength = filteredTodos.filter(
-    (todo) => todo.isFinished === true
+  const completedQuestionsLength = filteredQuestions.filter(
+    (question) => question.isFinished === true
   ).length;
 
-  const status = `${completedTodosLength} / ${filteredTodos.length} `;
+  const status = `${completedQuestionsLength} / ${filteredQuestions.length} `;
 
   return (
     <Container
-      onClick={() => goalItemClicked(goal.id)}
+      onClick={() => interviewItemClicked(interview.id)}
       $backgroundColor={backgroundColor}
     >
-      {goal.isCompleted ? <span>완료🥳</span> : <span>미완료</span>}
+      {interview.isCompleted ? <span>완료🥳</span> : <span>미완료</span>}
       {isEditClicked ? (
         <input
           className={
@@ -81,7 +83,7 @@ const InterviewItem = ({
           value={updatedText}
           onChange={(e) => setUpdatedText(e.target.value)}
           ref={editedText}
-          placeholder={goal.text}
+          placeholder={interview.text}
         />
       ) : (
         <Text
@@ -89,7 +91,7 @@ const InterviewItem = ({
             isChecked ? `${styles.text} ${styles.checked}` : `${styles.text}`
           }
         >
-          {goal.text}
+          {interview.text}
         </Text>
       )}
       <ActionButtons className="hover-visible">
@@ -121,7 +123,7 @@ const InterviewItem = ({
             <>
               <button
                 className={styles.submitIcon}
-                onClick={() => onDelete(goal.id)}
+                onClick={() => onDelete(interview.id)}
               >
                 <FontAwesomeIcon icon={faCheck} size="2x" color="white" />
               </button>

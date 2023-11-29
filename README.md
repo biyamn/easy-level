@@ -5,7 +5,7 @@
 <div align="center">
   <img src='https://user-images.githubusercontent.com/101965666/221892947-4d9a9650-658b-4042-b092-d77f1a95b0f6.PNG' width="60%"/>
 
-**배포 링크**: https://todolist.biyamn.dev
+**배포 링크**: https://questionlist.biyamn.dev
 
 </div>
 
@@ -33,9 +33,9 @@ $ npm run dev
 ### 목표, 투두리스트 CRUD
 
 - Cloud Firestore를 활용하여 실시간 CRUD (Create, Read, Update, Delete) 기능을 구현하였습니다.
-- goal과 각 goal을 이루기 위한 todo를 작성할 수 있습니다.
-- 수정 아이콘을 눌러 goal과 todo를 수정할 수 있습니다. 수정 버튼 클릭시 placeholder에 기존의 goal과 todo가 표시됩니다. 수정 아이콘을 누르면 수정/삭제 아이콘이 ✅/❌ 버튼으로 변경되며, ✅ 버튼을 누르면 수정이 완료되고 ❌ 버튼을 누르면 수정이 취소됩니다.
-- 삭제 아이콘을 눌러 goal과 todo를 삭제할 수 있습니다. 삭제 버튼 클릭시 수정/삭제 아이콘이 ✅/❌ 버튼으로 변경되며, ✅ 버튼을 누르면 삭제가 완료되고 ❌ 버튼을 누르면 삭제가 취소됩니다.
+- interview과 각 interview을 이루기 위한 question를 작성할 수 있습니다.
+- 수정 아이콘을 눌러 interview과 question를 수정할 수 있습니다. 수정 버튼 클릭시 placeholder에 기존의 interview과 question가 표시됩니다. 수정 아이콘을 누르면 수정/삭제 아이콘이 ✅/❌ 버튼으로 변경되며, ✅ 버튼을 누르면 수정이 완료되고 ❌ 버튼을 누르면 수정이 취소됩니다.
+- 삭제 아이콘을 눌러 interview과 question를 삭제할 수 있습니다. 삭제 버튼 클릭시 수정/삭제 아이콘이 ✅/❌ 버튼으로 변경되며, ✅ 버튼을 누르면 삭제가 완료되고 ❌ 버튼을 누르면 삭제가 취소됩니다.
 
 | ![추가하기](https://github.com/biyamn/Quiz-App/assets/101965666/1b8b7a8c-bd1e-4391-9ca5-af6748a0a679) | ![완료하기](https://github.com/biyamn/Quiz-App/assets/101965666/6518aa04-d2e6-4423-8c60-ff361b6c40ab) |
 | :---------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------: |
@@ -95,16 +95,16 @@ $ npm run dev
  ┣ 📂components
  ┃ ┣ 📂Navbar
  ┃ ┃ ┗ 📜Navbar.jsx
- ┃ ┣ 📂Goal
- ┃ ┃ ┣ 📜Goal.jsx
- ┃ ┃ ┣ 📜GoalInput.jsx
- ┃ ┃ ┣ 📜GoalItem.jsx
- ┃ ┃ ┗ 📜GoalItems.jsx
- ┃ ┗ 📂Todo
- ┃ ┃ ┣ 📜Todo.jsx
- ┃ ┃ ┣ 📜TodoInput.jsx
- ┃ ┃ ┣ 📜TodoItem.jsx
- ┃ ┃ ┗ 📜TodoItems.jsx
+ ┃ ┣ 📂Interview
+ ┃ ┃ ┣ 📜Interview.jsx
+ ┃ ┃ ┣ 📜InterviewInput.jsx
+ ┃ ┃ ┣ 📜InterviewItem.jsx
+ ┃ ┃ ┗ 📜InterviewItems.jsx
+ ┃ ┗ 📂Question
+ ┃ ┃ ┣ 📜Question.jsx
+ ┃ ┃ ┣ 📜QuestionInput.jsx
+ ┃ ┃ ┣ 📜QuestionItem.jsx
+ ┃ ┃ ┗ 📜QuestionItems.jsx
  ┣ 📜App.jsx
  ┗ 📜main.jsx
 ```

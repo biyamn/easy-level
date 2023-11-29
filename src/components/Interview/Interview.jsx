@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Interview.module.css';
-import GoalInput from './InterviewInput';
-import GoalItems from './InterviewItems';
+import InterviewInput from './InterviewInput';
+import InterviewItems from './InterviewItems';
 import {
   collection,
   addDoc,
@@ -15,58 +15,58 @@ import {
 } from 'firebase/firestore';
 
 const Interview = ({
-  goals,
-  todos,
-  setGoals,
+  interviews,
+  questions,
+  setInterviews,
   db,
-  syncGoalItemWithFirestore,
-  syncTodoItemWithFirestore,
-  onSelectGoal,
-  selectedGoal,
+  syncInterviewItemWithFirestore,
+  syncQuestionItemWithFirestore,
+  onSelectInterview,
+  selectedInterview,
   currentUser,
   isCompleted,
   setIsCompleted,
 }) => {
-  const handleGoalEdit = async (updatedText, id) => {
-    setGoals(
-      goals.map((goal) => {
-        if (goal.id === id) {
+  const handleInterviewEdit = async (updatedText, id) => {
+    setInterviews(
+      interviews.map((interview) => {
+        if (interview.id === id) {
           return {
-            ...goal,
+            ...interview,
             text: updatedText,
           };
         }
-        return goal;
+        return interview;
       })
     );
     handleEditSync(updatedText, id);
   };
 
   const handleEditSync = async (updatedText, id) => {
-    const goalItemRef = doc(db, 'goalItem', id);
-    await updateDoc(goalItemRef, {
+    const interviewItemRef = doc(db, 'interviewItem', id);
+    await updateDoc(interviewItemRef, {
       text: updatedText,
     });
-    syncGoalItemWithFirestore();
+    syncInterviewItemWithFirestore();
   };
 
-  const handleGoalSubmit = async (enteredOption, enteredGoal) => {
-    await addDoc(collection(db, 'goalItem'), {
-      text: `[${enteredOption}] ${enteredGoal}`,
+  const handleInterviewSubmit = async (enteredOption, enteredInterview) => {
+    await addDoc(collection(db, 'interviewItem'), {
+      text: `[${enteredOption}] ${enteredInterview}`,
       isFinished: false,
       createdTime: serverTimestamp(),
       userId: currentUser,
       isCompleted: false,
     });
 
-    syncGoalItemWithFirestore();
+    syncInterviewItemWithFirestore();
     const q = query(
-      collection(db, 'goalItem'),
+      collection(db, 'interviewItem'),
       where('userId', '==', currentUser)
     );
     getDocs(q).then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        if (doc.data().text === enteredGoal) {
+        if (doc.data().text === enteredInterview) {
           setIsCompleted([
             ...isCompleted,
             {
@@ -79,13 +79,13 @@ const Interview = ({
     });
   };
 
-  const handleGoalDelete = async (id) => {
-    const goalItemRef = doc(db, 'goalItem', id);
-    await deleteDoc(goalItemRef);
+  const handleInterviewDelete = async (id) => {
+    const interviewItemRef = doc(db, 'interviewItem', id);
+    await deleteDoc(interviewItemRef);
 
     const q = query(
-      collection(db, 'todoItem'),
-      where('goalId', '==', id),
+      collection(db, 'questionItem'),
+      where('interviewId', '==', id),
       where('userId', '==', currentUser)
     );
 
@@ -95,26 +95,26 @@ const Interview = ({
       });
     });
 
-    syncGoalItemWithFirestore();
-    syncTodoItemWithFirestore();
+    syncInterviewItemWithFirestore();
+    syncQuestionItemWithFirestore();
   };
 
-  const handleSelectedGoal = (id) => {
-    onSelectGoal(id);
+  const handleSelectedInterview = (id) => {
+    onSelectInterview(id);
   };
 
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>면접 종류</h1>
-      <GoalInput onGoalSubmit={handleGoalSubmit} />
-      <GoalItems
-        goals={goals}
-        todos={todos}
-        onGoalEdit={handleGoalEdit}
-        onGoalDelete={handleGoalDelete}
+      <InterviewInput onInterviewSubmit={handleInterviewSubmit} />
+      <InterviewItems
+        interviews={interviews}
+        questions={questions}
+        onInterviewEdit={handleInterviewEdit}
+        onInterviewDelete={handleInterviewDelete}
         db={db}
-        onSelectGoal={handleSelectedGoal}
-        selectedGoal={selectedGoal}
+        onSelectInterview={handleSelectedInterview}
+        selectedInterview={selectedInterview}
       />
     </div>
   );

@@ -4,26 +4,26 @@ import styles from './QuestionInput.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
-const QuestionInput = ({ onTodoSubmit }) => {
-  const [enteredTodo, setEnteredTodo] = useState('');
+const QuestionInput = ({ onQuestionSubmit }) => {
+  const [enteredQuestion, setEnteredQuestion] = useState('');
   const [isValid, setIsValid] = useState(true);
 
-  const goalChangeHandler = (e) => {
-    setEnteredTodo(e.target.value);
+  const interviewChangeHandler = (e) => {
+    setEnteredQuestion(e.target.value);
     setIsValid(true);
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (enteredTodo.trim() === '') {
+    if (enteredQuestion.trim() === '') {
       setIsValid(false);
-      setEnteredTodo('');
+      setEnteredQuestion('');
       return;
     }
     setIsValid(true);
 
-    onTodoSubmit(enteredTodo);
-    setEnteredTodo('');
+    onQuestionSubmit(enteredQuestion);
+    setEnteredQuestion('');
   };
 
   return (
@@ -34,8 +34,8 @@ const QuestionInput = ({ onTodoSubmit }) => {
             !isValid ? `${styles.input} ${styles.invalid}` : `${styles.input}`
           }
           type="text"
-          value={enteredTodo}
-          onChange={goalChangeHandler}
+          value={enteredQuestion}
+          onChange={interviewChangeHandler}
           placeholder="예상 질문을 추가해 주세요."
         />
         <button className={styles.button} type="submit">

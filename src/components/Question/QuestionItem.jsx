@@ -13,14 +13,19 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import styled from 'styled-components';
 
-const QuestionItem = ({ todo, onTodoDelete, onTodoEdit, onTodoCheck }) => {
+const QuestionItem = ({
+  question,
+  onQuestionDelete,
+  onQuestionEdit,
+  onQuestionCheck,
+}) => {
   const editedText = useRef(null);
   const [value, setValue] = useState('');
   const [isEditClicked, setIsEditClicked] = useState(false);
   const [isDeleteClicked, setIsDeleteClicked] = useState(false);
 
-  // firestore에서 todoItem의 answer를 가져옴
-  const answer = todo.answer;
+  // firestore에서 questionItem의 answer를 가져옴
+  const answer = question.answer;
 
   const submitEditedContent = () => {
     if (value === '') {
@@ -29,7 +34,7 @@ const QuestionItem = ({ todo, onTodoDelete, onTodoEdit, onTodoCheck }) => {
     }
 
     setIsEditClicked(false);
-    onTodoEdit(value, todo.id);
+    onQuestionEdit(value, question.id);
 
     setValue(value);
   };
@@ -52,14 +57,14 @@ const QuestionItem = ({ todo, onTodoDelete, onTodoEdit, onTodoCheck }) => {
   };
 
   const onDelete = (id) => {
-    onTodoDelete(id);
+    onQuestionDelete(id);
   };
 
   const onCheck = (id) => {
-    onTodoCheck(id);
+    onQuestionCheck(id);
   };
 
-  const isChecked = todo.isFinished;
+  const isChecked = question.isFinished;
 
   return (
     <Accordion
@@ -78,8 +83,8 @@ const QuestionItem = ({ todo, onTodoDelete, onTodoEdit, onTodoCheck }) => {
         <label className={styles.checkboxLabel}>
           <input
             type="checkbox"
-            onChange={() => onCheck(todo.id)}
-            checked={todo.isFinished}
+            onChange={() => onCheck(question.id)}
+            checked={question.isFinished}
           />
           <div>
             <FontAwesomeIcon
@@ -94,7 +99,7 @@ const QuestionItem = ({ todo, onTodoDelete, onTodoEdit, onTodoCheck }) => {
             isChecked ? `${styles.text} ${styles.checked}` : `${styles.text}`
           }
         >
-          {todo.text}
+          {question.text}
         </div>
       </AccordionSummary>
       <AccordionDetails>
@@ -123,7 +128,7 @@ const QuestionItem = ({ todo, onTodoDelete, onTodoEdit, onTodoCheck }) => {
           </>
         ) : !isEditClicked && isDeleteClicked ? (
           <>
-            <Button onClick={() => onDelete(todo.id)}>
+            <Button onClick={() => onDelete(question.id)}>
               <FontAwesomeIcon icon={faCheck} size="2x" color="#000000" />
             </Button>
             <Button onClick={cancelDelete}>

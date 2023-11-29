@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { signOut } from 'firebase/auth';
 
-const Header = ({ auth, currentUser, todayString, setSelectedGoal }) => {
+const Header = ({ auth, currentUser, todayString, setSelectedInterview }) => {
   const logoutButton = <Button onClick={() => signOut(auth)}>로그아웃</Button>;
   const button = currentUser !== null && logoutButton;
 
@@ -11,7 +11,7 @@ const Header = ({ auth, currentUser, todayString, setSelectedGoal }) => {
       <Img
         src="assets/logo.png"
         width="200px"
-        onClick={() => setSelectedGoal(null)}
+        onClick={() => setSelectedInterview(null)}
       />
       <Wrapper>
         <Date>{todayString}</Date>

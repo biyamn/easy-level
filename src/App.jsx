@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import styles from './App.module.css';
-import Todo from './components/Question/Question';
-import Goal from './components/Interview/Interview';
+import Question from './components/Question/Question';
+import Interview from './components/Interview/Interview';
 import Navbar from './components/Header';
 import Main from './components/Status';
 import { initializeApp } from 'firebase/app';
@@ -59,31 +59,35 @@ const day = WEEKDAY[today.getDay()];
 const todayString = `${year}년 ${month}월 ${date}일 (${day})`;
 
 const App = () => {
-  const [todos, setTodos] = useState([]);
-  const [goals, setGoals] = useState([]);
-  const [selectedGoal, setSelectedGoal] = useState(null);
+  const [questions, setQuestions] = useState([]);
+  const [interviews, setInterviews] = useState([]);
+  const [selectedInterview, setSelectedInterview] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
   const [isCompleted, setIsCompleted] = useState([]);
   const [status, setStatus] = useState([]);
 
   const statusHandler = () => {
     let statusArray = [];
-    goals.map((goal) => {
-      const filteredTodos = todos.filter((todo) => todo.goalId === goal.id);
+    interviews.map((interview) => {
+      const filteredQuestions = questions.filter(
+        (question) => question.interviewId === interview.id
+      );
 
-      const completedTodosLength = filteredTodos.filter(
-        (todo) => todo.isFinished === true
+      const completedQuestionsLength = filteredQuestions.filter(
+        (question) => question.isFinished === true
       ).length;
 
-      const result = `${completedTodosLength} / ${filteredTodos.length} `;
+      const result = `${completedQuestionsLength} / ${filteredQuestions.length} `;
       const percent =
-        filteredTodos.length === 0
+        filteredQuestions.length === 0
           ? 0
-          : Math.floor((completedTodosLength / filteredTodos.length) * 100);
+          : Math.floor(
+              (completedQuestionsLength / filteredQuestions.length) * 100
+            );
       statusArray.push({
-        id: goal.id,
+        id: interview.id,
         status: result,
-        text: goal.text,
+        text: interview.text,
         percent: percent,
       });
     });
@@ -92,32 +96,32 @@ const App = () => {
     setStatus(statusArray);
   };
 
-  const handleSelectedGoal = (id) => {
-    if (id === selectedGoal) {
-      setSelectedGoal(null);
+  const handleSelectedInterview = (id) => {
+    if (id === selectedInterview) {
+      setSelectedInterview(null);
     } else {
-      setSelectedGoal(id);
+      setSelectedInterview(id);
     }
   };
 
   // 초기값 설정
-  // 아예 속성에 todos를 넣어버린다(firestore에는 없음)
-  // 여기 todos에는 goalId가 없음
-  // goal, todo에 id도 모두 없음(firestore가 만들어 줄 거임)
+  // 아예 속성에 questions를 넣어버린다(firestore에는 없음)
+  // 여기 questions에는 interviewId가 없음
+  // interview, question에 id도 모두 없음(firestore가 만들어 줄 거임)
 
-  // syncGoalItemWithFirestore, syncTodoItemWithFirestore: firestore에서 데이터를 가져와서 state에 저장
+  // syncInterviewItemWithFirestore, syncQuestionItemWithFirestore: firestore에서 데이터를 가져와서 state에 저장
   // firebase에 데이터를 보내는 함수 아님. 가져와서 state에 저장하는 함수임
   // 그래서 여기서 바꿀 건 없음
-  const syncGoalItemWithFirestore = async () => {
+  const syncInterviewItemWithFirestore = async () => {
     const q = query(
-      collection(db, 'goalItem'),
+      collection(db, 'interviewItem'),
       where('userId', '==', currentUser),
       orderBy('createdTime', 'asc')
     );
     await getDocs(q).then((querySnapshot) => {
-      const firestoreGoalItemList = [];
+      const firestoreInterviewItemList = [];
       querySnapshot.forEach((doc) => {
-        firestoreGoalItemList.push({
+        firestoreInterviewItemList.push({
           id: doc.id,
           text: doc.data().text,
           createdTime: doc.data().createdTime,
@@ -125,30 +129,30 @@ const App = () => {
           userId: doc.data().userId,
         });
       });
-      setGoals(firestoreGoalItemList);
+      setInterviews(firestoreInterviewItemList);
     });
   };
 
-  const syncTodoItemWithFirestore = async () => {
+  const syncQuestionItemWithFirestore = async () => {
     const q = query(
-      collection(db, 'todoItem'),
+      collection(db, 'questionItem'),
       where('userId', '==', currentUser),
       orderBy('createdTime', 'asc')
     );
     await getDocs(q).then((querySnapshot) => {
-      const firestoreTodoItemList = [];
+      const firestoreQuestionItemList = [];
       querySnapshot.forEach((doc) => {
-        firestoreTodoItemList.push({
+        firestoreQuestionItemList.push({
           id: doc.id,
           text: doc.data().text,
           answer: doc.data().answer,
           isFinished: doc.data().isFinished,
           createdTime: doc.data().createdTime,
-          goalId: doc.data().goalId,
+          interviewId: doc.data().interviewId,
           userId: doc.data().userId,
         });
       });
-      setTodos(firestoreTodoItemList);
+      setQuestions(firestoreQuestionItemList);
     });
   };
 
@@ -165,40 +169,40 @@ const App = () => {
 
   useEffect(() => {
     statusHandler();
-  }, [todos]);
+  }, [questions]);
 
   // 여기를 추가했다
   useEffect(() => {
     if (!currentUser) return;
 
-    // 맨 처음에 firebase에서 'goalItem' 데이터를 가져오는 쿼리를 작성함
+    // 맨 처음에 firebase에서 'interviewItem' 데이터를 가져오는 쿼리를 작성함
     const initialValue = getInitialValue(currentUser);
     const q = query(
-      collection(db, 'goalItem'),
+      collection(db, 'interviewItem'),
       where('userId', '==', currentUser),
       orderBy('createdTime', 'asc')
     );
     // 쿼리로 데이터를 가져옴(getDocs)
     getDocs(q)
       .then((querySnapshot) => {
-        // 가져온 goalItem이 없을 때. 즉 계정이 처음 만들어졌을 때
+        // 가져온 interviewItem이 없을 때. 즉 계정이 처음 만들어졌을 때
         if (querySnapshot.size === 0) {
-          // 구조분해할당으로 initialValue에서 todos와 ...goal을 나눠서 가져옴(goal은 꼭 goal이 아니어도 됨. 그냥 나머지라는 뜻임)
+          // 구조분해할당으로 initialValue에서 questions와 ...interview을 나눠서 가져옴(interview은 꼭 interview이 아니어도 됨. 그냥 나머지라는 뜻임)
           return Promise.all(
-            initialValue.map(async ({ todos, ...goal }) => {
-              // goal을 추가하는 부분. 추가로 끝나는 . 게아니라 goalResponse라는 변수에 저장한다.
-              const goalResponse = await addDoc(
-                collection(db, 'goalItem'),
-                goal
+            initialValue.map(async ({ questions, ...interview }) => {
+              // interview을 추가하는 부분. 추가로 끝나는 . 게아니라 interviewResponse라는 변수에 저장한다.
+              const interviewResponse = await addDoc(
+                collection(db, 'interviewItem'),
+                interview
               );
 
-              // todo를 추가하는 부분. todos에서 id를 받아 todo의 goalId로 등록하여 firestore에 저장한다.
+              // question를 추가하는 부분. questions에서 id를 받아 question의 interviewId로 등록하여 firestore에 저장한다.
               await Promise.all(
-                todos.map(
-                  async (todo) =>
-                    await addDoc(collection(db, 'todoItem'), {
-                      ...todo,
-                      goalId: goalResponse.id,
+                questions.map(
+                  async (question) =>
+                    await addDoc(collection(db, 'questionItem'), {
+                      ...question,
+                      interviewId: interviewResponse.id,
                       answer: '이곳에 답변을 입력해주세요.',
                       isFinished: false,
                       userId: currentUser,
@@ -210,8 +214,8 @@ const App = () => {
         }
       })
       .finally(() => {
-        syncGoalItemWithFirestore();
-        syncTodoItemWithFirestore();
+        syncInterviewItemWithFirestore();
+        syncQuestionItemWithFirestore();
       });
   }, [currentUser]);
 
@@ -241,33 +245,33 @@ const App = () => {
         auth={auth}
         currentUser={currentUser}
         todayString={todayString}
-        selectedGoal={selectedGoal}
-        setSelectedGoal={setSelectedGoal}
+        selectedInterview={selectedInterview}
+        setSelectedInterview={setSelectedInterview}
       />
       <div className={styles.box}>
-        <Goal
+        <Interview
           db={db}
-          goals={goals}
-          todos={todos}
-          setGoals={setGoals}
-          syncGoalItemWithFirestore={syncGoalItemWithFirestore}
-          syncTodoItemWithFirestore={syncTodoItemWithFirestore}
-          onSelectGoal={handleSelectedGoal}
-          selectedGoal={selectedGoal}
+          interviews={interviews}
+          questions={questions}
+          setInterviews={setInterviews}
+          syncInterviewItemWithFirestore={syncInterviewItemWithFirestore}
+          syncQuestionItemWithFirestore={syncQuestionItemWithFirestore}
+          onSelectInterview={handleSelectedInterview}
+          selectedInterview={selectedInterview}
           currentUser={currentUser}
           year={year}
           isCompleted={isCompleted}
           setIsCompleted={setIsCompleted}
         />
-        {selectedGoal ? (
-          <Todo
+        {selectedInterview ? (
+          <Question
             db={db}
-            todos={todos}
-            goals={goals}
-            setTodos={setTodos}
-            syncTodoItemWithFirestore={syncTodoItemWithFirestore}
-            syncGoalItemWithFirestore={syncGoalItemWithFirestore}
-            selectedGoal={selectedGoal}
+            questions={questions}
+            interviews={interviews}
+            setQuestions={setQuestions}
+            syncQuestionItemWithFirestore={syncQuestionItemWithFirestore}
+            syncInterviewItemWithFirestore={syncInterviewItemWithFirestore}
+            selectedInterview={selectedInterview}
             currentUser={currentUser}
             isCompleted={isCompleted}
             setIsCompleted={setIsCompleted}

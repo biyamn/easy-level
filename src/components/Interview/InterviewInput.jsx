@@ -10,7 +10,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-const InterviewInput = ({ onGoalSubmit }) => {
+const InterviewInput = ({ onInterviewSubmit }) => {
   const options = [
     { value: '기술면접' },
     { value: '인성면접' },
@@ -18,26 +18,26 @@ const InterviewInput = ({ onGoalSubmit }) => {
     { value: '기타' },
   ];
 
-  const [enteredGoal, setEnteredGoal] = useState('');
+  const [enteredInterview, setEnteredInterview] = useState('');
   const [isValid, setIsValid] = useState(true);
   const [selectedOption, setSelectedOption] = useState(options[0].value);
 
-  const handleGoalChange = (e) => {
-    setEnteredGoal(e.target.value);
+  const handleInterviewChange = (e) => {
+    setEnteredInterview(e.target.value);
     setIsValid(true);
   };
 
-  const handleGoalSubmit = (e) => {
+  const handleInterviewSubmit = (e) => {
     e.preventDefault();
-    if (enteredGoal.trim() === '') {
+    if (enteredInterview.trim() === '') {
       setIsValid(false);
-      setEnteredGoal('');
+      setEnteredInterview('');
       return;
     }
     setIsValid(true);
-    console.log(selectedOption, enteredGoal);
-    onGoalSubmit(selectedOption, enteredGoal);
-    setEnteredGoal('');
+    console.log(selectedOption, enteredInterview);
+    onInterviewSubmit(selectedOption, enteredInterview);
+    setEnteredInterview('');
     setSelectedOption(options[0].value);
   };
 
@@ -82,7 +82,7 @@ const InterviewInput = ({ onGoalSubmit }) => {
   };
   return (
     <div className={styles.container}>
-      <form className={styles.form} onSubmit={handleGoalSubmit}>
+      <form className={styles.form} onSubmit={handleInterviewSubmit}>
         <SelectType />
         <div>
           <input
@@ -90,8 +90,8 @@ const InterviewInput = ({ onGoalSubmit }) => {
               !isValid ? `${styles.input} ${styles.invalid}` : `${styles.input}`
             }
             type="text"
-            value={enteredGoal}
-            onChange={handleGoalChange}
+            value={enteredInterview}
+            onChange={handleInterviewChange}
             placeholder="상세 종류를 추가해 주세요."
           />
           <button className={styles.button} type="submit">

@@ -5,7 +5,7 @@ const getInitialValue = (currentUser) => {
       isCompleted: false,
       userId: currentUser,
       createdTime: Math.floor(Date.now() / 1000),
-      todos: [
+      questions: [
         {
           text: '시맨틱 마크업에 대해 설명해 주세요.',
           createdTime: Math.floor(Date.now() / 1000) + 1,
@@ -21,7 +21,7 @@ const getInitialValue = (currentUser) => {
       isCompleted: false,
       userId: currentUser,
       createdTime: Math.floor(Date.now() / 1000) + 3,
-      todos: [
+      questions: [
         {
           text: '박스 모델에 대해 설명해 주세요.',
           createdTime: Math.floor(Date.now() / 1000) + 4,
@@ -53,7 +53,7 @@ const getInitialValue = (currentUser) => {
       isCompleted: false,
       userId: currentUser,
       createdTime: Math.floor(Date.now() / 1000) + 10,
-      todos: [
+      questions: [
         {
           text: '원시 타입과 참조 타입에는 어떤 것들이 있는지 설명해 주세요.',
           createdTime: Math.floor(Date.now() / 1000) + 11,
@@ -113,7 +113,7 @@ const getInitialValue = (currentUser) => {
       isCompleted: false,
       userId: currentUser,
       createdTime: Math.floor(Date.now() / 1000) + 24,
-      todos: [
+      questions: [
         {
           text: 'DOM과 Virtual DOM의 차이점에 대해 설명해 주세요.',
           createdTime: Math.floor(Date.now() / 1000) + 25,
@@ -130,7 +130,7 @@ const getInitialValue = (currentUser) => {
       isCompleted: false,
       userId: currentUser,
       createdTime: Math.floor(Date.now() / 1000) + 27,
-      todos: [
+      questions: [
         {
           text: '브라우저 렌더링 과정에 대해 설명해 주세요.',
           createdTime: Math.floor(Date.now() / 1000) + 28,

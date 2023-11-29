@@ -14,80 +14,82 @@ import {
 
 const Question = ({
   db,
-  todos,
-  setTodos,
-  syncTodoItemWithFirestore,
-  syncGoalItemWithFirestore,
-  selectedGoal,
+  questions,
+  setQuestions,
+  syncQuestionItemWithFirestore,
+  syncInterviewItemWithFirestore,
+  selectedInterview,
   currentUser,
 }) => {
-  const handleTodoEdit = async (updatedText, id) => {
-    setTodos(
-      todos.map((todo) => {
-        if (todo.id === id) {
+  const handleQuestionEdit = async (updatedText, id) => {
+    setQuestions(
+      questions.map((question) => {
+        if (question.id === id) {
           return {
-            ...todo,
+            ...question,
             answer: updatedText,
           };
         }
-        return todo;
+        return question;
       })
     );
     handleEditSync(updatedText, id);
   };
 
   const handleEditSync = async (updatedText, id) => {
-    const todoItemRef = doc(db, 'todoItem', id);
-    await updateDoc(todoItemRef, {
+    const questionItemRef = doc(db, 'questionItem', id);
+    await updateDoc(questionItemRef, {
       answer: updatedText,
     });
-    syncTodoItemWithFirestore();
+    syncQuestionItemWithFirestore();
   };
 
-  const handleTodoSubmit = async (enteredTodo) => {
-    await addDoc(collection(db, 'todoItem'), {
-      text: enteredTodo,
+  const handleQuestionSubmit = async (enteredQuestion) => {
+    await addDoc(collection(db, 'questionItem'), {
+      text: enteredQuestion,
       answer: '이곳에 답변을 작성해 주세요.',
       isFinished: false,
       createdTime: serverTimestamp(),
-      goalId: selectedGoal,
+      interviewId: selectedInterview,
       userId: currentUser,
     });
 
-    syncTodoItemWithFirestore();
+    syncQuestionItemWithFirestore();
   };
 
-  const handleTodoDelete = async (id) => {
-    const todoItemRef = doc(db, 'todoItem', id);
-    await deleteDoc(todoItemRef);
-    syncTodoItemWithFirestore();
+  const handleQuestionDelete = async (id) => {
+    const questionItemRef = doc(db, 'questionItem', id);
+    await deleteDoc(questionItemRef);
+    syncQuestionItemWithFirestore();
   };
 
-  const handleTodoCheck = async (id) => {
-    const todoItemRef = doc(db, 'todoItem', id);
+  const handleQuestionCheck = async (id) => {
+    const questionItemRef = doc(db, 'questionItem', id);
     console.log(
-      'todos.find((todo) => todo.id === id).isFinished',
-      todos.find((todo) => todo.id === id).isFinished
+      'questions.find((question) => question.id === id).isFinished',
+      questions.find((question) => question.id === id).isFinished
     );
-    await updateDoc(todoItemRef, {
-      isFinished: !todos.find((todo) => todo.id === id).isFinished,
+    await updateDoc(questionItemRef, {
+      isFinished: !questions.find((question) => question.id === id).isFinished,
     });
-    syncTodoItemWithFirestore();
+    syncQuestionItemWithFirestore();
   };
 
   useEffect(() => {
-    const filteredTodos = todos.filter((todo) => todo.goalId === selectedGoal);
-    if (filteredTodos.length === 0) return;
-    const newIsAllFinished = filteredTodos.every(
+    const filteredQuestions = questions.filter(
+      (question) => question.interviewId === selectedInterview
+    );
+    if (filteredQuestions.length === 0) return;
+    const newIsAllFinished = filteredQuestions.every(
       (item) => item.isFinished === true
     );
-    // goal의 isCompleted를 바꾸기
-    const goalItemRef = doc(db, 'goalItem', selectedGoal);
-    updateDoc(goalItemRef, {
+    // interview의 isCompleted를 바꾸기
+    const interviewItemRef = doc(db, 'interviewItem', selectedInterview);
+    updateDoc(interviewItemRef, {
       isCompleted: newIsAllFinished,
     });
-    syncGoalItemWithFirestore();
-  }, [todos]);
+    syncInterviewItemWithFirestore();
+  }, [questions]);
 
   return (
     <div className={styles.container}>
@@ -95,15 +97,15 @@ const Question = ({
         <div className={styles.titleContainer}>
           <h1 className={styles.title}>예상 질문</h1>
         </div>
-        <QuestionInput onTodoSubmit={handleTodoSubmit} />
+        <QuestionInput onQuestionSubmit={handleQuestionSubmit} />
       </div>
       <QuestionItems
         db={db}
-        todos={todos}
-        onTodoCheck={handleTodoCheck}
-        onTodoEdit={handleTodoEdit}
-        onTodoDelete={handleTodoDelete}
-        selectedGoal={selectedGoal}
+        questions={questions}
+        onQuestionCheck={handleQuestionCheck}
+        onQuestionEdit={handleQuestionEdit}
+        onQuestionDelete={handleQuestionDelete}
+        selectedInterview={selectedInterview}
         currentUser={currentUser}
       />
     </div>
