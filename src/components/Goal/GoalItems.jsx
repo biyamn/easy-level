@@ -23,7 +23,7 @@ const GoalItems = ({
 
   const mobileView = (
     <Mobile>
-      <Carousel slide={false}>
+      <Carousel slide={false} interval={null}>
         {goals.map((goal) => {
           if (goal.id === selectedGoal) {
             backgroundColor = ABLED;
