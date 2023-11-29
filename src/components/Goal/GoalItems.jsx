@@ -33,15 +33,17 @@ const GoalItems = ({
           console.log(goal.id);
           return (
             <Carousel.Item key={goal.id}>
-              <GoalItem
-                goal={goal}
-                todos={todos}
-                onGoalDelete={handleGoalDelete}
-                onGoalEdit={handleGoalEdit}
-                onSelectGoal={handleSelectedGoal}
-                backgroundColor={backgroundColor}
-                selectedGoal={selectedGoal}
-              />
+              <div style={{ padding: '1rem' }}>
+                <GoalItem
+                  goal={goal}
+                  todos={todos}
+                  onGoalDelete={handleGoalDelete}
+                  onGoalEdit={handleGoalEdit}
+                  onSelectGoal={handleSelectedGoal}
+                  backgroundColor={backgroundColor}
+                  selectedGoal={selectedGoal}
+                />
+              </div>
             </Carousel.Item>
           );
         })}

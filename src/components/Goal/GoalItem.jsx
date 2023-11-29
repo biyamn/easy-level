@@ -11,7 +11,6 @@ const GoalItem = ({
   onGoalEdit,
   onSelectGoal,
   backgroundColor,
-  selectedGoal,
   todos,
 }) => {
   const editedText = useRef(null);
@@ -19,7 +18,6 @@ const GoalItem = ({
   const [isEditClicked, setIsEditClicked] = useState(false);
   const [isDeleteClicked, setIsDeleteClicked] = useState(false);
   const [updatedText, setUpdatedText] = useState('');
-  const [isHovered, setIsHovered] = useState(false);
 
   const submitEditedContent = () => {
     if (updatedText === '') {
@@ -165,6 +163,24 @@ const Container = styled.div`
   }
   @media screen and (max-width: 768px) {
     margin: 0.5rem;
+
+    .hover-visible {
+      display: flex;
+    }
+
+    .hover-hidden {
+      display: none;
+    }
+
+    &:hover {
+      .hover-hidden {
+        display: none;
+      }
+
+      .hover-visible {
+        display: flex;
+      }
+    }
   }
 `;
 
