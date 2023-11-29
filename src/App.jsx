@@ -10,6 +10,7 @@ import { initializeApp } from 'firebase/app';
 import getInitialValue from './utils/getInitialValue';
 import { signInWithPopup } from 'firebase/auth';
 import { styled } from 'styled-components';
+import { Carousel } from 'react-bootstrap';
 
 import {
   getFirestore,
@@ -228,7 +229,23 @@ const App = () => {
           todayString={todayString}
         />
         <div className={styles.layout}>
-          <h3 style={{ marginBottom: '30px' }}>로그인이 필요합니다.</h3>
+          <Carousel slide={true} interval={null}>
+            <Carousel.Item>
+              <div style={{ padding: '5rem' }}>
+                <img src="assets/logo.png" width="50%" />
+              </div>
+            </Carousel.Item>
+            <Carousel.Item>
+              <div style={{ padding: '5rem' }}>
+                <img src="assets/logo.png" width="50%" />
+              </div>
+            </Carousel.Item>
+            <Carousel.Item>
+              <div style={{ padding: '5rem' }}>
+                <img src="assets/logo.png" width="50%" />
+              </div>
+            </Carousel.Item>
+          </Carousel>
           <Button onClick={() => signInWithPopup(auth, provider)}>
             로그인하기
           </Button>
@@ -285,15 +302,15 @@ const App = () => {
 };
 
 const Button = styled.button`
-  background-color: transparent;
-  color: #a8dcfa;
+  background-color: #b9e9ff;
+  border-radius: 0.5rem;
+  color: black;
   border: none;
   font-size: 1.5rem;
-  height: 3rem;
   cursor: pointer;
-  margin: 0 2rem;
+  padding: 1rem 2rem;
   font-weight: bold;
-  padding: 0;
+  margin-top: 2rem;
 `;
 
 export default App;
