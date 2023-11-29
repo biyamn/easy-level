@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan, faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 import { faCheck, faXmark } from '@fortawesome/free-solid-svg-icons';
-import styles from './GoalItem.module.css';
+import styles from './InterviewItem.module.css';
 
-const GoalItem = ({
+const InterviewItem = ({
   goal,
   onGoalDelete,
   onGoalEdit,
@@ -224,4 +224,4 @@ const Text = styled.div`
   overflow-wrap: anywhere;
 `;
 
-export default GoalItem;
+export default InterviewItem;

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import TodoInput from './TodoInput';
-import TodoItems from './TodoItems';
+import QuestionInput from './QuestionInput';
+import QuestionItems from './QuestionItems';
 
-import styles from './Todo.module.css';
+import styles from './Question.module.css';
 import {
   collection,
   doc,
@@ -12,7 +12,7 @@ import {
   serverTimestamp,
 } from 'firebase/firestore';
 
-const Todo = ({
+const Question = ({
   db,
   todos,
   setTodos,
@@ -95,9 +95,9 @@ const Todo = ({
         <div className={styles.titleContainer}>
           <h1 className={styles.title}>예상 질문</h1>
         </div>
-        <TodoInput onTodoSubmit={handleTodoSubmit} />
+        <QuestionInput onTodoSubmit={handleTodoSubmit} />
       </div>
-      <TodoItems
+      <QuestionItems
         db={db}
         todos={todos}
         onTodoCheck={handleTodoCheck}
@@ -110,4 +110,4 @@ const Todo = ({
   );
 };
 
-export default Todo;
+export default Question;

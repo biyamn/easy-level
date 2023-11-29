@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from './Goal.module.css';
-import GoalInput from './GoalInput';
-import GoalItems from './GoalItems';
+import styles from './Interview.module.css';
+import GoalInput from './InterviewInput';
+import GoalItems from './InterviewItems';
 import {
   collection,
   addDoc,
@@ -14,7 +14,7 @@ import {
   serverTimestamp,
 } from 'firebase/firestore';
 
-const Goal = ({
+const Interview = ({
   goals,
   todos,
   setGoals,
@@ -120,4 +120,4 @@ const Goal = ({
   );
 };
 
-export default Goal;
+export default Interview;

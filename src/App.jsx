@@ -2,10 +2,10 @@
 
 import React, { useState, useEffect } from 'react';
 import styles from './App.module.css';
-import Todo from './components/Todo/Todo';
-import Goal from './components/Goal/Goal';
-import Navbar from './components/Navbar';
-import Main from './components/Main';
+import Todo from './components/Question/Question';
+import Goal from './components/Interview/Interview';
+import Navbar from './components/Header';
+import Main from './components/Status';
 import { initializeApp } from 'firebase/app';
 import getInitialValue from './utils/getInitialValue';
 import { signInWithPopup } from 'firebase/auth';

@@ -2,13 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { signOut } from 'firebase/auth';
 
-const Navbar = ({
-  auth,
-  currentUser,
-  todayString,
-  selectedGoal,
-  setSelectedGoal,
-}) => {
+const Header = ({ auth, currentUser, todayString, setSelectedGoal }) => {
   const logoutButton = <Button onClick={() => signOut(auth)}>로그아웃</Button>;
   const button = currentUser !== null && logoutButton;
 
@@ -88,4 +82,4 @@ const Button = styled.button`
   }
 `;
 
-export default Navbar;
+export default Header;

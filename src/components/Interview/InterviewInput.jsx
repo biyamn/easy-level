@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import styles from './GoalInput.module.css';
+import styles from './InterviewInput.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
@@ -10,7 +10,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-const GoalInput = ({ onGoalSubmit }) => {
+const InterviewInput = ({ onGoalSubmit }) => {
   const options = [
     { value: '기술면접' },
     { value: '인성면접' },
@@ -103,4 +103,4 @@ const GoalInput = ({ onGoalSubmit }) => {
   );
 };
 
-export default GoalInput;
+export default InterviewInput;

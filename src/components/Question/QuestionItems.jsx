@@ -1,8 +1,8 @@
 import React from 'react';
-import TodoItem from './TodoItem';
-import styles from './TodoItems.module.css';
+import QuestionItem from './QuestionItem';
+import styles from './QuestionItems.module.css';
 
-const TodoItems = ({
+const QuestionItems = ({
   todos,
   onTodoCheck,
   onTodoDelete,
@@ -23,7 +23,7 @@ const TodoItems = ({
     <div className={styles.container}>
       <div className={styles.items}>
         {selectedTodos.map((todo) => (
-          <TodoItem
+          <QuestionItem
             todo={todo}
             onTodoDelete={handleTodoDelete}
             key={todo.id}
@@ -38,4 +38,4 @@ const TodoItems = ({
   );
 };
 
-export default TodoItems;
+export default QuestionItems;

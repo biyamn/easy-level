@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './TodoItem.module.css';
+import styles from './QuestionItem.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan, faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 import { faCheck, faXmark } from '@fortawesome/free-solid-svg-icons';
@@ -13,7 +13,7 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import styled from 'styled-components';
 
-const TodoItem = ({ todo, onTodoDelete, onTodoEdit, onTodoCheck }) => {
+const QuestionItem = ({ todo, onTodoDelete, onTodoEdit, onTodoCheck }) => {
   const editedText = useRef(null);
   const [value, setValue] = useState('');
   const [isEditClicked, setIsEditClicked] = useState(false);
@@ -155,4 +155,4 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-export default TodoItem;
+export default QuestionItem;

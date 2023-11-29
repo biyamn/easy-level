@@ -1,10 +1,10 @@
 import React from 'react';
 import { useState } from 'react';
-import styles from './TodoInput.module.css';
+import styles from './QuestionInput.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
-const TodoInput = ({ onTodoSubmit }) => {
+const QuestionInput = ({ onTodoSubmit }) => {
   const [enteredTodo, setEnteredTodo] = useState('');
   const [isValid, setIsValid] = useState(true);
 
@@ -46,4 +46,4 @@ const TodoInput = ({ onTodoSubmit }) => {
   );
 };
 
-export default TodoInput;
+export default QuestionInput;

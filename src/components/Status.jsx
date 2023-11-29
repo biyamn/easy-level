@@ -3,7 +3,7 @@ import Progress from './Progress';
 
 import styled from 'styled-components';
 
-const Main = ({ status }) => {
+const Status = ({ status }) => {
   const Title = () => {
     return (
       <TitleWrapper>
@@ -74,4 +74,4 @@ const TitleText = styled.h1`
   }
 `;
 
-export default Main;
+export default Status;

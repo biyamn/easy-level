@@ -1,9 +1,9 @@
 import React from 'react';
-import GoalItem from './GoalItem';
+import InterviewItem from './InterviewItem';
 import { Carousel } from 'react-bootstrap';
 import styled from 'styled-components';
 
-const GoalItems = ({
+const InterviewItems = ({
   goals,
   onGoalDelete,
   onGoalEdit,
@@ -34,7 +34,7 @@ const GoalItems = ({
           return (
             <Carousel.Item key={goal.id}>
               <div style={{ padding: '2rem' }}>
-                <GoalItem
+                <InterviewItem
                   goal={goal}
                   todos={todos}
                   onGoalDelete={handleGoalDelete}
@@ -61,7 +61,7 @@ const GoalItems = ({
         }
         console.log(goal.id);
         return (
-          <GoalItem
+          <InterviewItem
             key={goal.id}
             goal={goal}
             todos={todos}
@@ -106,4 +106,4 @@ const Mobile = styled.div`
   }
 `;
 
-export default GoalItems;
+export default InterviewItems;
