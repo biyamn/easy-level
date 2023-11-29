@@ -33,7 +33,7 @@ const GoalItems = ({
           console.log(goal.id);
           return (
             <Carousel.Item key={goal.id}>
-              <div style={{ padding: '1rem' }}>
+              <div style={{ padding: '2rem' }}>
                 <GoalItem
                   goal={goal}
                   todos={todos}

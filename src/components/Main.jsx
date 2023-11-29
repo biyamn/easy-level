@@ -39,6 +39,11 @@ const Container = styled.div`
   width: 100%;
   flex-direction: column;
   white-space: pre-line;
+
+  @media screen and (max-width: 768px) {
+    border-top: 1px solid white;
+    margin-top: 5%;
+  }
 `;
 
 const TitleWrapper = styled.div`
@@ -46,6 +51,10 @@ const TitleWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 1.5rem;
+  @media screen and (max-width: 768px) {
+    margin-top: 5%;
+  }
 `;
 
 const StatusWrapper = styled.div`
