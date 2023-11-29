@@ -74,7 +74,15 @@ const InterviewItem = ({
       onClick={() => interviewItemClicked(interview.id)}
       $backgroundColor={backgroundColor}
     >
-      {interview.isCompleted ? <span>완료🥳</span> : <span>미완료</span>}
+      {interview.isCompleted ? (
+        <span style={{ color: '#f2ff39' }}>
+          <b>🥳 완료 🎉</b>
+        </span>
+      ) : (
+        <span>
+          <b>미완료</b>
+        </span>
+      )}
       {isEditClicked ? (
         <input
           className={
@@ -94,47 +102,53 @@ const InterviewItem = ({
           {interview.text}
         </Text>
       )}
-      <ActionButtons className="hover-visible">
-        <>
-          {!isEditClicked && !isDeleteClicked && (
-            <>
-              <button className={styles.editIcon} onClick={openEdit}>
-                <FontAwesomeIcon icon={faPenToSquare} size="2x" color="white" />
-              </button>
-              <button className={styles.deleteIcon} onClick={openDelete}>
-                <FontAwesomeIcon icon={faTrashCan} size="2x" color="white" />
-              </button>
-            </>
-          )}
-          {isEditClicked && !isDeleteClicked && (
-            <>
-              <button
-                className={styles.submitIcon}
-                onClick={submitEditedContent}
-              >
-                <FontAwesomeIcon icon={faCheck} size="2x" color="white" />
-              </button>
-              <button className={styles.cancelIcon} onClick={cancelEdit}>
-                <FontAwesomeIcon icon={faXmark} size="2x" color="white" />
-              </button>
-            </>
-          )}
-          {!isEditClicked && isDeleteClicked && (
-            <>
-              <button
-                className={styles.submitIcon}
-                onClick={() => onDelete(interview.id)}
-              >
-                <FontAwesomeIcon icon={faCheck} size="2x" color="white" />
-              </button>
-              <button className={styles.cancelIcon} onClick={cancelDelete}>
-                <FontAwesomeIcon icon={faXmark} size="2x" color="white" />
-              </button>
-            </>
-          )}
-        </>
-      </ActionButtons>
-      <Status className="hover-hidden">{status}</Status>
+      <div style={{ height: '30px' }}>
+        <ActionButtons className="hover-visible">
+          <>
+            {!isEditClicked && !isDeleteClicked && (
+              <>
+                <button className={styles.editIcon} onClick={openEdit}>
+                  <FontAwesomeIcon
+                    icon={faPenToSquare}
+                    size="2x"
+                    color="white"
+                  />
+                </button>
+                <button className={styles.deleteIcon} onClick={openDelete}>
+                  <FontAwesomeIcon icon={faTrashCan} size="2x" color="white" />
+                </button>
+              </>
+            )}
+            {isEditClicked && !isDeleteClicked && (
+              <>
+                <button
+                  className={styles.submitIcon}
+                  onClick={submitEditedContent}
+                >
+                  <FontAwesomeIcon icon={faCheck} size="1x" color="white" />
+                </button>
+                <button className={styles.cancelIcon} onClick={cancelEdit}>
+                  <FontAwesomeIcon icon={faXmark} size="1x" color="white" />
+                </button>
+              </>
+            )}
+            {!isEditClicked && isDeleteClicked && (
+              <>
+                <button
+                  className={styles.submitIcon}
+                  onClick={() => onDelete(interview.id)}
+                >
+                  <FontAwesomeIcon icon={faCheck} size="2x" color="white" />
+                </button>
+                <button className={styles.cancelIcon} onClick={cancelDelete}>
+                  <FontAwesomeIcon icon={faXmark} size="2x" color="white" />
+                </button>
+              </>
+            )}
+          </>
+        </ActionButtons>
+        <Status className="hover-hidden">{status}</Status>
+      </div>
     </Container>
   );
 };
@@ -196,29 +210,12 @@ const Status = styled.div`
   display: flex;
   justify-content: right;
   width: 100%;
-  font-size: 15px;
-  padding: 10px;
+  font-size: 18px;
   font-weight: bold;
   color: #c1fffb;
+  padding-right: 0.5rem;
 `;
 
-const Label = styled.label`
-  div {
-    width: 35px;
-    height: 35px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: transparent;
-    border: 3px solid transparent;
-    border-radius: 50%;
-    cursor: pointer;
-  }
-
-  input[type='checkbox']:checked + div {
-    background: ${(props) => props.$backgroundColor};
-  }
-`;
 const Text = styled.div`
   font-size: 1.1rem;
   color: #1a202c;

@@ -189,6 +189,7 @@ const App = () => {
         // 가져온 interviewItem이 없을 때. 즉 계정이 처음 만들어졌을 때
         if (querySnapshot.size === 0) {
           // 구조분해할당으로 initialValue에서 questions와 ...interview을 나눠서 가져옴(interview은 꼭 interview이 아니어도 됨. 그냥 나머지라는 뜻임)
+          // map으로 가져온 모든 배열을 가져올 때까지 기다림
           return Promise.all(
             initialValue.map(async ({ questions, ...interview }) => {
               // interview을 추가하는 부분. 추가로 끝나는 . 게아니라 interviewResponse라는 변수에 저장한다.
