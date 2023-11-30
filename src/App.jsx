@@ -1,16 +1,16 @@
 // zod nicemodal react hook form
 
-import React, { useState, useEffect } from 'react';
-import styles from './App.module.css';
-import Question from './components/Question/Question';
-import Interview from './components/Interview/Interview';
-import Navbar from './components/Header';
-import Main from './components/Status';
-import { initializeApp } from 'firebase/app';
-import getInitialValue from './utils/getInitialValue';
-import { signInWithPopup } from 'firebase/auth';
-import { styled } from 'styled-components';
-import { Carousel } from 'react-bootstrap';
+import React, { useState, useEffect } from "react";
+import styles from "./App.module.css";
+import Question from "./components/Question/Question";
+import Interview from "./components/Interview/Interview";
+import Navbar from "./components/Header";
+import Main from "./components/Status";
+import { initializeApp } from "firebase/app";
+import getInitialValue from "./utils/getInitialValue";
+import { signInWithPopup } from "firebase/auth";
+import { styled } from "styled-components";
+import { Carousel } from "react-bootstrap";
 
 import {
   getFirestore,
@@ -20,8 +20,8 @@ import {
   query,
   orderBy,
   where,
-} from 'firebase/firestore';
-import { GoogleAuthProvider, getAuth, onAuthStateChanged } from 'firebase/auth';
+} from "firebase/firestore";
+import { GoogleAuthProvider, getAuth, onAuthStateChanged } from "firebase/auth";
 
 const {
   VITE_API_KEY,
@@ -52,7 +52,7 @@ const provider = new GoogleAuthProvider();
 const auth = getAuth(app);
 
 const today = new Date();
-const WEEKDAY = ['일', '월', '화', '수', '목', '금', '토'];
+const WEEKDAY = ["일", "월", "화", "수", "목", "금", "토"];
 const year = today.getFullYear();
 const month = today.getMonth() + 1;
 const date = today.getDate();
@@ -92,8 +92,8 @@ const App = () => {
         percent: percent,
       });
     });
-    console.log('status: ', status);
-    console.log('statusArray: ', statusArray);
+    console.log("status: ", status);
+    console.log("statusArray: ", statusArray);
     setStatus(statusArray);
   };
 
@@ -115,9 +115,9 @@ const App = () => {
   // 그래서 여기서 바꿀 건 없음
   const syncInterviewItemWithFirestore = async () => {
     const q = query(
-      collection(db, 'interviewItem'),
-      where('userId', '==', currentUser),
-      orderBy('createdTime', 'asc')
+      collection(db, "interviewItem"),
+      where("userId", "==", currentUser),
+      orderBy("createdTime", "asc")
     );
     await getDocs(q).then((querySnapshot) => {
       const firestoreInterviewItemList = [];
@@ -136,9 +136,9 @@ const App = () => {
 
   const syncQuestionItemWithFirestore = async () => {
     const q = query(
-      collection(db, 'questionItem'),
-      where('userId', '==', currentUser),
-      orderBy('createdTime', 'asc')
+      collection(db, "questionItem"),
+      where("userId", "==", currentUser),
+      orderBy("createdTime", "asc")
     );
     await getDocs(q).then((querySnapshot) => {
       const firestoreQuestionItemList = [];
@@ -179,9 +179,9 @@ const App = () => {
     // 맨 처음에 firebase에서 'interviewItem' 데이터를 가져오는 쿼리를 작성함
     const initialValue = getInitialValue(currentUser);
     const q = query(
-      collection(db, 'interviewItem'),
-      where('userId', '==', currentUser),
-      orderBy('createdTime', 'asc')
+      collection(db, "interviewItem"),
+      where("userId", "==", currentUser),
+      orderBy("createdTime", "asc")
     );
     // 쿼리로 데이터를 가져옴(getDocs)
     getDocs(q)
@@ -194,7 +194,7 @@ const App = () => {
             initialValue.map(async ({ questions, ...interview }) => {
               // interview을 추가하는 부분. 추가로 끝나는 . 게아니라 interviewResponse라는 변수에 저장한다.
               const interviewResponse = await addDoc(
-                collection(db, 'interviewItem'),
+                collection(db, "interviewItem"),
                 interview
               );
 
@@ -202,10 +202,10 @@ const App = () => {
               await Promise.all(
                 questions.map(
                   async (question) =>
-                    await addDoc(collection(db, 'questionItem'), {
+                    await addDoc(collection(db, "questionItem"), {
                       ...question,
                       interviewId: interviewResponse.id,
-                      answer: '이곳에 답변을 입력해주세요.',
+                      answer: "이곳에 답변을 입력해주세요.",
                       isFinished: false,
                       userId: currentUser,
                     })
@@ -232,30 +232,21 @@ const App = () => {
         <div className={styles.layout}>
           <Carousel slide={true} interval={null}>
             <Carousel.Item>
-              <div style={{ padding: '5rem' }}>
-                <img src="assets/logo.png" width="50%" />
-              </div>
+              <Image src="assets/1.png" width="25%" />
             </Carousel.Item>
             <Carousel.Item>
-              <div style={{ padding: '5rem' }}>
-                <img src="assets/logo.png" width="50%" />
-              </div>
-            </Carousel.Item>
-            <Carousel.Item>
-              <div style={{ padding: '5rem' }}>
-                <img src="assets/logo.png" width="50%" />
-              </div>
+              <Image src="assets/2.png" width="25%" />
             </Carousel.Item>
           </Carousel>
           <Button onClick={() => signInWithPopup(auth, provider)}>
-            로그인하기
+            시작하기
           </Button>
         </div>
       </div>
     );
   }
 
-  console.log('status in app: ', status);
+  console.log("status in app: ", status);
   return (
     <div className={styles.App}>
       <Navbar
@@ -312,6 +303,17 @@ const Button = styled.button`
   padding: 1rem 2rem;
   font-weight: bold;
   margin-top: 2rem;
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+    padding: 0%.5 1rem;
+    width: 80%;
+  }
+`;
+
+const Image = styled.img`
+  @media (max-width: 768px) {
+    width: 90%;
+  }
 `;
 
 export default App;

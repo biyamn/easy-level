@@ -1,11 +1,11 @@
-import React from 'react';
-import { useState } from 'react';
-import styles from './QuestionInput.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import React from "react";
+import { useState } from "react";
+import styles from "./QuestionInput.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 const QuestionInput = ({ onQuestionSubmit }) => {
-  const [enteredQuestion, setEnteredQuestion] = useState('');
+  const [enteredQuestion, setEnteredQuestion] = useState("");
   const [isValid, setIsValid] = useState(true);
 
   const interviewChangeHandler = (e) => {
@@ -15,15 +15,15 @@ const QuestionInput = ({ onQuestionSubmit }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (enteredQuestion.trim() === '') {
+    if (enteredQuestion.trim() === "") {
       setIsValid(false);
-      setEnteredQuestion('');
+      setEnteredQuestion("");
       return;
     }
     setIsValid(true);
 
     onQuestionSubmit(enteredQuestion);
-    setEnteredQuestion('');
+    setEnteredQuestion("");
   };
 
   return (
@@ -36,7 +36,7 @@ const QuestionInput = ({ onQuestionSubmit }) => {
           type="text"
           value={enteredQuestion}
           onChange={interviewChangeHandler}
-          placeholder="예상 질문을 추가해 주세요."
+          placeholder="예상 질문을 추가해 주세요"
         />
         <button className={styles.button} type="submit">
           <FontAwesomeIcon icon={faPlus} color="#1a202c" />

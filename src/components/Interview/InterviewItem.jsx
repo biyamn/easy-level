@@ -1,9 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
-import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashCan, faPenToSquare } from '@fortawesome/free-regular-svg-icons';
-import { faCheck, faXmark } from '@fortawesome/free-solid-svg-icons';
-import styles from './InterviewItem.module.css';
+import React, { useState, useRef, useEffect } from "react";
+import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashCan, faPenToSquare } from "@fortawesome/free-regular-svg-icons";
+import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
+import styles from "./InterviewItem.module.css";
 
 const InterviewItem = ({
   interview,
@@ -17,15 +17,15 @@ const InterviewItem = ({
 
   const [isEditClicked, setIsEditClicked] = useState(false);
   const [isDeleteClicked, setIsDeleteClicked] = useState(false);
-  const [updatedText, setUpdatedText] = useState('');
+  const [updatedText, setUpdatedText] = useState("");
 
   const submitEditedContent = () => {
-    if (updatedText === '') {
+    if (updatedText === "") {
       setIsEditClicked(false);
       return;
     }
 
-    setUpdatedText('');
+    setUpdatedText("");
     setIsEditClicked(false);
     onInterviewEdit(updatedText, interview.id);
   };
@@ -40,7 +40,7 @@ const InterviewItem = ({
   };
 
   const cancelEdit = () => {
-    setUpdatedText('');
+    setUpdatedText("");
     setIsEditClicked(false);
   };
 
@@ -75,8 +75,8 @@ const InterviewItem = ({
       $backgroundColor={backgroundColor}
     >
       {interview.isCompleted ? (
-        <span style={{ color: '#f2ff39' }}>
-          <b>🥳 완료 🎉</b>
+        <span>
+          <b>🥳완료!!👏</b>
         </span>
       ) : (
         <span>
@@ -102,7 +102,7 @@ const InterviewItem = ({
           {interview.text}
         </Text>
       )}
-      <div style={{ height: '30px' }}>
+      <div style={{ height: "30px" }}>
         <ActionButtons className="hover-visible">
           <>
             {!isEditClicked && !isDeleteClicked && (

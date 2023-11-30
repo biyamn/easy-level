@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import { signOut } from 'firebase/auth';
+import React from "react";
+import styled from "styled-components";
+import { signOut } from "firebase/auth";
 
 const Header = ({ auth, currentUser, todayString, setSelectedInterview }) => {
   const logoutButton = <Button onClick={() => signOut(auth)}>로그아웃</Button>;
@@ -10,7 +10,7 @@ const Header = ({ auth, currentUser, todayString, setSelectedInterview }) => {
     <Container>
       <Img
         src="assets/logo.png"
-        width="200px"
+        width="160px"
         onClick={() => setSelectedInterview(null)}
       />
       <Wrapper>
@@ -29,13 +29,12 @@ const Container = styled.div`
   top: 0;
   left: 0;
   width: 100vw;
-  height: 85px;
+  height: 90px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 
   @media (max-width: 768px) {
-    padding: 0 1rem;
     height: 60px;
   }
 `;
@@ -43,9 +42,10 @@ const Container = styled.div`
 const Img = styled.img`
   margin: 0 2rem;
   cursor: pointer;
+  padding-top: 1rem;
   @media (max-width: 768px) {
     width: 100px;
-    margin: 0;
+    margin: 0 1rem;
   }
 `;
 
@@ -56,11 +56,13 @@ const Wrapper = styled.div`
 `;
 
 const Date = styled.div`
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   color: white;
   font-weight: bold;
   margin: 0 2rem;
   @media (max-width: 768px) {
+    font-size: 0.9rem;
+    margin: 0 0.5rem;
     display: none;
   }
 `;
@@ -78,7 +80,7 @@ const Button = styled.button`
 
   @media (max-width: 768px) {
     font-size: 1rem;
-    margin: 0;
+    margin: 0 1rem;
   }
 `;
 

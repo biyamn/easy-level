@@ -1,24 +1,24 @@
-import React from 'react';
-import { useState } from 'react';
-import styles from './InterviewInput.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import React from "react";
+import { useState } from "react";
+import styles from "./InterviewInput.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
 const InterviewInput = ({ onInterviewSubmit }) => {
   const options = [
-    { value: '기술면접' },
-    { value: '인성면접' },
-    { value: '포트폴리오' },
-    { value: '기타' },
+    { value: "기술면접" },
+    { value: "인성면접" },
+    { value: "포트폴리오" },
+    { value: "기타" },
   ];
 
-  const [enteredInterview, setEnteredInterview] = useState('');
+  const [enteredInterview, setEnteredInterview] = useState("");
   const [isValid, setIsValid] = useState(true);
   const [selectedOption, setSelectedOption] = useState(options[0].value);
 
@@ -29,15 +29,15 @@ const InterviewInput = ({ onInterviewSubmit }) => {
 
   const handleInterviewSubmit = (e) => {
     e.preventDefault();
-    if (enteredInterview.trim() === '') {
+    if (enteredInterview.trim() === "") {
       setIsValid(false);
-      setEnteredInterview('');
+      setEnteredInterview("");
       return;
     }
     setIsValid(true);
     console.log(selectedOption, enteredInterview);
     onInterviewSubmit(selectedOption, enteredInterview);
-    setEnteredInterview('');
+    setEnteredInterview("");
     setSelectedOption(options[0].value);
   };
 
@@ -48,22 +48,22 @@ const InterviewInput = ({ onInterviewSubmit }) => {
     };
 
     return (
-      <Box sx={{ minWidth: 70, mr: '10px', height: '45px' }}>
+      <Box sx={{ minWidth: 70, mr: "10px", height: "45px" }}>
         <FormControl
           variant="filled"
           sx={{
             minWidth: 70,
-            bgcolor: '#fff',
-            borderRadius: '6px',
-            marginBottom: '100px',
-            color: 'white',
-            height: '45px',
+            bgcolor: "#fff",
+            borderRadius: "6px",
+            marginBottom: "100px",
+            color: "white",
+            height: "45px",
           }}
           fullWidth
         >
           <InputLabel id="demo-simple-select-label">면접 분류</InputLabel>
           <Select
-            sx={{ height: '50px' }}
+            sx={{ height: "50px" }}
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             value={selectedOption}
@@ -92,7 +92,7 @@ const InterviewInput = ({ onInterviewSubmit }) => {
             type="text"
             value={enteredInterview}
             onChange={handleInterviewChange}
-            placeholder="상세 종류를 추가해 주세요."
+            placeholder="상세 종류 추가하기"
           />
           <button className={styles.button} type="submit">
             <FontAwesomeIcon icon={faPlus} color="#1a202c" />
