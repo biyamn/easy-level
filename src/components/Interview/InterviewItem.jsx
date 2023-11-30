@@ -125,10 +125,10 @@ const InterviewItem = ({
                   className={styles.submitIcon}
                   onClick={submitEditedContent}
                 >
-                  <FontAwesomeIcon icon={faCheck} size="1x" color="white" />
+                  <FontAwesomeIcon icon={faCheck} size="2x" color="white" />
                 </button>
                 <button className={styles.cancelIcon} onClick={cancelEdit}>
-                  <FontAwesomeIcon icon={faXmark} size="1x" color="white" />
+                  <FontAwesomeIcon icon={faXmark} size="2x" color="white" />
                 </button>
               </>
             )}
